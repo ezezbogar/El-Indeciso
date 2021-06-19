@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">El-Indeciso</string>
+    <string name="achievements_menu_text">\n\n\n\n\nLogros</string>
+    <string name="profile_menu_text">\n\n\n\n\nPerfil</string>
+    <string name="rules_menu_text">\n\n\n\n\nReglas</string>
+    <string name="play_menu_text">\n\n\n\n\nJugar</string>
+    <string name="settings_content_description_text">Settings content description</string>
 </resources>

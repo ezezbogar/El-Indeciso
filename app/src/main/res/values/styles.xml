@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BackgroundImageView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="LogoImageView">
+        <item name="android:layout_width">130dp</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginTop">52dp</item>
+        <item name="srcCompat">@drawable/logo</item>
+    </style>
+
+    <style name="SettingsImageButton">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="srcCompat">@drawable/ic_settings</item>
+        <item name="android:background">#24346C</item>
+        <item name="android:layout_marginTop">140dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+
+    <style name="OptionMenuButton">
+        <item name="android:layout_width">@dimen/menu_button_width</item>
+        <item name="android:layout_height">@dimen/menu_button_height</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">end</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textSize">@dimen/text_size_menu_options</item>
+    </style>
+</resources>
