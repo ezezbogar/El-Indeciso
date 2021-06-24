@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/maze"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/maze_image"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:background="@drawable/fondo"
+            android:importantForAccessibility="no"
+            android:rotationX="45"
+            android:scaleType="centerCrop" />
+
+        <TextSwitcher
+            android:id="@+id/maze_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/maze_image"
+            android:layout_alignTop="@id/maze_image"
+            android:layout_alignRight="@id/maze_image"
+            android:layout_alignBottom="@id/maze_image"
+            android:layout_alignStart="@id/maze_image"
+            android:layout_alignEnd="@id/maze_image"
+            android:rotationX="45"
+            android:inAnimation="@anim/card_in"
+            android:outAnimation="@anim/card_out">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                />
+        </TextSwitcher>
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:clipChildren="false">
+
+        <LinearLayout
+            android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:clipChildren="false"
+            />
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
