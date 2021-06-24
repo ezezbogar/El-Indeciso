@@ -1,4 +1,4 @@
-package com.example.cartitas
+package com.example.el_indeciso
 
 import android.content.Context
 import android.os.Handler
@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
-import com.example.frasesitas.model.DoubleClickListener
+import com.example.el_indeciso.DoubleClickListener
 
 class Card (value: CharSequence,
             context: Context,
