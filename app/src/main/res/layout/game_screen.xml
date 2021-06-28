@@ -3,8 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/game_background"/>
+
+    <ImageView
+        android:layout_width="174dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="218dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_edge_black"/>
 
     <RelativeLayout
         android:id="@+id/maze"
@@ -12,13 +29,13 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center" >
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/maze_image"
             android:layout_width="140dp"
             android:layout_height="200dp"
-            android:background="@drawable/fondo"
+            android:background="@drawable/card"
             android:importantForAccessibility="no"
             android:rotationX="45"
             android:scaleType="centerCrop" />
@@ -40,15 +57,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:textAppearance="?attr/textAppearanceHeadline3"
-                />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textAppearance="?attr/textAppearanceHeadline3"
-                />
+                android:fontFamily="sans-serif"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </TextSwitcher>
 
     </RelativeLayout>
@@ -65,8 +86,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:clipChildren="false"
-            />
+            android:clipChildren="false" />
     </HorizontalScrollView>
+
+    <GridLayout
+        android:id="@+id/players_grid"
+        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:columnCount="4"
+        android:rowCount="2"
+        android:useDefaultMargins="true"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/drop_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
