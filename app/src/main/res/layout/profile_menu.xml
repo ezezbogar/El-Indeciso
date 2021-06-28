@@ -50,6 +50,7 @@
         app:srcCompat="@drawable/face_1"/>
 
     <GridLayout
+        android:id="@+id/profile_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="3"
@@ -110,5 +111,15 @@
             style="@style/nextButton" />
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_buttons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

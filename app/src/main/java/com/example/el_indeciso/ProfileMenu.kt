@@ -12,9 +12,11 @@ class ProfileMenu: AppCompatActivity() {
     private var outfit_index = 0
     private var head_index = 0
 
+    var profile_pic: String = "0000"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.profile_menu)
 
         val head: ImageView = findViewById(R.id.head)
         val face: ImageView = findViewById(R.id.face)
@@ -60,6 +62,14 @@ class ProfileMenu: AppCompatActivity() {
             back_index--
             if (back_index < 0) back_index = BACKGROUNDS.size - 1
             back.setImageResource(BACKGROUNDS[back_index])
+        }
+        findViewById<Button>(R.id.save_button).setOnClickListener {
+            val back_digit = Integer.toHexString(back_index)
+            val head_digit = Integer.toHexString(head_index)
+            val face_digit = Integer.toHexString(face_index)
+            val outfit_digit = Integer.toHexString(outfit_index)
+
+            profile_pic = "${back_digit}${head_digit}${face_digit}${outfit_digit}"
         }
 
     }

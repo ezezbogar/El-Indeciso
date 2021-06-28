@@ -12,4 +12,5 @@
     <string name="back">FONDO</string>
     <string name="head">CABEZA</string>
     <string name="outfit">OUTFIT</string>
+    <string name="save_profile">GUARDAR</string>
 </resources>
