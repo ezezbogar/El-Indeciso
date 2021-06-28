@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
@@ -17,26 +18,26 @@ class Card (value: CharSequence,
             context: Context,
             layout: LinearLayout,
             maze_top: TextSwitcher) {
+
     val view = LayoutInflater.from(context).inflate(R.layout.scrollable_card, layout, false)
-    val card_text: TextView = view.findViewById(R.id.card_title)
+    private val card_text: TextView = view.findViewById(R.id.card_title)
+    private val  drop_sleep: Long = 650
 
     init {
         card_text.text = value
 
-        view.setOnClickListener(object: DoubleClickListener() {
+        view.findViewById<ImageView>(R.id.card_image).setOnClickListener(object: DoubleClickListener() {
             override fun onDoubleClick(v: View) {
                 val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.drop)
-                v.startAnimation(animation)
+                view.startAnimation(animation)
                 maze_top.setText(card_text.text)
 
+                // delay para remover carta de la mano
                 Handler(Looper.getMainLooper()).postDelayed({
                     val parent: ViewGroup = view.parent as ViewGroup
-                    parent.removeView(v)
-                }, 650)
+                    parent.removeView(view)
+                }, drop_sleep)
             }
         })
     }
-
-    @JvmName("getView1")
-    fun getView(): View = view
 }
