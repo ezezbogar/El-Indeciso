@@ -32,4 +32,27 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textSize">@dimen/text_size_menu_options</item>
     </style>
+
+    <style name="prevButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:text">@string/previous</item>
+    </style>
+
+    <style name="nextButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:text">@string/next</item>
+    </style>
+
+    <style name="profileElement">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_row">0</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:text">@string/head</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+    </style>
 </resources>
