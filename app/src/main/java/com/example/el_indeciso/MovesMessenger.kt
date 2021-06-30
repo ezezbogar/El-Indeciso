@@ -40,7 +40,7 @@ class MovesMessenger (private val matchID:String) {
         }
         return false
     }
-    // Si no hay movimientos en la cola devuelve null.
+    // Si no hay movimientos esperando salir en la cola devuelve null.
     fun getMove(): Move? {
         return moves.poll();
     }
