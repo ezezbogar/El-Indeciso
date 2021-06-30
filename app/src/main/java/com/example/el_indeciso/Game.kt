@@ -1,4 +1,7 @@
-package com.example.firebaseplayground
+package com.example.el_indeciso
+
+import com.example.el_indeciso.Move
+import com.example.el_indeciso.Player
 
 class Game (val id: Int) {
     lateinit var players : MutableList<Player>

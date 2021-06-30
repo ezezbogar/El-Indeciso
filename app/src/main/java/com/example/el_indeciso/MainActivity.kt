@@ -3,8 +3,6 @@ package com.example.el_indeciso
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.el_indeciso.databinding.ActivityMainBinding
-import com.example.firebaseplayground.Move
-import com.example.firebaseplayground.MovesMessenger
 
 class MainActivity : AppCompatActivity() {
     // Binding object instance with access to the views in the activity_main.xml layout
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setContentView(R.layout.activity_main)
         var mensajero = MovesMessenger("DesdeElRepo")
-        mensajero.addMove(Move(1,1))
-        mensajero.addMove(Move(1,2))
+        mensajero.addMove(Move("Niqui",1))
+        mensajero.addMove(Move("Eze",2))
     }
 }

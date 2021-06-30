@@ -1,4 +1,4 @@
-package com.example.firebaseplayground
+package com.example.el_indeciso
 
 import android.util.Log
 import com.google.firebase.database.ChildEventListener
@@ -31,7 +31,7 @@ class MovesMessenger (private val matchID:String) {
         }
         movesReference.addChildEventListener(childEventListener)
     }
-    fun addMove( newMove :Move ):Boolean {
+    fun addMove( newMove : Move):Boolean {
         var key = movesReference.push().key
         if (key != null) {
             Log.d("FIREBASE_INFO", "Se agrega un elemetento : $newMove")

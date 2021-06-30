@@ -1,5 +1,4 @@
-package com.example.firebaseplayground
+package com.example.el_indeciso
 
-data class Move(val playerId : Int = 0, val card : Int = 0) {
-
+data class Move(val playerId : String? = null, val card : Int = 0) {
 }
