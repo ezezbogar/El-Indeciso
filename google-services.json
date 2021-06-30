@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "209252412358",
+    "firebase_url": "https://el-indeciso-e730c-default-rtdb.firebaseio.com",
+    "project_id": "el-indeciso-e730c",
+    "storage_bucket": "el-indeciso-e730c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209252412358:android:a5003142fcf2f09f52e0c7",
+        "android_client_info": {
+          "package_name": "com.example.el_indeciso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209252412358-i75latpnn7i13frbghn1fgfppq67hcig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM-G1MlZ9AkYWBYBUt9Nlf9o6DET8aQFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209252412358-i75latpnn7i13frbghn1fgfppq67hcig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209252412358:android:9493497438b75cea52e0c7",
+        "android_client_info": {
+          "package_name": "com.example.firebaseplayground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209252412358-i75latpnn7i13frbghn1fgfppq67hcig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM-G1MlZ9AkYWBYBUt9Nlf9o6DET8aQFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209252412358-i75latpnn7i13frbghn1fgfppq67hcig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
