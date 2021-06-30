@@ -29,9 +29,10 @@ class UI_Player (val name: CharSequence,
         view.findViewById<TextView>(R.id.player_name).text = name
         player_cards.text = cards.toString()
         loadProfilePic()
-        view.setOnClickListener(object: DoubleClickListener() { // borrar esto despues jaja
+        view.setOnClickListener(object: DoubleClickListener() {
             override fun onDoubleClick(v: View) {
                 dropCard(7)
+                dropCard(12)
             }
         })
     }
@@ -40,6 +41,7 @@ class UI_Player (val name: CharSequence,
         cards--
         player_cards.text = cards.toString()
         drop_notifier.put(context.getString(R.string.drop_message, name, card))
+        drop_notifier.put(context.getString(R.string.drop_spacing))
         back.startAnimation(player_drop)
     }
 

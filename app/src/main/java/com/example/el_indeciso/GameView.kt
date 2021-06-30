@@ -23,7 +23,7 @@ class GameView : AppCompatActivity() {
 
         val player_hand: LinearLayout = findViewById(R.id.gallery)
         val players_grid: GridLayout = findViewById(R.id.players_grid)
-        val drop_message: TextView = findViewById(R.id.drop_message)
+        val drop_message: TextSwitcher = findViewById(R.id.drop_message)
         val maze_text: TextSwitcher = findViewById(R.id.maze_title)
         maze_text.setText("0")
 
@@ -31,18 +31,17 @@ class GameView : AppCompatActivity() {
 
 
 
-        // animación de que otro tiró una carta
-        val player_dropped: Animation = AnimationUtils.loadAnimation(this, R.anim.players_drop)
 
-        // con esta cola bloqueante en teoria los mensajes aparecen uno atras del otro, sin pisarse
-        // (terminar de testear)
+        // con esta cola bloqueante los mensajes aparecen uno atras del otro, sin pisarse
         val drop_message_loop: Runnable = object : Runnable {
             override fun run() {
-                while (message_queue.isNotEmpty()) {
-                    drop_message.text = message_queue.take()
-                    drop_message.startAnimation(player_dropped)
+                var sleep = DROP_MESSAGE_DURATION
+                if (message_queue.isNotEmpty()) {
+                    val message = message_queue.take()
+                    drop_message.setText(message)
+                    if (message == "") sleep = DROP_MESSAGE_DURATION/2
                 }
-                drop_handler.postDelayed(this, DROP_MESSAGE_LOOP_SLEEP)
+                drop_handler.postDelayed(this, sleep)
             }
         }
         drop_handler.postDelayed(drop_message_loop, DROP_MESSAGE_LOOP_SLEEP)
@@ -72,5 +71,6 @@ class GameView : AppCompatActivity() {
 
     companion object {
         val DROP_MESSAGE_LOOP_SLEEP: Long = 50
+        val DROP_MESSAGE_DURATION: Long = 1000
     }
 }

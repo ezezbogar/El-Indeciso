@@ -6,6 +6,7 @@
     <string name="play_menu_text">\n\n\n\n\nJugar</string>
     <string name="settings_content_description_text">Settings content description</string>
     <string name="drop_message">%1$s tiró el %2$d</string>
+    <string name="drop_spacing"></string>
     <string name="next">&gt;</string>
     <string name="previous">&lt;</string>
     <string name="face">CARA</string>
