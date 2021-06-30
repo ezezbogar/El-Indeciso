@@ -33,6 +33,7 @@ class UI_Player (val name: CharSequence,
             override fun onDoubleClick(v: View) {
                 dropCard(7)
                 dropCard(12)
+                discardCards(listOf(1,2,3))
             }
         })
     }
@@ -43,6 +44,15 @@ class UI_Player (val name: CharSequence,
         drop_notifier.put(context.getString(R.string.drop_message, name, card))
         drop_notifier.put(context.getString(R.string.drop_spacing))
         back.startAnimation(player_drop)
+    }
+
+    fun discardCards(discarded_cards: List<Int>) {
+        for (card:Int in discarded_cards) {
+            cards--
+            player_cards.text = cards.toString()
+            drop_notifier.put(context.getString(R.string.discard_message, name, card))
+            drop_notifier.put(context.getString(R.string.drop_spacing))
+        }
     }
 
     private fun loadProfilePic(){
