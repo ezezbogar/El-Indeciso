@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.TextSwitcher
 import android.widget.TextView
 import com.example.el_indeciso.DoubleClickListener
 import java.lang.Long.parseLong
@@ -29,17 +30,11 @@ class UI_Player (val name: CharSequence,
         view.findViewById<TextView>(R.id.player_name).text = name
         player_cards.text = cards.toString()
         loadProfilePic()
-        view.setOnClickListener(object: DoubleClickListener() {
-            override fun onDoubleClick(v: View) {
-                dropCard(7)
-                dropCard(12)
-                discardCards(listOf(1,2,3))
-            }
-        })
     }
 
-    fun dropCard(card: Int) {
+    fun dropCard(card: Int, maze: TextSwitcher) {
         cards--
+        maze.setText(card.toString())
         player_cards.text = cards.toString()
         drop_notifier.put(context.getString(R.string.drop_message, name, card))
         drop_notifier.put(context.getString(R.string.drop_spacing))

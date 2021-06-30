@@ -67,6 +67,14 @@ class GameView : AppCompatActivity() {
             players.add(player)
             players_grid.addView(player.view)
         }
+
+        // pruebita para ver que funca jiji, borrar
+        val player_dropped: Runnable = object : Runnable {
+            override fun run() {
+                players[0].dropCard(5, maze_text)
+            }
+        }
+        drop_handler.postDelayed(player_dropped, 5000)
     }
 
     companion object {
