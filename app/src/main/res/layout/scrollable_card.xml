@@ -6,9 +6,9 @@
 
     <RelativeLayout
         android:id="@+id/card"
-        android:layout_width="140dp"
-        android:layout_height="200dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/_105sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_margin="@dimen/_8sdp"
         android:clipChildren="false"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -36,7 +36,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
