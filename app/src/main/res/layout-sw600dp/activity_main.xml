@@ -9,20 +9,26 @@
     <ImageView
         android:id="@+id/backgroundImageView"
         style="@style/BackgroundImageView"
+        android:background="@color/background_color"
         android:importantForAccessibility="no"
-        android:src="@drawable/main_menu_background_cellphone"
-        tools:ignore="MissingConstraints" />
+        android:src="@drawable/main_menu_background_tablet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/logoImageView"
-        style="@style/LogoImageViewCellphone"
+        style="@style/LogoImageViewTablet"
         android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backgroundImageView" />
 
     <ImageButton
         android:id="@+id/settingsImageButton"
-        style="@style/SettingsImageButtonCellphone"
+        style="@style/SettingsImageButtonTablet"
         android:contentDescription="@string/settings_content_description_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +62,7 @@
         style="@style/OptionMenuButton"
         android:layout_marginStart="@dimen/lateral_margin_menu_button"
         android:layout_marginLeft="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
+        android:layout_marginBottom="@dimen/bottom_margin_menu_button_tablet"
         android:background="@drawable/custom_profile_button"
         android:text="@string/profile_menu_text"
         android:textColor="@color/profile_color"
@@ -68,7 +74,7 @@
         style="@style/OptionMenuButton"
         android:layout_marginEnd="@dimen/lateral_margin_menu_button"
         android:layout_marginRight="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
+        android:layout_marginBottom="@dimen/bottom_margin_menu_button_tablet"
         android:background="@drawable/custom_achievements_button"
         android:text="@string/achievements_menu_text"
         android:textColor="@color/achievements_color"

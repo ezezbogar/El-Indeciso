@@ -3,50 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ProfileMenu">
 
     <ImageView
-        android:id="@+id/back"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/back_1"/>
+        android:id="@+id/backgroundImageView"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/head"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/head_1"/>
+        android:id="@+id/back_profile_menu"
+        style="@style/ProfileMenuImage"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+        app:srcCompat="@drawable/back_1"
+        tools:ignore="MissingConstraints"/>
 
     <ImageView
-        android:id="@+id/outfit"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
+        android:id="@+id/head_profile_menu"
+        style="@style/ProfileMenuImage"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+        app:srcCompat="@drawable/head_1"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageView
+        android:id="@+id/outfit_profile_menu"
+        style="@style/ProfileMenuImage"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+        tools:ignore="MissingConstraints"
         app:srcCompat="@drawable/outfit_1"/>
 
     <ImageView
-        android:id="@+id/face"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
+        android:id="@+id/face_profile_menu"
+        style="@style/ProfileMenuImage"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+        tools:ignore="MissingConstraints"
+        android:importantForAccessibility="no"
         app:srcCompat="@drawable/face_1"/>
 
     <GridLayout
@@ -55,68 +48,74 @@
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="4"
-        android:horizontalSpacing="20dp"
-        android:verticalSpacing="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back">
+        app:layout_constraintTop_toBottomOf="@+id/back_profile_menu">
 
-        <Button
+        <ImageButton
             android:id="@+id/prev_head"
-            style="@style/prevButton"/>
+            android:importantForAccessibility="no"
+            style="@style/prevButton" />
 
         <TextView
             style="@style/profileElement"
             android:text="@string/head" />
 
-        <Button
+        <ImageButton
             android:id="@+id/next_head"
-            style="@style/nextButton" />
+            android:importantForAccessibility="no"
+            style="@style/nextButton"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/prev_face"
+            android:importantForAccessibility="no"
             style="@style/prevButton" />
 
         <TextView
             style="@style/profileElement"
             android:text="@string/face" />
 
-        <Button
+        <ImageButton
             android:id="@+id/next_face"
+            android:importantForAccessibility="no"
             style="@style/nextButton" />
 
-        <Button
+        <ImageButton
             android:id="@+id/prev_outfit"
+            android:importantForAccessibility="no"
             style="@style/prevButton" />
 
         <TextView
             style="@style/profileElement"
             android:text="@string/outfit" />
 
-        <Button
+        <ImageButton
             android:id="@+id/next_outfit"
+            android:importantForAccessibility="no"
             style="@style/nextButton" />
 
-        <Button
+        <ImageButton
             android:id="@+id/prev_back"
+            android:importantForAccessibility="no"
             style="@style/prevButton" />
 
         <TextView
             style="@style/profileElement"
             android:text="@string/back"/>
-
-        <Button
+        <ImageButton
             android:id="@+id/next_back"
+            android:importantForAccessibility="no"
             style="@style/nextButton" />
-
     </GridLayout>
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/save_button_profile_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_profile"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
