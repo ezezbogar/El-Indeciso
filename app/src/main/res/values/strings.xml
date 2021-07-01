@@ -15,4 +15,6 @@
     <string name="head">CABEZA</string>
     <string name="outfit">OUTFIT</string>
     <string name="save_profile">GUARDAR</string>
+    <string name="life">VIDAS</string>
+    <string name="round">RONDA</string>
 </resources>
