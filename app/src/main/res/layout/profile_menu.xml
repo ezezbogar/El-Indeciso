@@ -18,45 +18,45 @@
         style="@style/ProfileMenuImage"
         app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
         app:srcCompat="@drawable/back_1"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/head_profile_menu"
         style="@style/ProfileMenuImage"
         app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
         app:srcCompat="@drawable/head_1"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/outfit_profile_menu"
         style="@style/ProfileMenuImage"
         app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        tools:ignore="MissingConstraints"
-        app:srcCompat="@drawable/outfit_1"/>
+        app:srcCompat="@drawable/outfit_1"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/face_profile_menu"
         style="@style/ProfileMenuImage"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        tools:ignore="MissingConstraints"
         android:importantForAccessibility="no"
-        app:srcCompat="@drawable/face_1"/>
+        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+        app:srcCompat="@drawable/face_1"
+        tools:ignore="MissingConstraints" />
 
     <GridLayout
         android:id="@+id/profile_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
         android:columnCount="3"
         android:rowCount="4"
-        android:layout_marginTop="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_profile_menu">
 
         <ImageButton
             android:id="@+id/prev_head"
-            android:importantForAccessibility="no"
-            style="@style/prevButton" />
+            style="@style/prevButton"
+            android:importantForAccessibility="no" />
 
         <TextView
             style="@style/profileElement"
@@ -64,13 +64,13 @@
 
         <ImageButton
             android:id="@+id/next_head"
-            android:importantForAccessibility="no"
-            style="@style/nextButton"/>
+            style="@style/nextButton"
+            android:importantForAccessibility="no" />
 
         <ImageButton
             android:id="@+id/prev_face"
-            android:importantForAccessibility="no"
-            style="@style/prevButton" />
+            style="@style/prevButton"
+            android:importantForAccessibility="no" />
 
         <TextView
             style="@style/profileElement"
@@ -78,13 +78,13 @@
 
         <ImageButton
             android:id="@+id/next_face"
-            android:importantForAccessibility="no"
-            style="@style/nextButton" />
+            style="@style/nextButton"
+            android:importantForAccessibility="no" />
 
         <ImageButton
             android:id="@+id/prev_outfit"
-            android:importantForAccessibility="no"
-            style="@style/prevButton" />
+            style="@style/prevButton"
+            android:importantForAccessibility="no" />
 
         <TextView
             style="@style/profileElement"
@@ -92,30 +92,31 @@
 
         <ImageButton
             android:id="@+id/next_outfit"
-            android:importantForAccessibility="no"
-            style="@style/nextButton" />
+            style="@style/nextButton"
+            android:importantForAccessibility="no" />
 
         <ImageButton
             android:id="@+id/prev_back"
-            android:importantForAccessibility="no"
-            style="@style/prevButton" />
+            style="@style/prevButton"
+            android:importantForAccessibility="no" />
 
         <TextView
             style="@style/profileElement"
-            android:text="@string/back"/>
+            android:text="@string/back" />
+
         <ImageButton
             android:id="@+id/next_back"
-            android:importantForAccessibility="no"
-            style="@style/nextButton" />
+            style="@style/nextButton"
+            android:importantForAccessibility="no" />
     </GridLayout>
 
     <Button
         android:id="@+id/save_button_profile_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         android:text="@string/save_profile"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
