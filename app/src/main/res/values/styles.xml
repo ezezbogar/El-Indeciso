@@ -24,7 +24,7 @@
         <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="srcCompat">@drawable/ic_settings</item>
         <item name="android:layout_gravity">top|end</item>
-        <item name="android:background">@color/background_color</item>
+        <item name="android:background">@color/principal_background_color</item>
         <item name="android:layout_marginTop">@dimen/_108sdp</item>
         <item name="android:layout_marginRight">@dimen/_20sdp</item>
     </style>
@@ -33,7 +33,7 @@
         <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="srcCompat">@drawable/ic_settings</item>
         <item name="android:layout_gravity">top|start</item>
-        <item name="android:background">@color/background_color</item>
+        <item name="android:background">@color/principal_background_color</item>
         <item name="android:layout_marginTop">@dimen/_90sdp</item>
         <item name="android:layout_marginRight">@dimen/_20sdp</item>
     </style>
@@ -56,7 +56,7 @@
     <style name="prevButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
-        <item name="android:background">@color/background_color</item>
+        <item name="android:background">@color/principal_background_color</item>
         <item name="srcCompat">@drawable/prev_button</item>
         <item name="android:layout_marginTop">@dimen/margin_between_lines_profile_menu</item>
         <item name="android:scaleType">centerCrop</item>
@@ -66,7 +66,7 @@
     <style name="nextButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
-        <item name="android:background">@color/background_color</item>
+        <item name="android:background">@color/principal_background_color</item>
         <item name="srcCompat">@drawable/next_button</item>
         <item name="android:layout_marginTop">@dimen/margin_between_lines_profile_menu</item>
         <item name="android:scaleType">centerCrop</item>

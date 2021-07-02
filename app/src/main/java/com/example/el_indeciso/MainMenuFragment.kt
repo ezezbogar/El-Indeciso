@@ -39,6 +39,14 @@ class MainMenuFragment : Fragment() {
             fragmentTransaction.replace(R.id.fragment_container, fragment)
             fragmentTransaction.commit()
         }
+
+        binding.playButton.setOnClickListener {
+            val fragment: Fragment = PlayFragment()
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onDestroyView() {

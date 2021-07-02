@@ -106,6 +106,14 @@ class ProfileMenuFragment : Fragment() {
             fragmentTransaction.replace(R.id.fragment_container, fragment)
             fragmentTransaction.commit()
         }
+        binding.prevPageProfileMenu.setOnClickListener {
+
+            val fragment: Fragment = MainMenuFragment()
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onDestroyView() {
