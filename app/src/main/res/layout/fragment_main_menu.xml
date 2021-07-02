@@ -16,11 +16,12 @@
         style="@style/LogoImageView"
         android:importantForAccessibility="no" />
 
+    <!--
     <ImageButton
         android:id="@+id/settingsImageButton"
         style="@style/SettingsImageButton"
         android:contentDescription="@string/settings_content_description_text" />
-
+    -->
     <Button
         android:id="@+id/play_button"
         style="@style/OptionMenuButton"
@@ -55,13 +56,13 @@
         android:textColor="@color/profile_color" />
 
     <Button
-        android:id="@+id/achievements_button"
+        android:id="@+id/settings_button"
         style="@style/OptionMenuButton"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/lateral_margin_menu_button"
         android:layout_marginRight="@dimen/lateral_margin_menu_button"
         android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
-        android:background="@drawable/custom_achievements_button"
-        android:text="@string/achievements_menu_text"
-        android:textColor="@color/achievements_color" />
+        android:background="@drawable/custom_settings_button"
+        android:text="@string/settings_menu_text"
+        android:textColor="@color/settings_color" />
 </FrameLayout>

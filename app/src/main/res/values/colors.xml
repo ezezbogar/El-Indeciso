@@ -13,6 +13,6 @@
 
     <color name="play_color">#f36961</color>
     <color name="profile_color">#f8ccc4</color>
-    <color name="achievements_color">#2a3f87</color>
+    <color name="settings_color">#2a3f87</color>
     <color name="rules_color">#f6ce90</color>
 </resources>
