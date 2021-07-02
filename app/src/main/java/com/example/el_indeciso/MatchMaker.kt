@@ -1,16 +1,33 @@
 package com.example.el_indeciso
 
 import android.util.Log
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
-#### Debe recibir los datos del player
 class MatchMaker(var playerName: String = "default", val avatar: String = "def") {
-    var me = MatchPlayer(playerName, avatar, "0")
+    private val matchesReference: DatabaseReference = Firebase.database.reference
+        .child("matches")
 
     fun newMatch():Match {
-        var key = movesReference.push().key
-        if (key != null) {
-            Log.d("FIREBASE_INFO", "Se agrega un elemetento : $newMove")
-            movesReference.child(key).setValue(newMove)
-            return true
-        }
+       val key = generateRandomKey()
+        matchesReference.child(key).removeValue()
+        val match = Match(key)
+        match.addPlayer(MatchPlayer(playerName,avatar))
+        return match
+    }
+
+    fun joinMatch(key : String):Match {
+        val match = Match (key)
+        match.addPlayer( MatchPlayer(playerName, avatar) )
+        return  match
+    }
+
+    private fun generateRandomKey():String {
+        val allowedChars = ('A'..'Z') + ('0'..'9') //+ ('a'..'z')
+        return (1..4)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
 }
