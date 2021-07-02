@@ -2,7 +2,7 @@ package com.example.el_indeciso
 
 import java.util.*
 
-data class Player(var playerName: String) {
+data class Player(var playerName: String, var playerId: String) {
 
     private var cards: Vector<Int> = Vector<Int>()
 
@@ -12,6 +12,7 @@ data class Player(var playerName: String) {
 
     fun useCard(card: Int) {
         cards.remove(card)
+        //Animacion tiro carta
     }
 
     fun deleteAllCards() {
@@ -24,5 +25,15 @@ data class Player(var playerName: String) {
 
     fun hasCard(card: Int): Boolean {
         return cards.contains(card)
+    }
+
+    fun hasLowerCardThan(playedCard: Int): Boolean {
+        var hasLowerCard: Boolean = false
+        for (card in cards) {
+            if (card < playedCard) {
+                hasLowerCard = true
+            }
+        }
+        return hasLowerCard
     }
 }

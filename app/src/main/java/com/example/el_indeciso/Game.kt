@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.random.Random
 
 class Game() {
-    private var isRunning: Boolean = true
+    private var stillPlaying: Boolean = true
     private var players = Vector<Player>()
     private var currentNumber: Int = 0
     private var lives: Int = 3
@@ -18,9 +18,6 @@ class Game() {
     //private var sendQueue: Queue<Move> = LinkedList<Move>()
     //private var receiveQueue: BlockingQueue<Move> = LinkedBlockingQueue<Move>()
 
-    fun loadAllPlayers() {
-        // Load all players
-    }
 
     fun addPlayer(newPlayer: Player) {
         players.add(newPlayer)
@@ -30,18 +27,29 @@ class Game() {
 
         rnd = Random(123) //Leer de Firebase
 
+
+
+
+
+
+
+
         maxCardNumber = calculateMaxCardNumber(players.size)
 
         // Comienza el juego
-        while (isRunning && roundNumber <= maxRounds) {
+        while (stillPlaying && roundNumber <= maxRounds) {
 
             createCardsSequence()
             loadPlayersCards()
 
-            while (!allCardsPlayed() && isRunning) {
+            while (!allCardsPlayed() && stillPlaying) {
 
                 //var newMove: Move = receiveQueue.take()
                 //processMove(newMove)
+
+                if (lives < 0) {
+                    stillPlaying = false
+                }
             }
 
             roundNumber++
@@ -103,11 +111,36 @@ class Game() {
     }
 
     private fun processMove(newMove: Move) {
-        if (newMove.card > currentNumber) {
-            currentNumber = newMove.card
-        } else {
+        playerUsesCard(newMove.card)
+        currentNumber = newMove.card
+        // Update numero en la mesa
+        if (!isValidMove(newMove)) {
+            dropLowerCardsThan()
             lives--
-            // Perder vidas
+            // Update contador de Vidas
         }
+    }
+
+    private fun isValidMove(move: Move): Boolean {
+        var isValid: Boolean = true
+        for (player in players) {
+            if (player.hasLowerCardThan(move.card)) {
+                isValid = false
+            }
+        }
+        return isValid
+    }
+
+    private fun playerUsesCard(card: Int) {
+        //Cambiarlo checkeando el id
+        for (player in players) {
+            if (player.hasCard(card)) {
+                player.useCard(card)
+            }
+        }
+    }
+
+    private fun dropLowerCardsThan() {
+
     }
 }
