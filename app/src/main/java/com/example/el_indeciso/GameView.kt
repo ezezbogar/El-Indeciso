@@ -77,6 +77,16 @@ class GameView : AppCompatActivity() {
         drop_handler.postDelayed(player_dropped, 5000)
     }
 
+    // Actualiza la view de la cantidad de vidas del jugador
+    private fun updateLives(lives: Int) {
+        findViewById<TextView>(R.id.life_value).text = lives.toString()
+    }
+
+    // Actualiza la view de la ronda en la que se encuentra el jugador
+    private fun updateRound(current: Int, total_rounds: Int) {
+        findViewById<TextView>(R.id.round_value).text = getString(R.string.round_counter, current, total_rounds)
+    }
+
     companion object {
         val DROP_MESSAGE_LOOP_SLEEP: Long = 50
         val DROP_MESSAGE_DURATION: Long = 1000

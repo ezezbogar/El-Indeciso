@@ -17,4 +17,5 @@
     <string name="save_profile">GUARDAR</string>
     <string name="life">VIDAS</string>
     <string name="round">RONDA</string>
+    <string name="round_counter">%1$d/%2$d</string>
 </resources>
