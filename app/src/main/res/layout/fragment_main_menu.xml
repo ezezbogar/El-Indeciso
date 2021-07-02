@@ -13,12 +13,12 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        style="@style/LogoImageViewCellphone"
+        style="@style/LogoImageView"
         android:importantForAccessibility="no" />
 
     <ImageButton
         android:id="@+id/settingsImageButton"
-        style="@style/SettingsImageButtonCellphone"
+        style="@style/SettingsImageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
     <Button

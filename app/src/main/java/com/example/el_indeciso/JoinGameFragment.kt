@@ -1,14 +1,16 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import android.view.*
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.el_indeciso.databinding.FragmentPlayBinding
+import com.example.el_indeciso.databinding.FragmentJoinGameBinding
 
-class PlayFragment : Fragment() {
-    private var _binding: FragmentPlayBinding? = null
+class JoinGameFragment : Fragment() {
+    private var _binding: FragmentJoinGameBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,7 @@ class PlayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPlayBinding.inflate(inflater, container, false)
+        _binding = FragmentJoinGameBinding.inflate(inflater, container, false)
         val view = binding.root
 
         return view
@@ -28,17 +30,9 @@ class PlayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.prevPagePlay.setOnClickListener {
+        binding.prevPageJoin.setOnClickListener {
 
-            val fragment: Fragment = MainMenuFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
-        }
-        binding.joinButton.setOnClickListener {
-
-            val fragment: Fragment = JoinGameFragment()
+            val fragment: Fragment = PlayFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container, fragment)

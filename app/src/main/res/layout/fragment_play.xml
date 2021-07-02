@@ -8,14 +8,7 @@
 
     <ImageButton
         android:id="@+id/prev_page_play"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        app:srcCompat="@drawable/ic_back_arrow"
-        android:layout_gravity="top|end"
-        android:background="@color/top_background_color"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:scaleType="centerCrop"
+        style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
     <TextView

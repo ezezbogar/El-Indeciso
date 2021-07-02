@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JoinGameFragment">
+
+    <ImageButton
+        android:id="@+id/prev_page_join"
+        style="@style/PrevPageButton"
+        android:contentDescription="@string/settings_content_description_text" />
+
+    <TextView
+        android:id="@+id/textview_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_100sdp"
+        android:fontFamily="sans-serif-light"
+        android:text="Codigo de Sala"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+    <!--
+     <EditText
+     android:id="@+id/edittext_join"
+     android:layout_width="@dimen/_250sdp"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center"
+     android:fontFamily="sans-serif-light"
+     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+     android:textColor="#A7C3F3"
+     android:inputType="numberDecimal"
+     android:textStyle="bold"
+     android:hint="63427"
+     android:textColorHint="#A7C3F3"/>
+-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/code_to_join"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/top_background_color"
+        android:hint="Code to join"
+        android:textColorHint="@color/top_background_color"
+        app:helperTextTextColor="@color/top_background_color"
+        app:hintTextColor="@color/top_background_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_code_to_join"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textColor="#0352C8" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</FrameLayout>
