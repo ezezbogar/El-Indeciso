@@ -19,6 +19,6 @@ class MainActivity : AppCompatActivity() {
         val fragment = MainMenuFragment()
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.contenedor, fragment).commit()
+        fragmentTransaction.replace(R.id.fragment_container, fragment).commit()
     }
 }

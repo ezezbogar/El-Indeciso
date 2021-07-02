@@ -9,7 +9,7 @@
         android:id="@+id/backgroundImageViewMenu"
         style="@style/BackgroundImageView"
         android:importantForAccessibility="no"
-        android:src="@drawable/main_menu_background_cellphone" />
+        android:src="@drawable/main_menu"/>
 
     <ImageView
         android:id="@+id/logoImageView"

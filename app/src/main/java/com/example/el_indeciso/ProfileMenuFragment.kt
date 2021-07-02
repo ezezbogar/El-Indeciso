@@ -103,7 +103,7 @@ class ProfileMenuFragment : Fragment() {
             val fragment: Fragment = MainMenuFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.contenedor, fragment)
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
             fragmentTransaction.commit()
         }
     }

@@ -7,14 +7,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentMainMenuBinding
 
-
 class MainMenuFragment : Fragment() {
     private var _binding: FragmentMainMenuBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -38,7 +36,7 @@ class MainMenuFragment : Fragment() {
             val fragment: Fragment = ProfileMenuFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.contenedor, fragment)
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
             fragmentTransaction.commit()
         }
     }

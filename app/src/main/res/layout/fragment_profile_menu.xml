@@ -6,12 +6,6 @@
     tools:context=".ProfileMenuFragment">
 
     <ImageView
-        android:id="@+id/backgroundImageViewProfileMenu"
-        style="@style/BackgroundImageView"
-        android:importantForAccessibility="no"
-        android:src="@drawable/background" />
-
-    <ImageView
         android:id="@+id/back_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
