@@ -6,73 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/backgroundImageView"
-        style="@style/BackgroundImageView"
-        android:importantForAccessibility="no"
-        android:src="@drawable/main_menu_background_cellphone"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/logoImageView"
-        style="@style/LogoImageViewCellphone"
-        android:importantForAccessibility="no"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView" />
-
-    <ImageButton
-        android:id="@+id/settingsImageButton"
-        style="@style/SettingsImageButtonCellphone"
-        android:contentDescription="@string/settings_content_description_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/play_button"
-        style="@style/OptionMenuButton"
-        android:layout_marginStart="@dimen/lateral_margin_menu_button"
-        android:layout_marginLeft="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/margin_between_buttons_menu"
-        android:background="@drawable/custom_play_button"
-        android:text="@string/play_menu_text"
-        android:textColor="@color/play_color"
-        app:layout_constraintBottom_toTopOf="@+id/profile_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/rules_button"
-        style="@style/OptionMenuButton"
-        android:layout_marginEnd="@dimen/lateral_margin_menu_button"
-        android:layout_marginRight="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/margin_between_buttons_menu"
-        android:background="@drawable/custom_rules_button"
-        android:text="@string/rules_menu_text"
-        android:textColor="@color/rules_color"
-        app:layout_constraintBottom_toTopOf="@+id/achievements_button"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/profile_button"
-        style="@style/OptionMenuButton"
-        android:layout_marginStart="@dimen/lateral_margin_menu_button"
-        android:layout_marginLeft="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
-        android:background="@drawable/custom_profile_button"
-        android:text="@string/profile_menu_text"
-        android:textColor="@color/profile_color"
-        app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
-        app:layout_constraintStart_toStartOf="@+id/backgroundImageView" />
-
-    <Button
-        android:id="@+id/achievements_button"
-        style="@style/OptionMenuButton"
-        android:layout_marginEnd="@dimen/lateral_margin_menu_button"
-        android:layout_marginRight="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
-        android:background="@drawable/custom_achievements_button"
-        android:text="@string/achievements_menu_text"
-        android:textColor="@color/achievements_color"
-        app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+    <FrameLayout
+        android:id="@+id/contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">El-Indeciso</string>
-    <string name="achievements_menu_text">\n\n\n\n\nLogros</string>
-    <string name="profile_menu_text">\n\n\n\n\nPerfil</string>
-    <string name="rules_menu_text">\n\n\n\n\nReglas</string>
-    <string name="play_menu_text">\n\n\n\n\nJugar</string>
+    <string name="achievements_menu_text">Logros</string>
+    <string name="profile_menu_text">Perfil</string>
+    <string name="rules_menu_text">Reglas</string>
+    <string name="play_menu_text">Jugar</string>
     <string name="settings_content_description_text">Settings content description</string>
     <string name="drop_message">%1$s tiró el %2$d</string>
     <string name="discard_message">Se descarta el %2$d de %1$s</string>
@@ -18,4 +18,6 @@
     <string name="life">VIDAS</string>
     <string name="round">RONDA</string>
     <string name="round_counter">%1$d/%2$d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

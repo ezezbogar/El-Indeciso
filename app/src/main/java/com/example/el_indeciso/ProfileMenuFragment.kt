@@ -1,15 +1,20 @@
 package com.example.el_indeciso
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import com.example.el_indeciso.databinding.ActivityMainBinding
-import com.example.el_indeciso.databinding.ProfileMenuBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
 
-class ProfileMenu : AppCompatActivity() {
-    private lateinit var binding: ProfileMenuBinding
+
+class ProfileMenuFragment : Fragment() {
+
+    private var _binding: FragmentProfileMenuBinding? = null
+    private val binding get() = _binding!!
 
     private var back_index = 0
     private var face_index = 0
@@ -43,10 +48,20 @@ class ProfileMenu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
-        // Inflate the layout XML file and return a binding object instance
-        binding = ProfileMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val head: ImageView = binding.headProfileMenu
         val face: ImageView = binding.faceProfileMenu
@@ -54,28 +69,28 @@ class ProfileMenu : AppCompatActivity() {
         val back: ImageView = binding.backProfileMenu
 
         binding.nextHead.setOnClickListener {
-            head_index = nextButtonClicked(head_index, HEADS, head)
+            head_index = nextButtonClicked(head_index, ProfileMenuFragment.HEADS, head)
         }
         binding.prevHead.setOnClickListener {
-            head_index = prevButtonClicked(head_index, HEADS, head)
+            head_index = prevButtonClicked(head_index, ProfileMenuFragment.HEADS, head)
         }
         binding.nextFace.setOnClickListener {
-            face_index = nextButtonClicked(face_index, FACES, face)
+            face_index = nextButtonClicked(face_index, ProfileMenuFragment.FACES, face)
         }
         binding.prevFace.setOnClickListener {
-            face_index = prevButtonClicked(face_index, FACES, face)
+            face_index = prevButtonClicked(face_index, ProfileMenuFragment.FACES, face)
         }
         binding.nextOutfit.setOnClickListener {
-            outfit_index = nextButtonClicked(outfit_index, OUTFITS, outfit)
+            outfit_index = nextButtonClicked(outfit_index, ProfileMenuFragment.OUTFITS, outfit)
         }
         binding.prevOutfit.setOnClickListener {
-            outfit_index = prevButtonClicked(outfit_index, OUTFITS, outfit)
+            outfit_index = prevButtonClicked(outfit_index, ProfileMenuFragment.OUTFITS, outfit)
         }
         binding.nextBack.setOnClickListener {
-            back_index = nextButtonClicked(back_index, BACKGROUNDS, back)
+            back_index = nextButtonClicked(back_index, ProfileMenuFragment.BACKGROUNDS, back)
         }
         binding.prevBack.setOnClickListener {
-            back_index = prevButtonClicked(back_index, BACKGROUNDS, back)
+            back_index = prevButtonClicked(back_index, ProfileMenuFragment.BACKGROUNDS, back)
         }
         binding.saveButtonProfileMenu.setOnClickListener {
             val back_digit = Integer.toHexString(back_index)
@@ -84,9 +99,18 @@ class ProfileMenu : AppCompatActivity() {
             val outfit_digit = Integer.toHexString(outfit_index)
 
             profile_pic = "${back_digit}${head_digit}${face_digit}${outfit_digit}"
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+
+            val fragment: Fragment = MainMenuFragment()
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.contenedor, fragment)
+            fragmentTransaction.commit()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun nextButtonClicked(

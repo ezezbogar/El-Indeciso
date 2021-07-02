@@ -1,57 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileMenu">
+    tools:context=".ProfileMenuFragment">
 
     <ImageView
-        android:id="@+id/backgroundImageView"
+        android:id="@+id/backgroundImageViewProfileMenu"
         style="@style/BackgroundImageView"
         android:importantForAccessibility="no"
-        android:src="@drawable/background"
-        tools:ignore="MissingConstraints" />
+        android:src="@drawable/background" />
 
     <ImageView
         android:id="@+id/back_profile_menu"
         style="@style/ProfileMenuImage"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        app:srcCompat="@drawable/back_1"
-        tools:ignore="MissingConstraints" />
+        android:importantForAccessibility="no"
+        android:src="@drawable/back_1" />
 
     <ImageView
         android:id="@+id/head_profile_menu"
         style="@style/ProfileMenuImage"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        app:srcCompat="@drawable/head_1"
-        tools:ignore="MissingConstraints" />
+        android:importantForAccessibility="no"
+        android:src="@drawable/head_1" />
 
     <ImageView
         android:id="@+id/outfit_profile_menu"
         style="@style/ProfileMenuImage"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        app:srcCompat="@drawable/outfit_1"
-        tools:ignore="MissingConstraints" />
+        android:importantForAccessibility="no"
+        android:src="@drawable/outfit_1" />
 
     <ImageView
         android:id="@+id/face_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
-        app:srcCompat="@drawable/face_1"
-        tools:ignore="MissingConstraints" />
+        android:src="@drawable/face_1" />
 
     <GridLayout
         android:id="@+id/profile_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="@dimen/margin_top_grid_profile_menu"
         android:columnCount="3"
-        android:rowCount="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_profile_menu">
+        android:rowCount="4">
 
         <ImageButton
             android:id="@+id/prev_head"
@@ -114,12 +105,9 @@
         android:id="@+id/save_button_profile_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="@dimen/top_margin_save_button_profile_menu"
         android:backgroundTint="@color/white"
         android:text="@string/save_profile"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_buttons" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textColor="@color/black" />
+</FrameLayout>
