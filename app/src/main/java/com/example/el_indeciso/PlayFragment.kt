@@ -7,9 +7,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentPlayBinding
 
-class PlayFragment : Fragment() {
+class PlayFragment : BaseFragment() {
     private var _binding: FragmentPlayBinding? = null
     private val binding get() = _binding!!
+    override fun layoutId() = R.layout.fragment_join_game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,25 +30,10 @@ class PlayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.prevPagePlay.setOnClickListener {
-
-            val fragment: Fragment = MainMenuFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(MainMenuFragment())
         }
         binding.joinButton.setOnClickListener {
-
-            val fragment: Fragment = JoinGameFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(JoinGameFragment())
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

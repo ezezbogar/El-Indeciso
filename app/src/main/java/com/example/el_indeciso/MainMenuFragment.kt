@@ -7,9 +7,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentMainMenuBinding
 
-class MainMenuFragment : Fragment() {
+class MainMenuFragment : BaseFragment() {
     private var _binding: FragmentMainMenuBinding? = null
     private val binding get() = _binding!!
+    override fun layoutId() = R.layout.fragment_main_menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,19 +34,11 @@ class MainMenuFragment : Fragment() {
         mensajero.addMove(Move("Eze", 2))
 
         binding.profileButton.setOnClickListener {
-            val fragment: Fragment = ProfileMenuFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(ProfileMenuFragment())
         }
 
         binding.playButton.setOnClickListener {
-            val fragment: Fragment = PlayFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(PlayFragment())
         }
     }
 

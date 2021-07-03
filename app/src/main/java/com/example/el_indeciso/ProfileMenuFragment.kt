@@ -11,10 +11,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
 
 
-class ProfileMenuFragment : Fragment() {
-
+class ProfileMenuFragment : BaseFragment() {
     private var _binding: FragmentProfileMenuBinding? = null
     private val binding get() = _binding!!
+    override fun layoutId() = R.layout.fragment_join_game
 
     private var back_index = 0
     private var face_index = 0
@@ -100,19 +100,10 @@ class ProfileMenuFragment : Fragment() {
 
             profile_pic = "${back_digit}${head_digit}${face_digit}${outfit_digit}"
 
-            val fragment: Fragment = MainMenuFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(MainMenuFragment())
         }
         binding.prevPageProfileMenu.setOnClickListener {
-
-            val fragment: Fragment = MainMenuFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment)
-            fragmentTransaction.commit()
+            goToFragment(MainMenuFragment())
         }
     }
 
