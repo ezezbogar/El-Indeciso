@@ -1,12 +1,9 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentJoinGameBinding
 
 class JoinGameFragment : BaseFragment() {
@@ -21,7 +18,7 @@ class JoinGameFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentJoinGameBinding.inflate(inflater, container, false)
         val view = binding.root
 

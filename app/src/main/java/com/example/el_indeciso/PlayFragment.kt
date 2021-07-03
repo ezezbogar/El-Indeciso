@@ -1,10 +1,9 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.el_indeciso.databinding.FragmentPlayBinding
 
 class PlayFragment : BaseFragment() {
@@ -19,7 +18,7 @@ class PlayFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPlayBinding.inflate(inflater, container, false)
         val view = binding.root
 

@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
 
 
@@ -16,12 +13,12 @@ class ProfileMenuFragment : BaseFragment() {
     private val binding get() = _binding!!
     override fun layoutId() = R.layout.fragment_join_game
 
-    private var back_index = 0
-    private var face_index = 0
-    private var outfit_index = 0
-    private var head_index = 0
+    private var backIndex = 0
+    private var faceIndex = 0
+    private var outfitIndex = 0
+    private var headIndex = 0
 
-    var profile_pic: String = "0000"
+    private var profilePic: String = "0000"
 
     companion object {
         val BACKGROUNDS = listOf(
@@ -53,7 +50,7 @@ class ProfileMenuFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -69,36 +66,36 @@ class ProfileMenuFragment : BaseFragment() {
         val back: ImageView = binding.backProfileMenu
 
         binding.nextHead.setOnClickListener {
-            head_index = nextButtonClicked(head_index, ProfileMenuFragment.HEADS, head)
+            headIndex = nextButtonClicked(headIndex, HEADS, head)
         }
         binding.prevHead.setOnClickListener {
-            head_index = prevButtonClicked(head_index, ProfileMenuFragment.HEADS, head)
+            headIndex = prevButtonClicked(headIndex, HEADS, head)
         }
         binding.nextFace.setOnClickListener {
-            face_index = nextButtonClicked(face_index, ProfileMenuFragment.FACES, face)
+            faceIndex = nextButtonClicked(faceIndex, FACES, face)
         }
         binding.prevFace.setOnClickListener {
-            face_index = prevButtonClicked(face_index, ProfileMenuFragment.FACES, face)
+            faceIndex = prevButtonClicked(faceIndex, FACES, face)
         }
         binding.nextOutfit.setOnClickListener {
-            outfit_index = nextButtonClicked(outfit_index, ProfileMenuFragment.OUTFITS, outfit)
+            outfitIndex = nextButtonClicked(outfitIndex, OUTFITS, outfit)
         }
         binding.prevOutfit.setOnClickListener {
-            outfit_index = prevButtonClicked(outfit_index, ProfileMenuFragment.OUTFITS, outfit)
+            outfitIndex = prevButtonClicked(outfitIndex, OUTFITS, outfit)
         }
         binding.nextBack.setOnClickListener {
-            back_index = nextButtonClicked(back_index, ProfileMenuFragment.BACKGROUNDS, back)
+            backIndex = nextButtonClicked(backIndex, BACKGROUNDS, back)
         }
         binding.prevBack.setOnClickListener {
-            back_index = prevButtonClicked(back_index, ProfileMenuFragment.BACKGROUNDS, back)
+            backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
         }
         binding.saveButtonProfileMenu.setOnClickListener {
-            val back_digit = Integer.toHexString(back_index)
-            val head_digit = Integer.toHexString(head_index)
-            val face_digit = Integer.toHexString(face_index)
-            val outfit_digit = Integer.toHexString(outfit_index)
+            val backDigit = Integer.toHexString(backIndex)
+            val headDigit = Integer.toHexString(headIndex)
+            val faceDigit = Integer.toHexString(faceIndex)
+            val outfitDigit = Integer.toHexString(outfitIndex)
 
-            profile_pic = "${back_digit}${head_digit}${face_digit}${outfit_digit}"
+            profilePic = "${backDigit}${headDigit}${faceDigit}${outfitDigit}"
 
             goToFragment(MainMenuFragment())
         }

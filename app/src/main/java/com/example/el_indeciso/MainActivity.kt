@@ -9,7 +9,7 @@ import com.example.el_indeciso.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     // Binding object instance with access to the views in the activity_main.xml layout
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

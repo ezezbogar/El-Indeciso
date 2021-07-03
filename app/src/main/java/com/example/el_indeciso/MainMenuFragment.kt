@@ -2,9 +2,6 @@ package com.example.el_indeciso
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.el_indeciso.databinding.FragmentMainMenuBinding
 
 class MainMenuFragment : BaseFragment() {
@@ -19,7 +16,7 @@ class MainMenuFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMainMenuBinding.inflate(inflater, container, false)
         val view = binding.root
 

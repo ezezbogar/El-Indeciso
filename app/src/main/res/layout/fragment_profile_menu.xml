@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:layout_marginTop="@dimen/top_margin_save_button_profile_menu"
-        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/white"
         android:text="@string/save_profile"
         android:textColor="@color/black" />
 </FrameLayout>

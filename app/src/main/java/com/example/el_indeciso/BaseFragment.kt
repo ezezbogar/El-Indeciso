@@ -5,11 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.el_indeciso.databinding.FragmentMainMenuBinding
-import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment : Fragment() {
 
@@ -20,10 +17,6 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? =
         inflater.inflate(layoutId(), container, false)
-
-    open fun onBackPressed() {}
-
-    internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
     fun goToFragment(fragment_to_go: Fragment) {
         val fragment: Fragment = fragment_to_go
