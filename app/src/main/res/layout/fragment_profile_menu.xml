@@ -15,25 +15,25 @@
         android:id="@+id/back_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
-        android:src="@drawable/back_1" />
+        android:src="@drawable/back_0" />
 
     <ImageView
         android:id="@+id/head_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
-        android:src="@drawable/head_1" />
+        android:src="@drawable/head_0" />
 
     <ImageView
         android:id="@+id/outfit_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
-        android:src="@drawable/outfit_1" />
+        android:src="@drawable/outfit_0" />
 
     <ImageView
         android:id="@+id/face_profile_menu"
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
-        android:src="@drawable/face_1" />
+        android:src="@drawable/face_0" />
 
     <GridLayout
         android:id="@+id/profile_buttons"
