@@ -4,51 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayFragment">
-
-    <ImageView
-        android:id="@+id/ahora"
-        style="@style/BackgroundImageView"
-        android:importantForAccessibility="no"
-        android:src="@drawable/background"/>
+    tools:context=".PlayMenuFragment">
 
     <ImageButton
-        android:id="@+id/prev_page_play"
+        android:id="@+id/prev_page_play_menu"
         style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
     <TextView
-        android:id="@+id/textViewStartPlaying"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start|top"
+        android:id="@+id/textview_play_menu"
+        style="@style/CustomTextView"
         android:layout_marginTop="@dimen/top_margin_textview_play_menu"
-        android:layout_marginStart="@dimen/left_margin_play_menu"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/title_play_menu_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginLeft="@dimen/_37sdp" />
+        android:text="@string/title_play_menu_text" />
 
     <ImageView
-        android:id="@+id/backgroundImageViewPlay"
+        android:id="@+id/background_imageview_play_menu"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/height_background_play_menu"
         android:layout_gravity="center|bottom"
-        android:layout_margin="@dimen/left_margin_play_menu"
+        android:layout_margin="@dimen/left_margin_textview"
         android:importantForAccessibility="no"
         android:scaleType="centerInside"
         android:src="@drawable/background_play_mini" />
 
     <Button
-        android:id="@+id/create_button"
+        android:id="@+id/create_button_play_menu"
         style="@style/PlayMenuButton"
         android:layout_marginTop="@dimen/top_margin_create_button_play_menu"
         android:text="@string/create_text" />
 
     <Button
-        android:id="@+id/join_button"
+        android:id="@+id/join_button_play_menu"
         style="@style/PlayMenuButton"
         android:layout_marginTop="@dimen/top_margin_join_button_play_menu"
         android:text="@string/join_text" />

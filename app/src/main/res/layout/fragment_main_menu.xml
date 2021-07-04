@@ -6,13 +6,13 @@
     tools:context=".MainMenuFragment">
 
     <ImageView
-        android:id="@+id/backgroundImageViewMenu"
+        android:id="@+id/background_image_view_menu"
         style="@style/BackgroundImageView"
         android:importantForAccessibility="no"
-        android:src="@drawable/main_menu"/>
+        android:src="@drawable/main_menu" />
 
     <ImageView
-        android:id="@+id/logoImageView"
+        android:id="@+id/logo_image_view"
         style="@style/LogoImageView"
         android:importantForAccessibility="no" />
 

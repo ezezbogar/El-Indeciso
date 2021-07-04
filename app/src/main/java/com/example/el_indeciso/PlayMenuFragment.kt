@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.el_indeciso.databinding.FragmentPlayBinding
+import com.example.el_indeciso.databinding.FragmentPlayMenuBinding
 
-class PlayFragment : BaseFragment() {
-    private var _binding: FragmentPlayBinding? = null
+class PlayMenuFragment : BaseFragment() {
+    private var _binding: FragmentPlayMenuBinding? = null
     private val binding get() = _binding!!
     override fun layoutId() = R.layout.fragment_join_game
 
@@ -19,7 +19,7 @@ class PlayFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlayBinding.inflate(inflater, container, false)
+        _binding = FragmentPlayMenuBinding.inflate(inflater, container, false)
         val view = binding.root
 
         return view
@@ -28,10 +28,13 @@ class PlayFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.prevPagePlay.setOnClickListener {
+        binding.prevPagePlayMenu.setOnClickListener {
             goToFragment(MainMenuFragment())
         }
-        binding.joinButton.setOnClickListener {
+        binding.createButtonPlayMenu.setOnClickListener {
+            goToFragment(CreateGameFragment())
+        }
+        binding.joinButtonPlayMenu.setOnClickListener {
             goToFragment(JoinGameFragment())
         }
     }

@@ -20,13 +20,25 @@
     <dimen name="margin_top_grid_profile_menu">@dimen/_280sdp</dimen>
     <dimen name="top_margin_save_button_profile_menu">@dimen/_490sdp</dimen>
 
-    <!-- PLAY -->
+    <!-- PLAY MENU -->
     <dimen name="height_background_play_menu">@dimen/_370sdp</dimen>
-    <dimen name="left_margin_play_menu">@dimen/_20sdp</dimen>
+    <dimen name="left_margin_textview">@dimen/_20sdp</dimen>
     <dimen name="top_margin_textview_play_menu">@dimen/_100sdp</dimen>
     <dimen name="height_button_play_menu">@dimen/_100sdp</dimen>
     <dimen name="top_margin_create_button_play_menu">@dimen/_10sdp</dimen>
     <dimen name="top_margin_join_button_play_menu">@dimen/_170sdp</dimen>
+
+    <!-- JOIN -->
+    <dimen name="top_margin_textview_join">@dimen/_200sdp</dimen>
+    <dimen name="top_margin_edittext_join">@dimen/_250sdp</dimen>
+
+    <!-- CREATE PLAY -->
+    <dimen name="top_margin_room_code_textview_create_game">@dimen/_80sdp</dimen>
+    <dimen name="top_margin_room_code_edittext_create_game">@dimen/_120sdp</dimen>
+    <dimen name="top_margin_waiting_players_text_textview_create_game">@dimen/_230sdp</dimen>
+    <dimen name="top_margin_waiting_players_textview_create_game">@dimen/_305sdp</dimen>
+    <dimen name="top_margin_start_play_button_create_game">@dimen/_480sdp</dimen>
+
 
 
 </resources>

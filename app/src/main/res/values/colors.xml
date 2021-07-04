@@ -11,6 +11,8 @@
     <color name="principal_background_color">#24346c</color>
     <color name="top_background_color">#0a194e</color>
 
+    <color name="hint_color">#A7C3F3</color>
+
     <color name="play_color">#f36961</color>
     <color name="profile_color">#f8ccc4</color>
     <color name="settings_color">#2a3f87</color>

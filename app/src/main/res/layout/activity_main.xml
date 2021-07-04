@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/backgroundImageViewProfileMenu"
+        android:id="@+id/background_imageview_profile_menu"
         style="@style/BackgroundImageView"
-        android:src="@drawable/background"
         android:importantForAccessibility="no"
+        android:src="@drawable/background"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

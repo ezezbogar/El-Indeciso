@@ -1,35 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- MAIN MENU -->
-    <style name="BackgroundImageView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:scaleType">centerCrop</item>
-    </style>
-    <style name="LogoImageView">
-        <item name="android:layout_width">@dimen/_90sdp</item>
-        <item name="android:layout_height">@dimen/_90sdp</item>
-        <item name="android:layout_marginLeft">@dimen/_25sdp</item>
-        <item name="android:layout_marginTop">@dimen/_50sdp</item>
-        <item name="android:src">@drawable/logo</item>
-    </style>
-    <style name="SettingsImageButton">
-        <item name="android:layout_width">@dimen/_40sdp</item>
-        <item name="android:layout_height">@dimen/_40sdp</item>
-        <item name="srcCompat">@drawable/ic_settings</item>
-        <item name="android:layout_gravity">top|end</item>
-        <item name="android:background">@color/principal_background_color</item>
-        <item name="android:layout_marginTop">@dimen/_108sdp</item>
-        <item name="android:layout_marginRight">@dimen/_20sdp</item>
-    </style>
-    <style name="OptionMenuButton">
-        <item name="android:layout_width">@dimen/menu_button_width</item>
-        <item name="android:layout_height">@dimen/menu_button_height</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:gravity">end|bottom</item>
-        <item name="backgroundTint">@null</item>
-        <item name="android:textSize">@dimen/text_size_menu_options</item>
-    </style>
 
     <!-- GENERAL -->
     <style name="PrevPageButton">
@@ -43,6 +13,62 @@
         <item name="srcCompat">@drawable/ic_back_arrow</item>
     </style>
 
+    <style name="CustomTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">start|top</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginHorizontal">@dimen/left_margin_textview</item>
+    </style>
+    <style name="CustomEditText">
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">@dimen/left_margin_textview</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:layout_gravity">top|center</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
+        <item name="android:textColor">@color/hint_color</item>
+    </style>
+
+    <!-- MAIN MENU -->
+    <style name="BackgroundImageView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="LogoImageView">
+        <item name="android:layout_width">@dimen/_90sdp</item>
+        <item name="android:layout_height">@dimen/_90sdp</item>
+        <item name="android:layout_marginLeft">@dimen/_25sdp</item>
+        <item name="android:layout_marginTop">@dimen/_50sdp</item>
+        <item name="android:src">@drawable/logo</item>
+    </style>
+
+    <style name="SettingsImageButton">
+        <item name="android:layout_width">@dimen/_40sdp</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
+        <item name="srcCompat">@drawable/ic_settings</item>
+        <item name="android:layout_gravity">top|end</item>
+        <item name="android:background">@color/principal_background_color</item>
+        <item name="android:layout_marginTop">@dimen/_108sdp</item>
+        <item name="android:layout_marginRight">@dimen/_20sdp</item>
+    </style>
+
+    <style name="OptionMenuButton">
+        <item name="android:layout_width">@dimen/menu_button_width</item>
+        <item name="android:layout_height">@dimen/menu_button_height</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">end|bottom</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textSize">@dimen/text_size_menu_options</item>
+    </style>
+
     <!-- PROFILE MENU -->
     <style name="ProfileMenuImage">
         <item name="android:layout_width">@dimen/image_width_profile_menu</item>
@@ -50,6 +76,7 @@
         <item name="android:layout_gravity">top|center</item>
         <item name="android:layout_marginTop">@dimen/top_margin_image_profile_menu</item>
     </style>
+
     <style name="prevButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
@@ -59,6 +86,7 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginRight">@dimen/margin_between_columns_profile_menu</item>
     </style>
+
     <style name="nextButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
@@ -68,6 +96,7 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginLeft">@dimen/margin_between_columns_profile_menu</item>
     </style>
+
     <style name="profileElement">
         <item name="android:layout_width">@dimen/_90sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
@@ -137,4 +166,5 @@
         <item name="backgroundTint">@null</item>
         <item name="android:background">@drawable/custom_popup_button</item>
     </style>
+
 </resources>

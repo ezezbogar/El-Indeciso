@@ -29,7 +29,7 @@ class JoinGameFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.prevPageJoin.setOnClickListener {
-            goToFragment(PlayFragment())
+            goToFragment(PlayMenuFragment())
         }
     }
 

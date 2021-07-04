@@ -1,13 +1,18 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import android.view.*
-import com.example.el_indeciso.databinding.FragmentMainMenuBinding
+import android.text.InputFilter
+import android.text.method.ScrollingMovementMethod
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.el_indeciso.databinding.FragmentCreateGameBinding
 
-class MainMenuFragment : BaseFragment() {
-    private var _binding: FragmentMainMenuBinding? = null
+
+class CreateGameFragment : BaseFragment() {
+    private var _binding: FragmentCreateGameBinding? = null
     private val binding get() = _binding!!
-    override fun layoutId() = R.layout.fragment_main_menu
+    override fun layoutId() = R.layout.fragment_create_game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +22,7 @@ class MainMenuFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateGameBinding.inflate(inflater, container, false)
         val view = binding.root
 
         return view
@@ -26,17 +31,12 @@ class MainMenuFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mensajero = MovesMessenger("DesdeElRepo")
-        mensajero.addMove(Move("Niqui", 1))
-        mensajero.addMove(Move("Eze", 2))
-
-        binding.profileButton.setOnClickListener {
-            goToFragment(ProfileMenuFragment())
-        }
-
-        binding.playButton.setOnClickListener {
+        binding.prevPageCreateGame.setOnClickListener {
             goToFragment(PlayMenuFragment())
         }
+
+        // Setting of TextView ScrollBars
+        binding.textviewPlayersWaitingCreateGame.movementMethod = ScrollingMovementMethod()
     }
 
     override fun onDestroyView() {
