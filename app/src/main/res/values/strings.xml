@@ -29,7 +29,9 @@
     <string name="join_text">Unirse</string>
     <string name="room_code_text">CÓDIGO DE SALA</string>
     <string name="room_text">SALA</string>
-    <string name="room_code_hint_text">22.08.2001</string>
+    <string name="room_code_hint_text">553286</string>
     <string name="waiting_players_text">JUGADORES \nEN ESPERA</string>
     <string name="start_play_text">COMENZAR</string>
+    <string name="text_example_waiting_players_text">gonzalo37 \n_ezequiel98 \nriedel.2 \nanag8 \nferrignoelmejor</string>
+    <string name="text_example_name_profile_menu">laisla.delsol</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import android.text.InputFilter
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View

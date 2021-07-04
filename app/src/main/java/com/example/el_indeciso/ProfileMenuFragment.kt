@@ -1,6 +1,7 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -102,6 +103,9 @@ class ProfileMenuFragment : BaseFragment() {
         binding.prevPageProfileMenu.setOnClickListener {
             goToFragment(MainMenuFragment())
         }
+
+        binding.playerNameProfileMenu.filters += InputFilter.LengthFilter(15)
+
     }
 
     override fun onDestroyView() {

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateGameFragment">
-
-    <ImageView
-        android:id="@+id/background_imageview_create_game_menu"
-        style="@style/BackgroundImageView"
-        android:importantForAccessibility="no"
-        android:src="@drawable/background" />
 
     <ImageButton
         android:id="@+id/prev_page_create_game"
@@ -47,20 +40,13 @@
         android:maxLines="4"
         android:textStyle="bold"
         android:scrollbars="vertical"
-        android:text="gonzalo37 \n_ezequiel98 \nriedel.2 \nanag8 \nferrignoelmejor"
+        android:text="@string/text_example_waiting_players_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/principal_background_color" />
 
     <Button
         android:id="@+id/save_button_profile_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:layout_marginTop="@dimen/top_margin_start_play_button_create_game"
-        android:text="@string/start_play_text"
-        android:textColor="@color/principal_background_color"
-        android:textSize="@dimen/_16sdp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/white" />
+        style="@style/BottomButton"
+        android:text="@string/start_play_text" />
 
 </FrameLayout>

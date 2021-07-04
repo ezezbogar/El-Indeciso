@@ -12,13 +12,15 @@
     <!-- PROFILE -->
     <dimen name="image_height_profile_menu">@dimen/_120sdp</dimen>
     <dimen name="image_width_profile_menu">@dimen/_120sdp</dimen>
-    <dimen name="top_margin_image_profile_menu">@dimen/_110sdp</dimen>
+    <dimen name="left_margin_profile_menu">@dimen/_20sdp</dimen>
+    <dimen name="top_margin_image_profile_menu">@dimen/_130sdp</dimen>
     <dimen name="margin_between_lines_profile_menu">@dimen/_10sdp</dimen>
     <dimen name="text_margin_between_lines_profile_menu">@dimen/_25sdp</dimen>
+    <dimen name="margin_first_column_profile_menu">@dimen/_50sdp</dimen>
     <dimen name="margin_between_columns_profile_menu">@dimen/_10sdp</dimen>
     <!--top_margin_image_profile_menu + image_height_profile_menu + 30 dsp -->
-    <dimen name="margin_top_grid_profile_menu">@dimen/_280sdp</dimen>
-    <dimen name="top_margin_save_button_profile_menu">@dimen/_490sdp</dimen>
+    <dimen name="margin_top_grid_profile_menu">@dimen/_270sdp</dimen>
+    <dimen name="top_margin_bottom_button">@dimen/_480sdp</dimen>
 
     <!-- PLAY MENU -->
     <dimen name="height_background_play_menu">@dimen/_370sdp</dimen>
@@ -38,7 +40,4 @@
     <dimen name="top_margin_waiting_players_text_textview_create_game">@dimen/_230sdp</dimen>
     <dimen name="top_margin_waiting_players_textview_create_game">@dimen/_305sdp</dimen>
     <dimen name="top_margin_start_play_button_create_game">@dimen/_480sdp</dimen>
-
-
-
 </resources>
