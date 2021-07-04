@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_240sdp"
+    android:layout_height="@dimen/_240sdp"
+    android:background="@drawable/pop_up_back">
+
+    <TextView
+        android:id="@+id/wrong_drop_title"
+        style="@style/PopUpTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/drop_responsible"/>
+
+    <TextView
+        android:id="@+id/drop_responsible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#21336B"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/discard_scroll"
+        app:layout_constraintTop_toBottomOf="@id/wrong_drop_title" />
+
+
+    <ScrollView
+        android:id="@+id/discard_scroll"
+        android:layout_width="@dimen/_215sdp"
+        android:layout_height="@dimen/_107sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drop_responsible"
+        app:layout_constraintVertical_bias="0.564"
+        >
+
+        <LinearLayout
+            android:id="@+id/discarded_cards_messages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/close_button"
+        style="@style/PopUpButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/discard_scroll"
+        app:layout_constraintVertical_bias="0.652" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
