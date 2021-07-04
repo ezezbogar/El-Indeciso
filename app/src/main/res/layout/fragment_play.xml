@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayFragment">
+
+    <ImageView
+        android:id="@+id/ahora"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background"/>
 
     <ImageButton
         android:id="@+id/prev_page_play"
@@ -15,31 +22,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|top"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/top_margin_textview_play_menu"
+        android:layout_marginStart="@dimen/left_margin_play_menu"
         android:fontFamily="sans-serif-light"
-        android:text="Comenzar partida"
+        android:text="@string/title_play_menu_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/_37sdp" />
+
+    <ImageView
+        android:id="@+id/backgroundImageViewPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_background_play_menu"
+        android:layout_gravity="center|bottom"
+        android:layout_margin="@dimen/left_margin_play_menu"
+        android:importantForAccessibility="no"
+        android:scaleType="centerInside"
+        android:src="@drawable/background_play_mini" />
 
     <Button
-        android:id="@+id/run_button"
-        style="@style/OptionMenuButton"
-        android:layout_height="156dp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_play_button"
-        android:text="Correr"
-        android:textColor="@color/play_color" />
+        android:id="@+id/create_button"
+        style="@style/PlayMenuButton"
+        android:layout_marginTop="@dimen/top_margin_create_button_play_menu"
+        android:text="@string/create_text" />
 
     <Button
         android:id="@+id/join_button"
-        style="@style/OptionMenuButton"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/custom_play_button"
-        android:text="Unirse"
-        android:textColor="@color/play_color" />
+        style="@style/PlayMenuButton"
+        android:layout_marginTop="@dimen/top_margin_join_button_play_menu"
+        android:text="@string/join_text" />
 
 </FrameLayout>

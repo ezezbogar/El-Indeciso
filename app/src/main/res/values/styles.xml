@@ -51,7 +51,6 @@
         <item name="android:layout_gravity">top|center</item>
         <item name="android:layout_marginTop">@dimen/top_margin_image_profile_menu</item>
     </style>
-
     <style name="prevButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
@@ -60,7 +59,6 @@
         <item name="android:layout_marginTop">@dimen/margin_between_lines_profile_menu</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginRight">@dimen/margin_between_columns_profile_menu</item>
-
     </style>
     <style name="nextButton">
         <item name="android:layout_width">@dimen/_30sdp</item>
@@ -71,7 +69,6 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginLeft">@dimen/margin_between_columns_profile_menu</item>
     </style>
-
     <style name="profileElement">
         <item name="android:layout_width">@dimen/_90sdp</item>
         <item name="android:layout_height">@dimen/_30sdp</item>
@@ -81,6 +78,19 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
         <item name="android:textSize">@dimen/_20sdp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- PLAY MENU -->
+    <style name="PlayMenuButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/height_button_play_menu</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/button_play_menu</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/top_background_color</item>
+        <item name="android:textSize">@dimen/text_size_menu_options</item>
+        <item name="backgroundTint">@null</item>
     </style>
 
     <style name="GameInfo">
