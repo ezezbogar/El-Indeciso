@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">El Indeciso</string>
+    <string name="app_name">El-Indeciso</string>
     <string name="settings_menu_text">Ajustes</string>
     <string name="profile_menu_text">Perfil</string>
     <string name="rules_menu_text">Reglas</string>
@@ -23,6 +23,8 @@
     <string name="discard_message">%1$s tuvo que descartar el %2$s</string>
     <string name="round_completed_text">Recompensa: %1$s\nVidas restantes: %2$s\nRondas para ganar: %3$s</string>
     <string name="continue_button">Continuar</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_play_menu_text">COMENZAR \nPARTIDA</string>
+    <string name="create_text">Crear</string>
+    <string name="join_text">Unirse</string>
 </resources>

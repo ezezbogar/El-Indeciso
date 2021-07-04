@@ -83,8 +83,20 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!-- PLAY MENU -->
+    <style name="PlayMenuButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/height_button_play_menu</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/button_play_menu</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/top_background_color</item>
+        <item name="android:textSize">@dimen/text_size_menu_options</item>
+        <item name="backgroundTint">@null</item>
+    </style>
 
-<!--  IN-GAME  -->
+    <!--  IN-GAME  -->
     <style name="GameInfo">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
@@ -102,6 +114,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>

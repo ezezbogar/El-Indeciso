@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- MAIN MENU -->
     <dimen name="menu_button_height">@dimen/_120sdp</dimen>
     <dimen name="menu_button_width">@dimen/_120sdp</dimen>
     <dimen name="lateral_margin_menu_button">@dimen/_25sdp</dimen>
-    <dimen name="bottom_margin_menu_button_cellphone">@dimen/_110sdp</dimen>
+    <dimen name="bottom_margin_menu_button">@dimen/_110sdp</dimen>
     <!--bottom_margin_menu_button_cellphone + margin_between_buttons_menu + menu_button_height -->
     <dimen name="bottom_margin_top_button">@dimen/_240sdp</dimen>
     <dimen name="text_size_menu_options">@dimen/_15sdp</dimen>
 
-    <dimen name="bottom_margin_menu_button_tablet">@dimen/_80sdp</dimen>
-
+    <!-- PROFILE -->
     <dimen name="image_height_profile_menu">@dimen/_120sdp</dimen>
     <dimen name="image_width_profile_menu">@dimen/_120sdp</dimen>
     <dimen name="top_margin_image_profile_menu">@dimen/_110sdp</dimen>
-
     <dimen name="margin_between_lines_profile_menu">@dimen/_10sdp</dimen>
     <dimen name="text_margin_between_lines_profile_menu">@dimen/_25sdp</dimen>
     <dimen name="margin_between_columns_profile_menu">@dimen/_10sdp</dimen>
-
     <!--top_margin_image_profile_menu + image_height_profile_menu + 30 dsp -->
     <dimen name="margin_top_grid_profile_menu">@dimen/_280sdp</dimen>
     <dimen name="top_margin_save_button_profile_menu">@dimen/_490sdp</dimen>
+
+    <!-- PLAY -->
+    <dimen name="height_background_play_menu">@dimen/_370sdp</dimen>
+    <dimen name="left_margin_play_menu">@dimen/_20sdp</dimen>
+    <dimen name="top_margin_textview_play_menu">@dimen/_100sdp</dimen>
+    <dimen name="height_button_play_menu">@dimen/_100sdp</dimen>
+    <dimen name="top_margin_create_button_play_menu">@dimen/_10sdp</dimen>
+    <dimen name="top_margin_join_button_play_menu">@dimen/_170sdp</dimen>
+
 
 </resources>

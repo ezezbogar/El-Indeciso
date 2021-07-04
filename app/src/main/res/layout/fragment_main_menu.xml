@@ -50,7 +50,7 @@
         android:layout_gravity="bottom|start"
         android:layout_marginStart="@dimen/lateral_margin_menu_button"
         android:layout_marginLeft="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
+        android:layout_marginBottom="@dimen/bottom_margin_menu_button"
         android:background="@drawable/custom_profile_button"
         android:text="@string/profile_menu_text"
         android:textColor="@color/profile_color" />
@@ -61,7 +61,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/lateral_margin_menu_button"
         android:layout_marginRight="@dimen/lateral_margin_menu_button"
-        android:layout_marginBottom="@dimen/bottom_margin_menu_button_cellphone"
+        android:layout_marginBottom="@dimen/bottom_margin_menu_button"
         android:background="@drawable/custom_settings_button"
         android:text="@string/settings_menu_text"
         android:textColor="@color/settings_color" />
