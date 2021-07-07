@@ -7,29 +7,30 @@
     android:background="@drawable/pop_up_back">
 
     <TextView
-        android:id="@+id/completed_round_title"
+        android:id="@+id/start_title"
         style="@style/PopUpTitle"
-        tools:text="@string/round_completed_title"
+        android:text="@string/start_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        android:id="@+id/completed_round_content"
+        android:id="@+id/start_content"
         style="@style/PopUpMessage"
-        app:layout_constraintBottom_toTopOf="@id/close_button"
+        android:text="@string/start_message"
+        app:layout_constraintBottom_toTopOf="@id/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/completed_round_title" />
+        app:layout_constraintTop_toBottomOf="@id/start_title" />
 
 
     <Button
-        android:id="@+id/close_button"
+        android:id="@+id/start_button"
         style="@style/PopUpButton"
-        android:text="@string/continue_button"
+        android:text="@string/start_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/completed_round_content" />
+        app:layout_constraintTop_toBottomOf="@id/start_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

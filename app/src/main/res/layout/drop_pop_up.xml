@@ -9,6 +9,7 @@
     <TextView
         android:id="@+id/wrong_drop_title"
         style="@style/PopUpTitle"
+        android:text="@string/wrong_drop_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +52,7 @@
     <Button
         android:id="@+id/close_button"
         style="@style/PopUpButton"
+        android:text="@string/continue_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
