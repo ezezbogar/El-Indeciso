@@ -19,6 +19,7 @@ class ProfileMenuFragment : BaseFragment() {
     private var outfitIndex = 0
     private var headIndex = 0
 
+    private var profile_name: String = "Hola"
     private var profilePic: String = "0000"
 
     companion object {
@@ -66,6 +67,38 @@ class ProfileMenuFragment : BaseFragment() {
         val outfit: ImageView = binding.outfitProfileMenu
         val back: ImageView = binding.backProfileMenu
 
+        //Edittext and Save Button Visibility is set as invisible
+        binding.playerNameEdittextProfileMenu.visibility = View.GONE
+        binding.saveNameButtonProfileMenu.visibility = View.GONE
+
+        binding.playerNameTextviewProfileMenu.text = profile_name
+
+        binding.changeNameButtonProfileMenu.setOnClickListener {
+
+            //Edittext and Save Button Visibility is set as visible
+            //Textview and Change Button Visibility is set as invisible
+            changeVisibilityOfButtons()
+
+            //Set old profile name
+            binding.playerNameEdittextProfileMenu.setText(profile_name)
+
+            //Set length limit to profile name
+            binding.playerNameEdittextProfileMenu.filters += InputFilter.LengthFilter(12)
+        }
+
+        binding.saveNameButtonProfileMenu.setOnClickListener {
+
+            //Get new profile name
+            profile_name = binding.playerNameEdittextProfileMenu.text.toString()
+
+            //Show new profile name
+            binding.playerNameTextviewProfileMenu.text = profile_name
+
+            //Edittext and Save Button Visibility is set as invisible
+            //Textview and Change Button Visibility is set as visible
+            changeVisibilityOfButtons()
+        }
+
         binding.nextHead.setOnClickListener {
             headIndex = nextButtonClicked(headIndex, HEADS, head)
         }
@@ -103,9 +136,6 @@ class ProfileMenuFragment : BaseFragment() {
         binding.prevPageProfileMenu.setOnClickListener {
             goToFragment(MainMenuFragment())
         }
-
-        binding.playerNameProfileMenu.filters += InputFilter.LengthFilter(15)
-
     }
 
     override fun onDestroyView() {
@@ -140,4 +170,25 @@ class ProfileMenuFragment : BaseFragment() {
 
         return avatarPartIndex
     }
+
+    fun changeVisibilityOfButtons() {
+
+        //Edittext and Save Button Visibility is set as invisible
+        invertVisibility(binding.playerNameEdittextProfileMenu)
+        invertVisibility(binding.saveNameButtonProfileMenu)
+
+        //Textview and Change Button Visibility is set as visible
+        invertVisibility(binding.playerNameTextviewProfileMenu)
+        invertVisibility(binding.changeNameButtonProfileMenu)
+    }
+
+    fun invertVisibility(view: View) {
+        view.visibility = if (view.visibility == View.VISIBLE) {
+            View.INVISIBLE
+        } else {
+            View.VISIBLE
+        }
+    }
 }
+
+
