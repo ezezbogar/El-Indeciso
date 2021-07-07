@@ -39,8 +39,8 @@
     <style name="BottomButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">top|center</item>
-        <item name="android:layout_marginTop">@dimen/top_margin_bottom_button</item>
+        <item name="android:layout_gravity">bottom|center</item>
+        <item name="android:layout_marginBottom">@dimen/bottom_margin_bottom_button</item>
         <item name="android:textColor">@color/principal_background_color</item>
         <item name="android:textSize">@dimen/_16sdp</item>
         <item name="android:textStyle">bold</item>
@@ -85,8 +85,8 @@
     <style name="ProfileMenuImage">
         <item name="android:layout_width">@dimen/image_width_profile_menu</item>
         <item name="android:layout_height">@dimen/image_height_profile_menu</item>
-        <item name="android:layout_gravity">top|center</item>
-        <item name="android:layout_marginTop">@dimen/top_margin_image_profile_menu</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom">@dimen/bottom_margin_image_profile_menu</item>
     </style>
 
     <style name="prevButton">

@@ -10,21 +10,24 @@
     <dimen name="text_size_menu_options">@dimen/_15sdp</dimen>
 
     <!-- PROFILE -->
-    <dimen name="top_margin_change_text_profile_menu">@dimen/_60sdp</dimen>
+    <dimen name="top_margin_linear_layout_profile_menu">@dimen/_70sdp</dimen>
+    <dimen name="min_width_text_profile_menu">@dimen/_70sdp</dimen>
+    <dimen name="margin_between_elements_linear_layout_profile_menu">@dimen/_5sdp</dimen>
+
+    <dimen name="top_margin_change_text_profile_menu">@dimen/_70sdp</dimen>
     <dimen name="left_margin_change_text_profile_menu">@dimen/_10sdp</dimen>
     <dimen name="pencil_button_size_profile_menu">45sp</dimen>
-
     <dimen name="image_height_profile_menu">@dimen/_120sdp</dimen>
     <dimen name="image_width_profile_menu">@dimen/_120sdp</dimen>
     <dimen name="left_margin_profile_menu">@dimen/_20sdp</dimen>
-    <dimen name="top_margin_image_profile_menu">@dimen/_130sdp</dimen>
+    <dimen name="bottom_margin_image_profile_menu">@dimen/_90sdp</dimen>
     <dimen name="margin_between_lines_profile_menu">@dimen/_10sdp</dimen>
     <dimen name="text_margin_between_lines_profile_menu">@dimen/_25sdp</dimen>
     <dimen name="margin_first_column_profile_menu">@dimen/_50sdp</dimen>
     <dimen name="margin_between_columns_profile_menu">@dimen/_10sdp</dimen>
     <!--top_margin_image_profile_menu + image_height_profile_menu + 30 dsp -->
-    <dimen name="margin_top_grid_profile_menu">@dimen/_270sdp</dimen>
-    <dimen name="top_margin_bottom_button">@dimen/_480sdp</dimen>
+    <dimen name="margin_top_grid_profile_menu">@dimen/_80sdp</dimen>
+    <dimen name="bottom_margin_bottom_button">@dimen/_50sdp</dimen>
 
     <!-- PLAY MENU -->
     <dimen name="height_background_play_menu">@dimen/_370sdp</dimen>
