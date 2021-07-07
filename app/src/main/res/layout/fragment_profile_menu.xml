@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileMenuFragment">
+
     <ImageView
         android:id="@+id/background_imageview_profile_menu"
         style="@style/BackgroundImageView"
@@ -14,6 +15,94 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_gravity="start|top"
+        android:layout_marginHorizontal="@dimen/left_margin_change_text_profile_menu"
+        android:layout_marginTop="@dimen/top_margin_change_text_profile_menu">
+
+        <TextView
+            android:id="@+id/player_name_textview_profile_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/change_name_button_profile_menu"
+            android:layout_width="@dimen/pencil_button_size_profile_menu"
+            android:layout_height="@dimen/pencil_button_size_profile_menu"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:background="@null"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pencil_button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_gravity="start|top"
+        android:layout_marginHorizontal="@dimen/left_margin_change_text_profile_menu"
+        android:layout_marginTop="@dimen/top_margin_change_text_profile_menu">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            android:layout_gravity="start">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/player_name_edittext_profile_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/principal_background_color"
+                android:inputType="textPersonName|textNoSuggestions"
+                android:minWidth="@dimen/_70sdp"
+                android:textSize="25sp"
+                android:maxLines="1"
+                android:layout_gravity="start|center"
+                android:fontFamily="sans-serif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/hint_color"
+                android:importantForAutofill="no"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<EditText
+
+            android:id="@+id/player_name_edittext_profile_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/_70sdp"
+            android:layout_gravity="bottom"
+            android:fontFamily="sans-serif"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/hint_color"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />-->
+
+        <ImageButton
+            android:id="@+id/save_name_button_profile_menu"
+            android:layout_width="@dimen/pencil_button_size_profile_menu"
+            android:layout_height="@dimen/pencil_button_size_profile_menu"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:background="@null"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tic_button" />
+
+    </LinearLayout>
+
+
     <ImageButton
         android:id="@+id/prev_page_profile_menu"
         style="@style/PrevPageButton"
@@ -42,20 +131,6 @@
         style="@style/ProfileMenuImage"
         android:importantForAccessibility="no"
         android:src="@drawable/face_0" />
-
-    <EditText
-        android:id="@+id/player_name_profile_menu"
-        android:textColorHint="@color/hint_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:fontFamily="sans-serif-light"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/hint_color"
-        android:layout_gravity="top|start"
-        android:layout_marginTop="@dimen/_60sdp"
-        android:hint="@string/text_example_name_profile_menu"
-        android:autofillHints="no"/>
 
     <GridLayout
         android:id="@+id/profile_buttons"
