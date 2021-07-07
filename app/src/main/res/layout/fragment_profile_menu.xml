@@ -47,23 +47,23 @@
             android:id="@+id/textField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:errorIconDrawable="@drawable/ic_error"
-            android:layout_gravity="start">
+            android:layout_gravity="start"
+            app:errorIconDrawable="@drawable/ic_error">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/player_name_edittext_profile_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/principal_background_color"
-                android:inputType="textPersonName|textNoSuggestions"
-                android:minWidth="@dimen/min_width_text_profile_menu"
-                android:textSize="25sp"
-                android:maxLines="1"
                 android:layout_gravity="start|center"
+                android:background="@color/principal_background_color"
                 android:fontFamily="sans-serif"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName|textNoSuggestions"
+                android:maxLines="1"
+                android:minWidth="@dimen/min_width_text_profile_menu"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/hint_color"
-                android:importantForAutofill="no"/>
+                android:textSize="25sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton

@@ -13,14 +13,14 @@
     <ImageView
         android:id="@+id/text_imageview_play_menu"
         style="@style/BackgroundImageView"
-        android:src="@drawable/start_play_text_play"
-        android:importantForAccessibility="no"/>
+        android:importantForAccessibility="no"
+        android:src="@drawable/start_play_text_play" />
 
     <ImageView
         android:id="@+id/background_imageview_play_menu"
         style="@style/BackgroundImageView"
-        android:src="@drawable/background_play"
-        android:importantForAccessibility="no"/>
+        android:importantForAccessibility="no"
+        android:src="@drawable/background_play" />
 
     <Button
         android:id="@+id/create_button_play_menu"

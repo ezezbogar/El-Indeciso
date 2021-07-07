@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    override fun onUserInteraction() {
+    /*override fun onUserInteraction() {
         if (currentFocus != null) {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
-    }
+    }*/
 }

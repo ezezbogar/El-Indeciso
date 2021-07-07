@@ -14,7 +14,9 @@
     <TextView
         android:id="@+id/textview_join"
         style="@style/CustomTextView"
-        android:layout_marginTop="@dimen/top_margin_textview_join"
+        android:layout_gravity="center|start"
+        android:layout_marginBottom="@dimen/top_margin_textview_join"
+        android:fontFamily="sans-serif"
         android:text="@string/room_code_text" />
 
     <!--CAMBIAR-->
@@ -22,31 +24,16 @@
     <EditText
         android:id="@+id/edittext_join"
         style="@style/CustomEditText"
-        android:layout_marginTop="@dimen/top_margin_edittext_join"
-        android:hint="@string/room_code_hint_text"
-        android:autofillHints="no"/>
-
-    <!--
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/code_to_join"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/top_background_color"
-        android:hint="Code to join"
-        android:textColorHint="@color/top_background_color"
-        app:helperTextTextColor="@color/top_background_color"
-        app:hintTextColor="@color/top_background_color">
+        android:layout_marginTop="@dimen/top_margin_edittext_join"
+        android:autofillHints="no"
+        android:hint="..."
+        android:textColorHint="#BDC6D6"
+        android:textSize="@dimen/_60sdp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edittext_code_to_join"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textColor="#0352C8" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
+    <Button
+        android:id="@+id/join_button_join"
+        style="@style/BottomButton"
+        android:text="UNIRSE" />
 
 </FrameLayout>

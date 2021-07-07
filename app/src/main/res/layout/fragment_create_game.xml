@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateGameFragment">
-
+    <ImageView
+        android:id="@+id/background_imageview_profile_menu"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background" />
     <ImageButton
         android:id="@+id/prev_page_create_game"
         style="@style/PrevPageButton"
@@ -19,20 +23,24 @@
     <TextView
         android:id="@+id/edittext_room_create_game"
         style="@style/CustomEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/_80sdp"
         android:layout_marginTop="@dimen/top_margin_room_code_edittext_create_game"
         android:hint="@string/room_code_hint_text" />
 
     <TextView
         android:id="@+id/textview_players_waiting_text_create_game"
         style="@style/CustomTextView"
-        android:layout_marginTop="@dimen/top_margin_waiting_players_text_textview_create_game"
+        android:layout_gravity="start|center"
+        android:layout_marginBottom="@dimen/bottom_margin_waiting_players_text_textview_create_game"
         android:text="@string/waiting_players_text" />
 
     <TextView
         android:id="@+id/textview_players_waiting_create_game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|top"
+        android:layout_gravity="start|center"
         android:layout_marginHorizontal="@dimen/left_margin_textview"
         android:layout_marginTop="@dimen/top_margin_waiting_players_textview_create_game"
         android:background="@color/white"

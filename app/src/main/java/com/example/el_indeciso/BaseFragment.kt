@@ -67,6 +67,14 @@ abstract class BaseFragment : Fragment() {
     }
 
     /*
+     * Hides keyboard
+     */
+    fun View.hideKeyboard() {
+        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    /*
      * Get Activity
      */
     private fun View.getActivity(): AppCompatActivity? {
@@ -130,5 +138,13 @@ abstract class BaseFragment : Fragment() {
         }
 
         return ret
+    }
+
+    /*
+    * File: Request focus and shows the keyboard
+    */
+    fun EditText.setFocus(){
+        requestFocus()
+        showKeyboard()
     }
 }

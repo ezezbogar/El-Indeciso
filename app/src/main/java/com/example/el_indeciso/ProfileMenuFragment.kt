@@ -94,8 +94,7 @@ class ProfileMenuFragment : BaseFragment() {
             binding.playerNameEdittextProfileMenu.filters += InputFilter.LengthFilter(12)
 
             //Focus change to EditText
-            binding.playerNameEdittextProfileMenu.requestFocus()
-            binding.playerNameEdittextProfileMenu.showKeyboard()
+            binding.playerNameEdittextProfileMenu.setFocus()
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
@@ -170,7 +169,7 @@ class ProfileMenuFragment : BaseFragment() {
                 //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
                 ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
                     binding.saveNameButtonProfileMenu.performClick()
-
+                    binding.playerNameEdittextProfileMenu.hideKeyboard()
                     return@setOnKeyListener true
                 }
                 else -> false
