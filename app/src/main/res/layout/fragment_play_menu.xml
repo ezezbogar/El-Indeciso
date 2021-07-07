@@ -10,21 +10,17 @@
         style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
-    <TextView
-        android:id="@+id/textview_play_menu"
-        style="@style/CustomTextView"
-        android:layout_marginTop="@dimen/top_margin_textview_play_menu"
-        android:text="@string/title_play_menu_text" />
+    <ImageView
+        android:id="@+id/text_imageview_play_menu"
+        style="@style/BackgroundImageView"
+        android:src="@drawable/start_play_text_play"
+        android:importantForAccessibility="no"/>
 
     <ImageView
         android:id="@+id/background_imageview_play_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/height_background_play_menu"
-        android:layout_gravity="center|bottom"
-        android:layout_margin="@dimen/left_margin_textview"
-        android:importantForAccessibility="no"
-        android:scaleType="centerInside"
-        android:src="@drawable/background_play_mini" />
+        style="@style/BackgroundImageView"
+        android:src="@drawable/background_play"
+        android:importantForAccessibility="no"/>
 
     <Button
         android:id="@+id/create_button_play_menu"
