@@ -19,7 +19,9 @@ class ProfileMenuFragment : BaseFragment() {
     private var outfitIndex = 0
     private var headIndex = 0
 
-    private var profile_name: String = "Hola"
+    private lateinit var actualText: String
+
+    private var profileName: String = "isla_sol.8"
     private var profilePic: String = "0000"
 
     companion object {
@@ -45,18 +47,20 @@ class ProfileMenuFragment : BaseFragment() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    /*
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+        }
+     */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
-        val view = binding.root
+        //val view = binding.root
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,13 +71,15 @@ class ProfileMenuFragment : BaseFragment() {
         val outfit: ImageView = binding.outfitProfileMenu
         val back: ImageView = binding.backProfileMenu
 
-        //Edittext and Save Button Visibility is set as invisible
+        //TextField, EditText and Save Button Visibility are set as invisible
         binding.playerNameEdittextProfileMenu.visibility = View.GONE
         binding.saveNameButtonProfileMenu.visibility = View.GONE
         binding.textField.visibility = View.GONE
 
-        binding.playerNameTextviewProfileMenu.text = profile_name
+        //The text of the Textview is updated with the profile name
+        binding.playerNameTextviewProfileMenu.text = profileName
 
+        //Action when wanting to change profile name
         binding.changeNameButtonProfileMenu.setOnClickListener {
 
             //Edittext and Save Button Visibility is set as visible
@@ -81,30 +87,29 @@ class ProfileMenuFragment : BaseFragment() {
             changeVisibilityOfButtons()
 
             //Set old profile name
-            binding.playerNameEdittextProfileMenu.setText(profile_name)
+            binding.playerNameEdittextProfileMenu.setText(profileName)
 
             //Set length limit to profile name
             binding.playerNameEdittextProfileMenu.filters += InputFilter.LengthFilter(12)
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
-            var actual_text = binding.playerNameEdittextProfileMenu.text.toString()
 
-            if(actual_text.length < 4){
+            if (!validProfileName()) {
                 setErrorTextField(true)
-            }
-            else{
+            } else {
                 //Edittext and Save Button Visibility is set as invisible
                 //Textview and Change Button Visibility is set as visible
                 changeVisibilityOfButtons()
 
                 //Get new profile name
-                profile_name = binding.playerNameEdittextProfileMenu.text.toString()
+                profileName = binding.playerNameEdittextProfileMenu.text.toString()
 
+                //Always set error al false
                 setErrorTextField(false)
 
                 //Show new profile name
-                binding.playerNameTextviewProfileMenu.text = profile_name
+                binding.playerNameTextviewProfileMenu.text = profileName
             }
         }
 
@@ -133,14 +138,21 @@ class ProfileMenuFragment : BaseFragment() {
             backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
         }
         binding.saveButtonProfileMenu.setOnClickListener {
-            val backDigit = Integer.toHexString(backIndex)
-            val headDigit = Integer.toHexString(headIndex)
-            val faceDigit = Integer.toHexString(faceIndex)
-            val outfitDigit = Integer.toHexString(outfitIndex)
+            if (!validProfileName()) {
+                setErrorTextField(true)
+                showMessageToast("Wrong profile name!")
+            } else if (binding.playerNameEdittextProfileMenu.visibility == View.VISIBLE) {
+                showMessageToast("Please set a profile name")
+            } else {
+                val backDigit = Integer.toHexString(backIndex)
+                val headDigit = Integer.toHexString(headIndex)
+                val faceDigit = Integer.toHexString(faceIndex)
+                val outfitDigit = Integer.toHexString(outfitIndex)
 
-            profilePic = "${backDigit}${headDigit}${faceDigit}${outfitDigit}"
+                profilePic = "${backDigit}${headDigit}${faceDigit}${outfitDigit}"
 
-            goToFragment(MainMenuFragment())
+                goToFragment(MainMenuFragment())
+            }
         }
         binding.prevPageProfileMenu.setOnClickListener {
             goToFragment(MainMenuFragment())
@@ -152,6 +164,9 @@ class ProfileMenuFragment : BaseFragment() {
         _binding = null
     }
 
+    /*
+     * Action when next button is clicked.
+     */
     private fun nextButtonClicked(
         _avatarPartIndex: Int,
         listOfAvatarPart: List<Int>,
@@ -166,6 +181,9 @@ class ProfileMenuFragment : BaseFragment() {
         return avatarPartIndex
     }
 
+    /*
+     * Action when prev button is clicked.
+     */
     private fun prevButtonClicked(
         _avatarPartIndex: Int,
         listOfAvatarPart: List<Int>,
@@ -180,7 +198,10 @@ class ProfileMenuFragment : BaseFragment() {
         return avatarPartIndex
     }
 
-    fun changeVisibilityOfButtons() {
+    /*
+     * Change visibility of elements for changing profile name.
+     */
+    private fun changeVisibilityOfButtons() {
 
         //Edittext and Save Button Visibility is set as invisible
         invertVisibility(binding.playerNameEdittextProfileMenu)
@@ -192,23 +213,27 @@ class ProfileMenuFragment : BaseFragment() {
         invertVisibility(binding.changeNameButtonProfileMenu)
     }
 
-    fun invertVisibility(view: View) {
-        view.visibility = if (view.visibility == View.VISIBLE) {
-            View.INVISIBLE
-        } else {
-            View.VISIBLE
-        }
+    /*
+     * Returns if the profile name meets the requirements
+     */
+    private fun validProfileName(): Boolean {
+        actualText = binding.playerNameEdittextProfileMenu.text.toString()
+
+        return (actualText.length > 3
+                && !(actualText.contains(" ")))
     }
 
     /*
-* Sets and resets the text field error status.
-*/
+     * Sets and resets the text field error status.
+     */
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true
+            binding.playerNameEdittextProfileMenu.setTextColor(resources.getColor(R.color.red))
             binding.textField.error = getString(R.string.try_again)
         } else {
             binding.textField.isErrorEnabled = false
+            binding.playerNameEdittextProfileMenu.setTextColor(resources.getColor(R.color.hint_color))
             binding.playerNameEdittextProfileMenu.text = null
         }
     }
