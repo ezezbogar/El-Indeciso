@@ -138,10 +138,7 @@ class ProfileMenuFragment : BaseFragment() {
             backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
         }
         binding.saveButtonProfileMenu.setOnClickListener {
-            if (!validProfileName()) {
-                setErrorTextField(true)
-                showMessageToast("Wrong profile name!")
-            } else if (binding.playerNameEdittextProfileMenu.visibility == View.VISIBLE) {
+            if (binding.playerNameEdittextProfileMenu.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
             } else {
                 val backDigit = Integer.toHexString(backIndex)
