@@ -58,7 +58,7 @@ abstract class BaseFragment : Fragment() {
     /*
      * Shows keyboard
      */
-    fun EditText.showKeyboard() {
+    private fun EditText.showKeyboard() {
         if (requestFocus()) {
             (getActivity()?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
                 .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
@@ -96,7 +96,7 @@ abstract class BaseFragment : Fragment() {
             val filename = "profile_info.txt"
             val fos = requireActivity().openFileOutput(fileName, Context.MODE_PRIVATE)
             fos.write(textToWrite.toByteArray())
-            fos.close();
+            fos.close()
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         } catch (e: NumberFormatException) {

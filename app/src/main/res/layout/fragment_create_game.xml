@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateGameFragment">
-    <ImageView
-        android:id="@+id/background_imageview_profile_menu"
-        style="@style/BackgroundImageView"
-        android:importantForAccessibility="no"
-        android:src="@drawable/background" />
+    
     <ImageButton
         android:id="@+id/prev_page_create_game"
         style="@style/PrevPageButton"

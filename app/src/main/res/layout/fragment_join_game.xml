@@ -34,6 +34,6 @@
     <Button
         android:id="@+id/join_button_join"
         style="@style/BottomButton"
-        android:text="UNIRSE" />
+        android:text="@string/join_text" />
 
 </FrameLayout>
