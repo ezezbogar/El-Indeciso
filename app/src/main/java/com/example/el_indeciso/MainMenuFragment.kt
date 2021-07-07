@@ -1,8 +1,11 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import com.example.el_indeciso.databinding.FragmentMainMenuBinding
+import java.io.*
+
 
 class MainMenuFragment : BaseFragment() {
     private var _binding: FragmentMainMenuBinding? = null

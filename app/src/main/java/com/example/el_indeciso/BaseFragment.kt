@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import java.io.*
 
 abstract class BaseFragment : Fragment() {
 
@@ -65,7 +66,10 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    private fun View.getActivity(): AppCompatActivity?{
+    /*
+     * Get Activity
+     */
+    private fun View.getActivity(): AppCompatActivity? {
         var context = this.context
         while (context is ContextWrapper) {
             if (context is AppCompatActivity) {
@@ -74,5 +78,57 @@ abstract class BaseFragment : Fragment() {
             context = context.baseContext
         }
         return null
+    }
+
+    /*
+     * File: Write
+     */
+    fun writeFile(fileName: String, textToWrite: String) {
+        try {
+            val filename = "profile_info.txt"
+            val fos = requireActivity().openFileOutput(fileName, Context.MODE_PRIVATE)
+            fos.write(textToWrite.toByteArray())
+            fos.close();
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /*
+     * File: Read
+     */
+    fun readFile(fileName: String): String {
+        var ret = ""
+
+        try {
+            val inputStream: InputStream? = requireContext().openFileInput(fileName)
+            if (inputStream != null) {
+                val inputStreamReader = InputStreamReader(inputStream)
+                val bufferedReader = BufferedReader(inputStreamReader)
+                var receiveString: String? = ""
+                val stringBuilder = StringBuilder()
+                while (bufferedReader.readLine().also { receiveString = it } != null) {
+                    stringBuilder.append("\n").append(receiveString)
+                }
+                inputStream.close()
+                ret = stringBuilder.toString()
+            }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return ret
     }
 }

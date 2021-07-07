@@ -1,10 +1,14 @@
 package com.example.el_indeciso
 
+import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.*
 import android.widget.ImageView
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
+import java.io.FileNotFoundException
+import java.io.IOException
+
 
 class ProfileMenuFragment : BaseFragment() {
     private var _binding: FragmentProfileMenuBinding? = null
@@ -150,6 +154,9 @@ class ProfileMenuFragment : BaseFragment() {
 
                 profilePic = "${backDigit}${headDigit}${faceDigit}${outfitDigit}"
 
+                //Internal Storage: Write info into profile_info.txt
+                var textToWrite = "$profilePic - $profileName"
+                writeFile("profile_info.txt", textToWrite)
                 goToFragment(MainMenuFragment())
             }
         }
