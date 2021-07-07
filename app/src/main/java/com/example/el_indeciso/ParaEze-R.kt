@@ -3,6 +3,7 @@ package com.example.el_indeciso
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -21,7 +22,7 @@ class ParaEze {
     lateinit var alertDialog: AlertDialog
 
 
-    // --------------- ESTOS 2 METODOS HACEN LA MAGIA, SON LOS QUE TENES QUE LLAMAR -------------//
+    // --------------- ESTOS 3 METODOS HACEN LA MAGIA, SON LOS QUE TENES QUE LLAMAR -------------//
 
     // Muestra el PopUp que indica que la ronda fue completada.
     // Recibe la cantidad de vidas del jugador, la ronda que se acaba de terminar y la cantidad
@@ -31,6 +32,7 @@ class ParaEze {
         val pop_up_layout: View =  LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
 
         setCompletedRoundPopUpData(pop_up_layout, lives, round, total_rounds)
+        initializeCloseButton(pop_up_layout.findViewById(R.id.close_button))
         showPopUp(pop_up_layout)
     }
 
@@ -44,6 +46,23 @@ class ParaEze {
         val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.drop_pop_up, null)
 
         setWrongDropPopUpData(pop_up_layout, drop_responsible, card_dropped, discarded_cards)
+        initializeCloseButton(pop_up_layout.findViewById(R.id.close_button))
+        showPopUp(pop_up_layout)
+    }
+
+
+    // Muestra el PopUp que aparece al inicio de la partida.
+    // El jugador toca "COMENZAR" y queda bloqueando hasta que todos hayan hecho lo mismo.
+    // Los parametros manejalos vos, le estoy pasando un handler pero capaz que vos tenes un handler como
+    // atributo y podes borrar este parametro.
+    // Además no tengo ni la más remota idea de cómo chequeas que estén todos ready, lo dejo a tu criterio
+    // mi rey. De ultima sabes donde encontrarme ;)
+    private fun showStartPopUp(handler: Handler) {
+        dialogBuilder = AlertDialog.Builder(context)
+        val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
+
+        // Lo mismo con este metodo, los parametros manejalos vos
+        initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
         showPopUp(pop_up_layout)
     }
 
@@ -87,9 +106,8 @@ class ParaEze {
         }
     }
 
-    private fun showPopUp(pop_up_layout: View) {
-        val button: Button = pop_up_layout.findViewById(R.id.close_button)
 
+    private fun showPopUp(pop_up_layout: View) {
         // magia de inicializacion
         dialogBuilder.setView(pop_up_layout);
         alertDialog = dialogBuilder.create()
@@ -97,10 +115,39 @@ class ParaEze {
         alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.setCanceledOnTouchOutside(false)
         alertDialog.show()
+    }
 
+    private fun initializeCloseButton(button: Button) {
         button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 alertDialog.dismiss()
+            }
+        })
+    }
+
+    private fun initializeStartButton(button: Button, handler: Handler) {
+        button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                var waiting = true
+                button.isClickable = false
+                button.setBackgroundResource(R.drawable.popup_button_pressed)
+                button.setText(R.string.wait_button)
+//                Acá va la logica que setea el flag "estoy_listo"
+//                ...
+
+
+//                Loop recursivo que chequea que esten todos conectados
+//                val wait_connections: Runnable = object : Runnable {
+//                    override fun run() {
+//                        waiting = chequear que esten todos conectados
+//                        if (waiting) {
+//                            handler.postDelayed(this, 50)
+//                        } else {
+//                            alertDialog.dismiss()
+//                        }
+//                    }
+//                }
+//                handler.post(wait_connections)
             }
         })
     }
