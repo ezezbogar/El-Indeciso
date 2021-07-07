@@ -1,11 +1,16 @@
 package com.example.el_indeciso
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
@@ -47,5 +52,27 @@ abstract class BaseFragment : Fragment() {
     fun showMessageToast(message: String) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast.show()
+    }
+
+    /*
+     * Shows keyboard
+     */
+    fun EditText.showKeyboard() {
+        if (requestFocus()) {
+            (getActivity()?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+            setSelection(text.length)
+        }
+    }
+
+    private fun View.getActivity(): AppCompatActivity?{
+        var context = this.context
+        while (context is ContextWrapper) {
+            if (context is AppCompatActivity) {
+                return context
+            }
+            context = context.baseContext
+        }
+        return null
     }
 }

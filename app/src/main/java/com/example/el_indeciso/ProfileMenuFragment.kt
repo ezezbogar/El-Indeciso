@@ -2,12 +2,9 @@ package com.example.el_indeciso
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
-
 
 class ProfileMenuFragment : BaseFragment() {
     private var _binding: FragmentProfileMenuBinding? = null
@@ -91,13 +88,18 @@ class ProfileMenuFragment : BaseFragment() {
 
             //Set length limit to profile name
             binding.playerNameEdittextProfileMenu.filters += InputFilter.LengthFilter(12)
+
+            //Focus change to EditText
+            binding.playerNameEdittextProfileMenu.requestFocus()
+            binding.playerNameEdittextProfileMenu.showKeyboard()
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
 
             if (!validProfileName()) {
                 setErrorTextField(true)
-            } else {
+            } else { //Profile name is ok
+
                 //Edittext and Save Button Visibility is set as invisible
                 //Textview and Change Button Visibility is set as visible
                 changeVisibilityOfButtons()
@@ -153,6 +155,19 @@ class ProfileMenuFragment : BaseFragment() {
         }
         binding.prevPageProfileMenu.setOnClickListener {
             goToFragment(MainMenuFragment())
+        }
+
+        binding.playerNameEdittextProfileMenu.setOnKeyListener { v, keyCode, event ->
+
+            when {
+                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
+                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
+                    binding.saveNameButtonProfileMenu.performClick()
+
+                    return@setOnKeyListener true
+                }
+                else -> false
+            }
         }
     }
 
