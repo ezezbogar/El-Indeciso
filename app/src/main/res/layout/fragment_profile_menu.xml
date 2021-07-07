@@ -18,7 +18,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_gravity="start|top"
         android:layout_marginHorizontal="@dimen/left_margin_change_text_profile_menu"
         android:layout_marginTop="@dimen/top_margin_change_text_profile_menu">
@@ -48,12 +48,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_gravity="start|top"
         android:layout_marginHorizontal="@dimen/left_margin_change_text_profile_menu"
         android:layout_marginTop="@dimen/top_margin_change_text_profile_menu">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            android:layout_gravity="start">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/player_name_edittext_profile_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/principal_background_color"
+                android:inputType="textPersonName|textNoSuggestions"
+                android:minWidth="@dimen/_70sdp"
+                android:textSize="25sp"
+                android:maxLines="1"
+                android:layout_gravity="start|center"
+                android:fontFamily="sans-serif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/hint_color"
+                android:importantForAutofill="no"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<EditText
+
             android:id="@+id/player_name_edittext_profile_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +85,9 @@
             android:layout_gravity="bottom"
             android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/hint_color" />
+            android:textColor="@color/hint_color"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />-->
 
         <ImageButton
             android:id="@+id/save_name_button_profile_menu"

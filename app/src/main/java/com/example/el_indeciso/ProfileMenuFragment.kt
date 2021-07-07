@@ -70,6 +70,7 @@ class ProfileMenuFragment : BaseFragment() {
         //Edittext and Save Button Visibility is set as invisible
         binding.playerNameEdittextProfileMenu.visibility = View.GONE
         binding.saveNameButtonProfileMenu.visibility = View.GONE
+        binding.textField.visibility = View.GONE
 
         binding.playerNameTextviewProfileMenu.text = profile_name
 
@@ -87,16 +88,24 @@ class ProfileMenuFragment : BaseFragment() {
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
+            var actual_text = binding.playerNameEdittextProfileMenu.text.toString()
 
-            //Get new profile name
-            profile_name = binding.playerNameEdittextProfileMenu.text.toString()
+            if(actual_text.length < 4){
+                setErrorTextField(true)
+            }
+            else{
+                //Edittext and Save Button Visibility is set as invisible
+                //Textview and Change Button Visibility is set as visible
+                changeVisibilityOfButtons()
 
-            //Show new profile name
-            binding.playerNameTextviewProfileMenu.text = profile_name
+                //Get new profile name
+                profile_name = binding.playerNameEdittextProfileMenu.text.toString()
 
-            //Edittext and Save Button Visibility is set as invisible
-            //Textview and Change Button Visibility is set as visible
-            changeVisibilityOfButtons()
+                setErrorTextField(false)
+
+                //Show new profile name
+                binding.playerNameTextviewProfileMenu.text = profile_name
+            }
         }
 
         binding.nextHead.setOnClickListener {
@@ -176,6 +185,7 @@ class ProfileMenuFragment : BaseFragment() {
         //Edittext and Save Button Visibility is set as invisible
         invertVisibility(binding.playerNameEdittextProfileMenu)
         invertVisibility(binding.saveNameButtonProfileMenu)
+        invertVisibility(binding.textField)
 
         //Textview and Change Button Visibility is set as visible
         invertVisibility(binding.playerNameTextviewProfileMenu)
@@ -187,6 +197,19 @@ class ProfileMenuFragment : BaseFragment() {
             View.INVISIBLE
         } else {
             View.VISIBLE
+        }
+    }
+
+    /*
+* Sets and resets the text field error status.
+*/
+    private fun setErrorTextField(error: Boolean) {
+        if (error) {
+            binding.textField.isErrorEnabled = true
+            binding.textField.error = getString(R.string.try_again)
+        } else {
+            binding.textField.isErrorEnabled = false
+            binding.playerNameEdittextProfileMenu.text = null
         }
     }
 }

@@ -10,7 +10,7 @@
     <dimen name="text_size_menu_options">@dimen/_15sdp</dimen>
 
     <!-- PROFILE -->
-    <dimen name="top_margin_change_text_profile_menu">@dimen/_80sdp</dimen>
+    <dimen name="top_margin_change_text_profile_menu">@dimen/_60sdp</dimen>
     <dimen name="left_margin_change_text_profile_menu">@dimen/_10sdp</dimen>
     <dimen name="pencil_button_size_profile_menu">45sp</dimen>
 
