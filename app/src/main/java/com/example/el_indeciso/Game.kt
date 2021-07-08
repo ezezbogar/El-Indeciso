@@ -1,36 +1,43 @@
 package com.example.el_indeciso
 
+import android.content.Context
+import android.os.Handler
+import android.util.Log
 import java.util.*
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.LinkedBlockingQueue
 import kotlin.random.Random
+import kotlin.concurrent.*
 
-class Game() {
+class Game(private var handler: Handler, private var gameViews: GameViews, private var context: Context, private var match: Match) {
     private var stillPlaying: Boolean = true
     private var players = Vector<Player>()
     private var currentNumber: Int = 0
     private var lives: Int = 3
     private var maxCardNumber: Int = 0
     private var cardsSequence: Vector<Int> = Vector<Int>()
-    private var roundNumber: Int = 1
+    private var roundNumber: Int = 3
     private val maxRounds: Int = 12
 
     var rnd: Random? = null
 
-    //private var sendQueue: Queue<Move> = LinkedList<Move>()
-    //private var receiveQueue: BlockingQueue<Move> = LinkedBlockingQueue<Move>()
+    /* - - - - - - - UI - - - - - - - */
+    private val messageQueue: BlockingQueue<String> = LinkedBlockingQueue()
+    /* - - - - - - - - - - - - - - - - */
 
+    fun run(): Boolean {
 
-    fun addPlayer(newPlayer: Player) {
-        players.add(newPlayer)
-    }
+        thread { messageLoop() }
 
-    fun run() {
+        thread {
+            Thread.sleep(10000)
+            match.ready()
+        }
+
+        waitTillPlayersReady()
+
 
         rnd = Random(123) //Leer de Firebase
-
-
-
-
-
 
 
 
@@ -39,28 +46,42 @@ class Game() {
         // Comienza el juego
         while (stillPlaying && roundNumber <= maxRounds) {
 
+            /* - - -*/
+            updateRoundUI()
+            updateLivesUI()
+            /* - - -*/
+
             createCardsSequence()
             loadPlayersCards()
 
+            for (player in players) {
+                for (card in player.cards) {
+                    Log.v("Cartas", card.toString())
+                }
+            }
+
+            var i = 0
             while (!allCardsPlayed() && stillPlaying) {
 
-                //var newMove: Move = receiveQueue.take()
-                //processMove(newMove)
+
+                val newMove = match.getMove()
+
+                if (newMove == null) {
+                    Thread.sleep(500)
+                } else {
+                    processMove(newMove)
+                }
 
                 if (lives < 0) {
                     stillPlaying = false
                 }
             }
 
+            currentNumber = 0
             roundNumber++
         }
-    }
 
-
-
-    fun showAll() {
-        for (player in players) {
-        }
+        return stillPlaying
     }
 
     private fun loadPlayersCards() {
@@ -68,6 +89,14 @@ class Game() {
         for (player in players) {
             for (i in 0 until roundNumber) {
                 player.addCard(cardsSequence[posCard])
+
+                if (player.playerId == match.whoAmI()) {
+
+                    /**/
+                    addHandCardUI(cardsSequence[posCard])
+                    /**/
+                }
+
                 posCard++
             }
         }
@@ -113,11 +142,18 @@ class Game() {
     private fun processMove(newMove: Move) {
         playerUsesCard(newMove.card)
         currentNumber = newMove.card
-        // Update numero en la mesa
+
+        /* - - -*/
+        updateDeckUI()
+        /* - - -*/
+
         if (!isValidMove(newMove)) {
-            dropLowerCardsThan()
+            dropLowerCardsThan(newMove.card)
             lives--
-            // Update contador de Vidas
+
+            /* - - -*/
+            updateLivesUI()
+            /* - - -*/
         }
     }
 
@@ -136,11 +172,147 @@ class Game() {
         for (player in players) {
             if (player.hasCard(card)) {
                 player.useCard(card)
+
+                if (player.playerId != match.whoAmI()) {
+
+                    if (currentNumber < card) {
+                        playerDropUI(player.getUI(), card, true)
+                    } else {
+                        playerDropUI(player.getUI(), card, false)
+                    }
+                }
             }
         }
     }
 
-    private fun dropLowerCardsThan() {
+    private fun dropLowerCardsThan(thrownCard: Int) {
+        for (player in players) {
+            var cardsCopy = Vector<Int>()
+            cardsCopy.addAll(player.getCards())
+            for (card in cardsCopy) {
+
+                if (card < thrownCard) {
+                    playerUsesCard(card)
+                }
+            }
+        }
+    }
+
+    private fun waitTillPlayersReady() {
+        var playersReady = false
+
+        while (!playersReady) {
+
+            val playersFireBase = match.getPlayers()
+            Log.d("Messi", "${playersFireBase}")
+            if (playersReady(playersFireBase) && playersFireBase.size > 0) {
+                playersReady = true
+
+                loadPlayers(playersFireBase)
+
+            } else {
+                Thread.sleep(1000)
+            }
+        }
+    }
+
+    private fun loadPlayers(playersFireBase: MutableList<MatchPlayer>) {
+        for (player in playersFireBase) {
+            if (player.id == match.whoAmI()) {
+                players.add(Player(player.id, null))
+            } else {
+                var playerUi = UI_Player(player.nombre, roundNumber, player.profilePic, messageQueue, context, gameViews.players_grid)
+                players.add(Player(player.id, playerUi))
+                addPlayerUI(playerUi)
+            }
+        }
+    }
+
+    private fun playersReady(playersFireBase: MutableList<MatchPlayer>): Boolean {
+        var allReady = true
+        for (player in playersFireBase) {
+            if (!player.ready) {
+                allReady = false
+            }
+        }
+        return allReady
+    }
+
+    private fun messageLoop() {
+        val dropMessageLoop: Runnable = object : Runnable {
+            override fun run() {
+                var sleep = DROP_MESSAGE_DURATION
+                if (messageQueue.isNotEmpty()) {
+                    val message = messageQueue.take()
+                    gameViews.drop_message.setText(message)
+                    if (message == "") sleep = DROP_MESSAGE_DURATION / 2
+                }
+                handler.postDelayed(this, sleep)
+            }
+        }
+        handler.postDelayed(dropMessageLoop, DROP_MESSAGE_LOOP_SLEEP)
 
     }
+
+    companion object {
+        val DROP_MESSAGE_LOOP_SLEEP: Long = 50
+        val DROP_MESSAGE_DURATION: Long = 1000
+    }
+
+    private fun updateLivesUI() {
+        val livesWriter: Runnable = object : Runnable {
+            override fun run() {
+                gameViews.lives.text = lives.toString()
+            }
+        }
+        handler.post(livesWriter)
+    }
+
+    private fun updateDeckUI() {
+        val deckWriter: Runnable = object : Runnable {
+            override fun run() {
+                gameViews.maze_text.setText(currentNumber.toString())
+            }
+        }
+        handler.post(deckWriter)
+    }
+
+    private fun updateRoundUI() {
+        val roundWriter: Runnable = object : Runnable {
+            override fun run() {
+                gameViews.round.text = roundNumber.toString()
+            }
+        }
+        handler.post(roundWriter)
+    }
+
+    private fun playerDropUI(UI: UI_Player?, card: Int?, validMove: Boolean) {
+        val playerDrop: Runnable = object : Runnable {
+            override fun run() {
+                UI!!.dropCard(card, gameViews.maze_text, validMove)
+            }
+        }
+        handler.post(playerDrop)
+    }
+
+    private fun addPlayerUI(UI: UI_Player) {
+        val playerAdder: Runnable = object : Runnable {
+            override fun run() {
+                gameViews.players_grid.addView(UI.view)
+            }
+        }
+        handler.post(playerAdder)
+    }
+
+    private fun addHandCardUI(card: Int) {
+        val card = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
+
+        val handCardAdder: Runnable = object : Runnable {
+            override fun run() {
+                gameViews.player_hand.addView(card.view)
+            }
+        }
+        handler.post(handCardAdder)
+    }
+
 }
