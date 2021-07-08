@@ -19,7 +19,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     private var roundNumber: Int = 3
     private val maxRounds: Int = 12
 
-    var rnd: Random? = null
+    private var rnd: Random? = null
 
     /* - - - - - - - UI - - - - - - - */
     private val messageQueue: BlockingQueue<String> = LinkedBlockingQueue()
@@ -60,7 +60,6 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
                 }
             }
 
-            var i = 0
             while (!allCardsPlayed() && stillPlaying) {
 
 
@@ -85,16 +84,16 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun loadPlayersCards() {
-        var posCard: Int = 0
+        var posCard = 0
         for (player in players) {
             for (i in 0 until roundNumber) {
                 player.addCard(cardsSequence[posCard])
 
                 if (player.playerId == match.whoAmI()) {
 
-                    /**/
+                    /* - - - */
                     addHandCardUI(cardsSequence[posCard])
-                    /**/
+                    /* - - - */
                 }
 
                 posCard++
@@ -103,7 +102,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun allCardsPlayed(): Boolean {
-        var allCardsPlayed: Boolean = true
+        var allCardsPlayed = true
         for (player in players) {
             if (player.getCardsAmount() > 0) {
                 allCardsPlayed = false
@@ -113,21 +112,21 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun createCardsSequence() {
-        var allCards: Vector<Int> = Vector<Int>()
+        val allCards: Vector<Int> = Vector<Int>()
         cardsSequence.removeAllElements()
 
         for (i in 1..maxCardNumber) {
             allCards.add(i)
         }
         for (i in 1..maxCardNumber) {
-            var num: Int = rnd!!.nextInt(0, maxCardNumber - i + 1)
+            val num: Int = rnd!!.nextInt(0, maxCardNumber - i + 1)
             cardsSequence.add(allCards[num])
             allCards.removeElementAt(num)
         }
     }
 
     private fun calculateMaxCardNumber(playersAmount: Int): Int {
-        var maxNumber: Int = 0
+        var maxNumber = 0
         when (playersAmount) {
             1, 2, 3, 4 -> maxNumber = 100
             5 -> maxNumber = 125
@@ -158,7 +157,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun isValidMove(move: Move): Boolean {
-        var isValid: Boolean = true
+        var isValid = true
         for (player in players) {
             if (player.hasLowerCardThan(move.card)) {
                 isValid = false
@@ -187,7 +186,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
 
     private fun dropLowerCardsThan(thrownCard: Int) {
         for (player in players) {
-            var cardsCopy = Vector<Int>()
+            val cardsCopy = Vector<Int>()
             cardsCopy.addAll(player.getCards())
             for (card in cardsCopy) {
 
@@ -221,7 +220,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
             if (player.id == match.whoAmI()) {
                 players.add(Player(player.id, null))
             } else {
-                var playerUi = UI_Player(player.nombre, roundNumber, player.profilePic, messageQueue, context, gameViews.players_grid)
+                val playerUi = UI_Player(player.nombre, roundNumber, player.profilePic, messageQueue, context, gameViews.players_grid)
                 players.add(Player(player.id, playerUi))
                 addPlayerUI(playerUi)
             }
@@ -255,8 +254,8 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     companion object {
-        val DROP_MESSAGE_LOOP_SLEEP: Long = 50
-        val DROP_MESSAGE_DURATION: Long = 1000
+        const val DROP_MESSAGE_LOOP_SLEEP: Long = 50
+        const val DROP_MESSAGE_DURATION: Long = 1000
     }
 
     private fun updateLivesUI() {
@@ -305,11 +304,11 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun addHandCardUI(card: Int) {
-        val card = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
+        val cardUI = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
 
         val handCardAdder: Runnable = object : Runnable {
             override fun run() {
-                gameViews.player_hand.addView(card.view)
+                gameViews.player_hand.addView(cardUI.view)
             }
         }
         handler.post(handCardAdder)
