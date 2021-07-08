@@ -14,10 +14,11 @@ import android.widget.TextSwitcher
 import android.widget.TextView
 import com.example.el_indeciso.DoubleClickListener
 
-class Card (value: CharSequence,
+class Card (value: String,
             context: Context,
             layout: LinearLayout,
-            maze_top: TextSwitcher) {
+            maze_top: TextSwitcher,
+            match: Match) {
 
     val view = LayoutInflater.from(context).inflate(R.layout.scrollable_card, layout, false)
     private val handler = Handler(Looper.getMainLooper())
@@ -30,6 +31,7 @@ class Card (value: CharSequence,
 
         view.findViewById<ImageView>(R.id.card_image).setOnClickListener(object: DoubleClickListener() {
             override fun onDoubleClick(v: View) {
+                match.playCard(value.toInt())
                 if (is_clickable) {
                     val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.drop)
                     view.startAnimation(animation)
