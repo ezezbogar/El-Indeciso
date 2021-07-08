@@ -55,7 +55,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
             loadPlayersCards()
 
             for (player in players) {
-                for (card in player.cards) {
+                for (card in player.getCards()) {
                     Log.v("Cartas", card.toString())
                 }
             }

@@ -4,7 +4,7 @@ import java.util.*
 
 data class Player(var playerId: String, var UI: UI_Player?) {
 
-    var cards: Vector<Int> = Vector<Int>() // PRIVATE
+    private var cards: Vector<Int> = Vector<Int>()
 
     fun addCard(card: Int) {
         cards.add(card)
@@ -20,10 +20,6 @@ data class Player(var playerId: String, var UI: UI_Player?) {
         return cards
     }
 
-    fun deleteAllCards() {
-        cards.removeAllElements()
-    }
-
     fun getCardsAmount(): Int {
         return cards.size
     }
@@ -33,7 +29,7 @@ data class Player(var playerId: String, var UI: UI_Player?) {
     }
 
     fun hasLowerCardThan(playedCard: Int): Boolean {
-        var hasLowerCard: Boolean = false
+        var hasLowerCard = false
         for (card in cards) {
             if (card < playedCard) {
                 hasLowerCard = true
