@@ -32,9 +32,11 @@ class UI_Player (val name: CharSequence,
         loadProfilePic()
     }
 
-    fun dropCard(card: Int, maze: TextSwitcher) {
+    fun dropCard(card: Int?, maze: TextSwitcher, validMove: Boolean) {
         cards--
-        maze.setText(card.toString())
+        if (validMove) {
+            maze.setText(card.toString())
+        }
         player_cards.text = cards.toString()
         drop_notifier.put(context.getString(R.string.drop_message, name, card))
         drop_notifier.put(context.getString(R.string.drop_spacing))
