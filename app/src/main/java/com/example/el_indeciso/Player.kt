@@ -2,9 +2,9 @@ package com.example.el_indeciso
 
 import java.util.*
 
-data class Player(var playerName: String, var playerId: String) {
+data class Player(var playerId: String, var UI: UI_Player?) {
 
-    private var cards: Vector<Int> = Vector<Int>()
+    var cards: Vector<Int> = Vector<Int>() // PRIVATE
 
     fun addCard(card: Int) {
         cards.add(card)
@@ -13,6 +13,11 @@ data class Player(var playerName: String, var playerId: String) {
     fun useCard(card: Int) {
         cards.remove(card)
         //Animacion tiro carta
+    }
+
+    @JvmName("getCards1")
+    fun getCards(): Vector<Int> {
+        return cards
     }
 
     fun deleteAllCards() {
@@ -35,5 +40,10 @@ data class Player(var playerName: String, var playerId: String) {
             }
         }
         return hasLowerCard
+    }
+
+    @JvmName("getUI1")
+    fun getUI(): UI_Player? {
+        return UI
     }
 }
