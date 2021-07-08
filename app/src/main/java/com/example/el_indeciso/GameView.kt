@@ -2,22 +2,16 @@ package com.example.el_indeciso
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.el_indeciso.Card
-import java.util.concurrent.BlockingQueue
-import java.util.concurrent.LinkedBlockingQueue
 import kotlin.concurrent.*
 
 class GameView : AppCompatActivity() {
 
     private val drop_handler = Handler()
-    private val message_queue: BlockingQueue<String> = LinkedBlockingQueue() // Borrar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +28,12 @@ class GameView : AppCompatActivity() {
 
         val game_views = GameViews(maze_text, drop_message, lives, round, player_hand, players_grid)
 
-        var matchMaker = MatchMaker("Messi", "1010")
+        val matchMaker = MatchMaker("Messi", "1010")
 
-        //var match = matchMaker.newMatch()
-        var match = matchMaker.joinMatch("46AS")
+        //val match = matchMaker.newMatch()
+        val match = matchMaker.joinMatch("46AS")
 
-        var game: Game = Game(drop_handler, game_views, this, match)
+        val game = Game(drop_handler, game_views, this, match)
 
         thread { game.run() }
     }
