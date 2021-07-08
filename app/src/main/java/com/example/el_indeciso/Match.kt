@@ -1,6 +1,5 @@
 package com.example.el_indeciso
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,15 +18,14 @@ class Match(val key: String) {
 
     init {
         playersReference.addValueEventListener(object : ValueEventListener {
-            var auxList = mutableListOf<MatchPlayer>()
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val auxList = mutableListOf<MatchPlayer>()
                 for (postSnapshot in dataSnapshot.children) {
                     if (postSnapshot.getValue<MatchPlayer>() != null) {
                         auxList.add(postSnapshot.getValue<MatchPlayer>()!!)
                     }
                 }
-                Log.d("FIREBASE_INFO", "Se detecto que un jugador fue modificado: $auxList")
-                playerList = auxList
+                playerList = auxList.toMutableList()
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
