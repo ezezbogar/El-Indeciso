@@ -1,17 +1,24 @@
 package com.example.el_indeciso
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Handler
 import android.util.Log
+import android.view.ViewGroup
 import java.util.*
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.random.Random
 import kotlin.concurrent.*
 
-class Game(private var handler: Handler, private var gameViews: GameViews, private var context: Context, private var match: Match) {
+class Game(private var handler: Handler,
+           private var gameViews: GameViews,
+           private var context: Context,
+           private var match: Match) {
+
     private var stillPlaying: Boolean = true
     private var players = Vector<Player>()
+    private var playerCards = mutableListOf<Card>()
     private var currentNumber: Int = 0
     private var lives: Int = 3
     private var maxCardNumber: Int = 0
@@ -23,6 +30,8 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
 
     /* - - - - - - - UI - - - - - - - */
     private val messageQueue: BlockingQueue<String> = LinkedBlockingQueue()
+    lateinit var dialogBuilder: AlertDialog.Builder
+    lateinit var alertDialog: AlertDialog
     /* - - - - - - - - - - - - - - - - */
 
     fun run(): Boolean {
@@ -36,32 +45,28 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
 
         waitTillPlayersReady()
 
-
         rnd = Random(123) //Leer de Firebase
-
-
 
         maxCardNumber = calculateMaxCardNumber(players.size)
 
-        // Comienza el juego
+        // Game Starts
         while (stillPlaying && roundNumber <= maxRounds) {
 
-            /* - - -*/
+            /* - - - */
             updateRoundUI()
             updateLivesUI()
-            /* - - -*/
+            /* - - - */
 
             createCardsSequence()
             loadPlayersCards()
 
             for (player in players) {
                 for (card in player.getCards()) {
-                    Log.v("Cartas", card.toString())
+                    Log.v("Cartas", card.toString()) // Borrar
                 }
             }
 
             while (!allCardsPlayed() && stillPlaying) {
-
 
                 val newMove = match.getMove()
 
@@ -112,7 +117,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     private fun createCardsSequence() {
-        val allCards: Vector<Int> = Vector<Int>()
+        var allCards: Vector<Int> = Vector<Int>()
         cardsSequence.removeAllElements()
 
         for (i in 1..maxCardNumber) {
@@ -142,22 +147,35 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
         playerUsesCard(newMove.card)
         currentNumber = newMove.card
 
-        /* - - -*/
+        /* - - - */
         updateDeckUI()
-        /* - - -*/
+        /* - - - */
+
+        if (newMove.playerId == match.whoAmI()) {
+            playerCards = playerCards.filterNot{ it.value.toInt() == newMove.card } as MutableList<Card>
+        }
 
         if (!isValidMove(newMove)) {
+
+            for (card in playerCards) {
+                if (card.value.toInt() < newMove.card) {
+                    val parent: ViewGroup = card.view.parent as ViewGroup
+                    handler.post{ parent.removeView(card.view) }
+                }
+            }
+
+            playerCards = playerCards.filterNot{ it.value.toInt() < newMove.card } as MutableList<Card>
             dropLowerCardsThan(newMove.card)
             lives--
 
-            /* - - -*/
+            /* - - - */
             updateLivesUI()
-            /* - - -*/
+            /* - - - */
         }
     }
 
     private fun isValidMove(move: Move): Boolean {
-        var isValid = true
+        var isValid: Boolean = true
         for (player in players) {
             if (player.hasLowerCardThan(move.card)) {
                 isValid = false
@@ -203,7 +221,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
         while (!playersReady) {
 
             val playersFireBase = match.getPlayers()
-            Log.d("Messi", "${playersFireBase}")
+            Log.d("PLAYERS", "${playersFireBase}") // Borrar
             if (playersReady(playersFireBase) && playersFireBase.size > 0) {
                 playersReady = true
 
@@ -220,7 +238,14 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
             if (player.id == match.whoAmI()) {
                 players.add(Player(player.id, null))
             } else {
-                val playerUi = UI_Player(player.nombre, roundNumber, player.profilePic, messageQueue, context, gameViews.players_grid)
+                val playerUi = UI_Player(
+                    player.nombre,
+                    roundNumber,
+                    player.profilePic,
+                    messageQueue,
+                    context,
+                    gameViews.players_grid
+                )
                 players.add(Player(player.id, playerUi))
                 addPlayerUI(playerUi)
             }
@@ -254,8 +279,8 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
     }
 
     companion object {
-        const val DROP_MESSAGE_LOOP_SLEEP: Long = 50
-        const val DROP_MESSAGE_DURATION: Long = 1000
+        val DROP_MESSAGE_LOOP_SLEEP: Long = 50
+        val DROP_MESSAGE_DURATION: Long = 1000
     }
 
     private fun updateLivesUI() {
@@ -305,6 +330,7 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
 
     private fun addHandCardUI(card: Int) {
         val cardUI = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
+        playerCards.add(cardUI)
 
         val handCardAdder: Runnable = object : Runnable {
             override fun run() {
@@ -313,5 +339,4 @@ class Game(private var handler: Handler, private var gameViews: GameViews, priva
         }
         handler.post(handCardAdder)
     }
-
 }

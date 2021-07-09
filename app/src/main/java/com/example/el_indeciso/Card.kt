@@ -12,9 +12,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
-import com.example.el_indeciso.DoubleClickListener
 
-class Card (value: String,
+class Card (val value: String,
             context: Context,
             layout: LinearLayout,
             maze_top: TextSwitcher,
