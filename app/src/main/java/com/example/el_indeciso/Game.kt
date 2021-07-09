@@ -117,7 +117,7 @@ class Game(private var handler: Handler,
     }
 
     private fun createCardsSequence() {
-        var allCards: Vector<Int> = Vector<Int>()
+        val allCards: Vector<Int> = Vector<Int>()
         cardsSequence.removeAllElements()
 
         for (i in 1..maxCardNumber) {
@@ -175,7 +175,7 @@ class Game(private var handler: Handler,
     }
 
     private fun isValidMove(move: Move): Boolean {
-        var isValid: Boolean = true
+        var isValid = true
         for (player in players) {
             if (player.hasLowerCardThan(move.card)) {
                 isValid = false
