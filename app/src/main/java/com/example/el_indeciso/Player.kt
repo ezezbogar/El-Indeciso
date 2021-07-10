@@ -2,7 +2,7 @@ package com.example.el_indeciso
 
 import java.util.*
 
-data class Player(var playerId: String, var UI: UI_Player?) {
+data class Player(var playerId: String, var name: String, var UI: UI_Player?) {
 
     private var cards: Vector<Int> = Vector<Int>()
 
