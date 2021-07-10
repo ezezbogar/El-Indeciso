@@ -101,8 +101,8 @@ class Game(private var handler: Handler,
                 lives++
             }
 
-            var roundNumberCopy = roundNumber
-            var livesCopy = lives
+            val roundNumberCopy = roundNumber
+            val livesCopy = lives
             handler.post { showCompletedRoundPopUp(livesCopy, roundNumberCopy, maxRounds) }
 
             currentNumber = 0
@@ -228,7 +228,7 @@ class Game(private var handler: Handler,
 
     private fun dropLowerCardsThan(move: Move) {
         val thrownCard = move.card
-        var discardedCards = mutableMapOf<String, List<String>>()
+        val discardedCards = mutableMapOf<String, List<String>>()
         for (player in players) {
             val cardsCopy = Vector<Int>()
             val discardedCardsList = mutableListOf<String>()
@@ -313,52 +313,32 @@ class Game(private var handler: Handler,
     }
 
     companion object {
-        val DROP_MESSAGE_LOOP_SLEEP: Long = 50
-        val DROP_MESSAGE_DURATION: Long = 1000
+        const val DROP_MESSAGE_LOOP_SLEEP: Long = 50
+        const val DROP_MESSAGE_DURATION: Long = 1000
     }
 
     private fun updateLivesUI() {
-        val livesWriter: Runnable = object : Runnable {
-            override fun run() {
-                gameViews.lives.text = lives.toString()
-            }
-        }
+        val livesWriter = Runnable { gameViews.lives.text = lives.toString() }
         handler.post(livesWriter)
     }
 
     private fun updateDeckUI() {
-        val deckWriter: Runnable = object : Runnable {
-            override fun run() {
-                gameViews.maze_text.setText(currentNumber.toString())
-            }
-        }
+        val deckWriter = Runnable { gameViews.maze_text.setText(currentNumber.toString()) }
         handler.post(deckWriter)
     }
 
     private fun updateRoundUI() {
-        val roundWriter: Runnable = object : Runnable {
-            override fun run() {
-                gameViews.round.text = roundNumber.toString()
-            }
-        }
+        val roundWriter = Runnable { gameViews.round.text = roundNumber.toString() }
         handler.post(roundWriter)
     }
 
     private fun playerDropUI(UI: UI_Player?, card: Int?, validMove: Boolean) {
-        val playerDrop: Runnable = object : Runnable {
-            override fun run() {
-                UI!!.dropCard(card, gameViews.maze_text, validMove)
-            }
-        }
+        val playerDrop = Runnable { UI!!.dropCard(card, gameViews.maze_text, validMove) }
         handler.post(playerDrop)
     }
 
     private fun addPlayerUI(UI: UI_Player) {
-        val playerAdder: Runnable = object : Runnable {
-            override fun run() {
-                gameViews.players_grid.addView(UI.view)
-            }
-        }
+        val playerAdder = Runnable { gameViews.players_grid.addView(UI.view) }
         handler.post(playerAdder)
     }
 
@@ -366,11 +346,7 @@ class Game(private var handler: Handler,
         val cardUI = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
         playerCards.add(cardUI)
 
-        val handCardAdder: Runnable = object : Runnable {
-            override fun run() {
-                gameViews.player_hand.addView(cardUI.view)
-            }
-        }
+        val handCardAdder = Runnable { gameViews.player_hand.addView(cardUI.view) }
         handler.post(handCardAdder)
     }
 
@@ -379,11 +355,11 @@ class Game(private var handler: Handler,
        de rondas totales. */
     private fun showCompletedRoundPopUp(lives:Int, round:Int, total_rounds: Int) {
         dialogBuilderCommon = AlertDialog.Builder(context)
-        val pop_up_layout: View =  LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
+        val popUpLayout: View =  LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
 
-        setCompletedRoundPopUpData(pop_up_layout, lives, round, total_rounds)
-        initializeCloseButton(pop_up_layout.findViewById(R.id.close_button))
-        showPopUp(pop_up_layout)
+        setCompletedRoundPopUpData(popUpLayout, lives, round, total_rounds)
+        initializeCloseButton(popUpLayout.findViewById(R.id.close_button))
+        showPopUp(popUpLayout)
     }
 
 
@@ -393,27 +369,23 @@ class Game(private var handler: Handler,
     // El map es de la forma ("gonza" to ["1","2","5"], "eze" to ["69", "420"], "chuchu" to [])
     private fun showWrongDropPopUp(drop_responsible: String, card_dropped: String, discarded_cards: Map<String, List<String>>) {
         dialogBuilderWrongMove = AlertDialog.Builder(context)
-        val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.drop_pop_up, null)
+        val popUpLayout: View = LayoutInflater.from(context).inflate(R.layout.drop_pop_up, null)
 
-        setWrongDropPopUpData(pop_up_layout, drop_responsible, card_dropped, discarded_cards)
-        initializeCloseButtonWrongMove(pop_up_layout.findViewById(R.id.close_button))
-        showPopUpWrongMove(pop_up_layout)
+        setWrongDropPopUpData(popUpLayout, drop_responsible, card_dropped, discarded_cards)
+        initializeCloseButtonWrongMove(popUpLayout.findViewById(R.id.close_button))
+        showPopUpWrongMove(popUpLayout)
     }
 
 
     // Muestra el PopUp que aparece al inicio de la partida.
     // El jugador toca "COMENZAR" y queda bloqueando hasta que todos hayan hecho lo mismo.
-    // Los parametros manejalos vos, le estoy pasando un handler pero capaz que vos tenes un handler como
-    // atributo y podes borrar este parametro.
-    // Además no tengo ni la más remota idea de cómo chequeas que estén todos ready, lo dejo a tu criterio
-    // mi rey. De ultima sabes donde encontrarme ;)
     private fun showStartPopUp() {
         dialogBuilderCommon = AlertDialog.Builder(context)
-        val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
+        val popUpLayout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
 
         // Lo mismo con este metodo, los parametros manejalos vos
-        initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
-        showPopUp(pop_up_layout)
+        initializeStartButton(popUpLayout.findViewById(R.id.start_button), handler)
+        showPopUp(popUpLayout)
     }
 
     // Setea la información que muestra el PopUp de ronda completada.
@@ -435,19 +407,19 @@ class Game(private var handler: Handler,
                                       card_dropped: String,
                                       discarded_cards: Map<String, List<String>>) {
 
-        val discarded_cards_messages: LinearLayout = pop_up_layout.findViewById(R.id.discarded_cards_messages)
+        val discardedCardsMessages: LinearLayout = pop_up_layout.findViewById(R.id.discarded_cards_messages)
 
         val subtitle: TextView = pop_up_layout.findViewById(R.id.drop_responsible)
         subtitle.text = context.getString(R.string.drop_responsible, drop_responsible, card_dropped)
 
         for (player: Map.Entry<String, List<String>> in discarded_cards) {
             for (card: String in player.value) {
-                val discarded_message_layout =  LayoutInflater.from(context).inflate(R.layout.pop_up_line, discarded_cards_messages, false)
+                val discardedMessageLayout =  LayoutInflater.from(context).inflate(R.layout.pop_up_line, discardedCardsMessages, false)
 
-                val discarded_message: TextView = discarded_message_layout.findViewById(R.id.discarded_message)
-                discarded_message.text = context.getString(R.string.discard_message, player.key, card)
+                val discardedMessage: TextView = discardedMessageLayout.findViewById(R.id.discarded_message)
+                discardedMessage.text = context.getString(R.string.discard_message, player.key, card)
 
-                discarded_cards_messages.addView(discarded_message_layout)
+                discardedCardsMessages.addView(discardedMessageLayout)
             }
         }
     }
@@ -483,7 +455,6 @@ class Game(private var handler: Handler,
     private fun initializeStartButton(button: Button, handler: Handler) {
         button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                var waiting = true
                 button.isClickable = false
                 button.setBackgroundResource(R.drawable.popup_button_pressed)
                 button.setText(R.string.wait_button)
@@ -491,7 +462,7 @@ class Game(private var handler: Handler,
 
                 val waitConnections: Runnable = object : Runnable {
                     override fun run() {
-                        waiting = gameStarted.get()
+                        val waiting = gameStarted.get()
                         if (waiting) {
                             handler.postDelayed(this, 50)
                         } else {
