@@ -8,6 +8,7 @@ import android.util.Log
 import java.util.*
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.random.Random
 import kotlin.concurrent.*
 
@@ -19,7 +20,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.graphics.drawable.ColorDrawable
 import android.graphics.Color
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class Game(private var handler: Handler,
            private var gameViews: GameViews,
@@ -35,6 +35,7 @@ class Game(private var handler: Handler,
     private var cardsSequence: Vector<Int> = Vector<Int>()
     private var roundNumber: Int = 3
     private val maxRounds: Int = 12
+    private var gameStarted: AtomicBoolean = AtomicBoolean(false)
 
     private var rnd: Random? = null
 
@@ -51,10 +52,13 @@ class Game(private var handler: Handler,
 
         thread { messageLoop() }
 
-        thread {
+        /*thread {
             Thread.sleep(10000)
             match.ready()
-        }
+        }*/
+
+
+        handler.post { showStartPopUp() }
 
         waitTillPlayersReady()
 
@@ -260,6 +264,7 @@ class Game(private var handler: Handler,
                 Thread.sleep(1000)
             }
         }
+        gameStarted.set(true)
     }
 
     private fun loadPlayers(playersFireBase: MutableList<MatchPlayer>) {
@@ -402,7 +407,7 @@ class Game(private var handler: Handler,
     // atributo y podes borrar este parametro.
     // Además no tengo ni la más remota idea de cómo chequeas que estén todos ready, lo dejo a tu criterio
     // mi rey. De ultima sabes donde encontrarme ;)
-    private fun showStartPopUp(handler: Handler) {
+    private fun showStartPopUp() {
         dialogBuilderCommon = AlertDialog.Builder(context)
         val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
 
@@ -482,22 +487,19 @@ class Game(private var handler: Handler,
                 button.isClickable = false
                 button.setBackgroundResource(R.drawable.popup_button_pressed)
                 button.setText(R.string.wait_button)
-//                Acá va la logica que setea el flag "estoy_listo"
-//                ...
+                match.ready()
 
-
-//                Loop recursivo que chequea que esten todos conectados
-//                val wait_connections: Runnable = object : Runnable {
-//                    override fun run() {
-//                        waiting = chequear que esten todos conectados
-//                        if (waiting) {
-//                            handler.postDelayed(this, 50)
-//                        } else {
-//                            alertDialog.dismiss()
-//                        }
-//                    }
-//                }
-//                handler.post(wait_connections)
+                val waitConnections: Runnable = object : Runnable {
+                    override fun run() {
+                        waiting = gameStarted.get()
+                        if (waiting) {
+                            handler.postDelayed(this, 50)
+                        } else {
+                            alertDialogCommon.dismiss()
+                        }
+                    }
+                }
+                handler.post(waitConnections)
             }
         })
     }
