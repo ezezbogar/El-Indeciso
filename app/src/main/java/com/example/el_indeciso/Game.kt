@@ -414,7 +414,7 @@ class Game(private var handler: Handler,
 
         for (player: Map.Entry<String, List<String>> in discarded_cards) {
             for (card: String in player.value) {
-                val discardedMessageLayout =  LayoutInflater.from(context).inflate(R.layout.pop_up_line, discardedCardsMessages, false)
+                val discardedMessageLayout =  LayoutInflater.from(context).inflate(R.layout.drop_pop_up_line, discardedCardsMessages, false)
 
                 val discardedMessage: TextView = discardedMessageLayout.findViewById(R.id.discarded_message)
                 discardedMessage.text = context.getString(R.string.discard_message, player.key, card)
