@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_240sdp"
-    android:layout_height="@dimen/_240sdp"
+    android:layout_height="wrap_content"
     android:background="@drawable/pop_up_back">
 
     <TextView
@@ -13,16 +13,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/room_code"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        android:id="@+id/start_content"
+        android:id="@+id/room_code"
+        style="@style/PopUpMessage"
+        android:text="@string/room_message"
+        app:layout_constraintBottom_toTopOf="@id/players_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_title" />
+
+    <TextView
+        android:id="@+id/players_message"
+        style="@style/PopUpMessage"
+        android:text="@string/players_connected"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/players_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/room_code" />
+
+    <ScrollView
+        android:id="@+id/players_scroll"
+        android:layout_width="@dimen/_215sdp"
+        android:layout_height="@dimen/_107sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/start_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/players_message"
+        app:layout_constraintVertical_bias="0.564" >
+        <LinearLayout
+            android:id="@+id/players_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/start_message"
         style="@style/PopUpMessage"
         android:text="@string/start_message"
         app:layout_constraintBottom_toTopOf="@id/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/start_title" />
+        app:layout_constraintTop_toBottomOf="@id/players_scroll" />
 
 
     <Button
@@ -32,5 +70,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/start_content" />
+        app:layout_constraintTop_toBottomOf="@id/start_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>
