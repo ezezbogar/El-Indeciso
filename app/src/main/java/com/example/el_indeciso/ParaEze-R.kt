@@ -57,11 +57,11 @@ class ParaEze {
     // atributo y podes borrar este parametro.
     // Además no tengo ni la más remota idea de cómo chequeas que estén todos ready, lo dejo a tu criterio
     // mi rey. De ultima sabes donde encontrarme ;)
-    private fun showStartPopUp(handler: Handler) {
+    private fun showStartPopUp(room_code: String, handler: Handler) {
         dialogBuilder = AlertDialog.Builder(context)
         val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
 
-        // Lo mismo con este metodo, los parametros manejalos vos
+        setStartPopUpData(pop_up_layout, room_code, handler)
         initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
         showPopUp(pop_up_layout)
     }
@@ -96,7 +96,7 @@ class ParaEze {
 
         for (player: Map.Entry<String, List<String>> in discarded_cards) {
             for (card: String in player.value) {
-                val discarded_message_layout =  LayoutInflater.from(context).inflate(R.layout.pop_up_line, discarded_cards_messages, false)
+                val discarded_message_layout =  LayoutInflater.from(context).inflate(R.layout.drop_pop_up_line, discarded_cards_messages, false)
 
                 val discarded_message: TextView = discarded_message_layout.findViewById(R.id.discarded_message)
                 discarded_message.text = getString(R.string.discard_message, player.key, card)
@@ -104,6 +104,47 @@ class ParaEze {
                 discarded_cards_messages.addView(discarded_message_layout)
             }
         }
+    }
+
+
+    // No te lo puse pero capaz quer necesites como parametro el map con los jugadores que armas a partir de firebase
+    private fun setStartPopUpData(pop_up_layout: View, room_code: String, handler: Handler) {
+        val players_state = mutableMapOf<String, Boolean>() // no estoy seguro de que con esto aca funcione, si es un atributo de clase seguro que sí
+        val players_state_view = mutableMapOf<String, TextView>()
+        val players_state_container: LinearLayout = pop_up_layout.findViewById(R.id.players_state)
+        var everyone_is_ready = false
+
+        val room_text: TextView = pop_up_layout.findViewById(R.id.room_code)
+        room_text.text = getString(R.string.room_message, room_code)
+
+//        Loop recursivo que chequea los que estan conectados y su estado
+//        Te dejo la logica, pero como no se realmente como haces lo de firebase reestructuralo como te parezca mejor.
+        val view_connections: Runnable = object : Runnable {
+            override fun run() {
+                for (player in players_leidos_de_firebase_xdxd) {
+                    if (!players_state.contains(player)) {
+                        val connected_player = layoutInflater.inflate(R.layout.players_pop_up_line, players_state_container, false)
+
+                        val player_name: TextView = connected_player.findViewById(R.id.connected_player_name)
+                        val player_state: TextView = connected_player.findViewById(R.id.connected_player_state)
+                        player_name.text = player.name
+
+                        players_state_container.addView(connected_player)
+                        players_state.put(player.name, player.state o false)
+                        players_state_view.put(player.name, player_state)
+
+                    } else if (players_state[player.name] != player.state) {
+                        players_state_view[player.name]?.text = getString(R.string.ready)
+                        players_state_view[player.name]?.setTextColor((Color.parseColor("#056266")))
+                    }
+                }
+                everyone_is_ready = !players_state.containsValue(false)
+                if (!everyone_is_ready) {
+                    handler.postDelayed(this, 50)
+                }
+            }
+        }
+        handler.post(view_connections)
     }
 
 
