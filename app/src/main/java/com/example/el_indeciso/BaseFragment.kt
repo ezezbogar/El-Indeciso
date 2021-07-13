@@ -147,4 +147,12 @@ abstract class BaseFragment : Fragment() {
         requestFocus()
         showKeyboard()
     }
+
+    /*
+    * String: returns a string with all the digits of the original
+    */
+    fun String.getDigit(): String {
+        return substring(indexOfFirst { it.isDigit() }, indexOfLast { it.isDigit() } + 1)
+            .filter { it.isDigit()}
+    }
 }

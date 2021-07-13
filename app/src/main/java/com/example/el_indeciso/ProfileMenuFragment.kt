@@ -2,8 +2,11 @@ package com.example.el_indeciso
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
 
 class ProfileMenuFragment : BaseFragment() {
@@ -18,8 +21,11 @@ class ProfileMenuFragment : BaseFragment() {
 
     private lateinit var actualText: String
 
-    private var profileName: String = "isla_sol.8"
+    private var profileName: String = "player"
     private var profilePic: String = "0000"
+    private val fileName: String = "profile_info.txt"
+    private val delimiter: String = " - "
+
 
     companion object {
         val BACKGROUNDS = listOf(
@@ -42,20 +48,14 @@ class ProfileMenuFragment : BaseFragment() {
             R.drawable.head_3, R.drawable.head_4, R.drawable.head_5,
             R.drawable.head_6,
         )
-    }
 
-    /*
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-        }
-     */
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
-        //val view = binding.root
 
         return binding.root
     }
@@ -67,14 +67,16 @@ class ProfileMenuFragment : BaseFragment() {
         val face: ImageView = binding.faceProfileMenu
         val outfit: ImageView = binding.outfitProfileMenu
         val back: ImageView = binding.backProfileMenu
+        val editText: EditText = binding.playerNameEdittextProfileMenu
+        val textView: TextView = binding.playerNameTextviewProfileMenu
 
         //TextField, EditText and Save Button Visibility are set as invisible
-        binding.playerNameEdittextProfileMenu.visibility = View.GONE
+        editText.visibility = View.GONE
         binding.saveNameButtonProfileMenu.visibility = View.GONE
         binding.textField.visibility = View.GONE
 
-        //The text of the Textview is updated with the profile name
-        binding.playerNameTextviewProfileMenu.text = profileName
+        //Set profile name and profile pic
+        setInitialData()
 
         //Action when wanting to change profile name
         binding.changeNameButtonProfileMenu.setOnClickListener {
@@ -84,13 +86,13 @@ class ProfileMenuFragment : BaseFragment() {
             changeVisibilityOfButtons()
 
             //Set old profile name
-            binding.playerNameEdittextProfileMenu.setText(profileName)
+            editText.setText(profileName)
 
             //Set length limit to profile name
-            binding.playerNameEdittextProfileMenu.filters += InputFilter.LengthFilter(12)
+            editText.filters += InputFilter.LengthFilter(12)
 
             //Focus change to EditText
-            binding.playerNameEdittextProfileMenu.setFocus()
+            editText.setFocus()
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
@@ -104,13 +106,13 @@ class ProfileMenuFragment : BaseFragment() {
                 changeVisibilityOfButtons()
 
                 //Get new profile name
-                profileName = binding.playerNameEdittextProfileMenu.text.toString()
+                profileName = editText.text.toString()
 
-                //Always set error al false
+                //Always set error as false
                 setErrorTextField(false)
 
                 //Show new profile name
-                binding.playerNameTextviewProfileMenu.text = profileName
+                textView.text = profileName
             }
         }
 
@@ -139,7 +141,7 @@ class ProfileMenuFragment : BaseFragment() {
             backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
         }
         binding.saveButtonProfileMenu.setOnClickListener {
-            if (binding.playerNameEdittextProfileMenu.visibility == View.VISIBLE) {
+            if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
             } else {
                 val backDigit = Integer.toHexString(backIndex)
@@ -150,22 +152,25 @@ class ProfileMenuFragment : BaseFragment() {
                 profilePic = "${backDigit}${headDigit}${faceDigit}${outfitDigit}"
 
                 //Internal Storage: Write info into profile_info.txt
-                val textToWrite = "$profilePic - $profileName"
-                writeFile("profile_info.txt", textToWrite)
+                val textToWrite = "$profilePic$delimiter$profileName"
+                writeFile(fileName, textToWrite)
                 goToFragment(MainMenuFragment())
             }
         }
         binding.prevPageProfileMenu.setOnClickListener {
-            goToFragment(MainMenuFragment())
+            if (editText.visibility == View.VISIBLE) {
+                showMessageToast("Please set a profile name")
+            } else {
+                goToFragment(MainMenuFragment())
+            }
         }
 
-        binding.playerNameEdittextProfileMenu.setOnKeyListener { v, keyCode, event ->
-
+        editText.setOnKeyListener { v, keyCode, event ->
             when {
                 //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
                 ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
                     binding.saveNameButtonProfileMenu.performClick()
-                    binding.playerNameEdittextProfileMenu.hideKeyboard()
+                    editText.hideKeyboard()
                     return@setOnKeyListener true
                 }
                 else -> false
@@ -250,6 +255,51 @@ class ProfileMenuFragment : BaseFragment() {
             binding.playerNameEdittextProfileMenu.setTextColor(resources.getColor(R.color.hint_color))
             binding.playerNameEdittextProfileMenu.text = null
         }
+    }
+
+    /*
+ * Action when prev button is clicked.
+ */
+    private fun updateImage(imageParts: IntArray) {
+        binding.backProfileMenu.setImageResource(BACKGROUNDS[imageParts[0]])
+        binding.headProfileMenu.setImageResource(HEADS[imageParts[1]])
+        binding.faceProfileMenu.setImageResource(FACES[imageParts[2]])
+        binding.outfitProfileMenu.setImageResource(OUTFITS[imageParts[3]])
+    }
+
+    /*
+     * Set profile name and profile pic.
+     */
+    private fun setInitialData() {
+        val readData = readFile(fileName) as CharSequence
+
+        //If there is information saved, it's loaded
+        if (readData.isNotEmpty()) {
+            val list = readData.split(delimiter)
+            Log.d("asa", "estou profile pic sin tocar: ${list[0]}")
+
+            //Update with the file information
+            profileName = list[1]
+            profilePic = list[0].getDigit()
+        }
+
+        //Update profile pic information to int
+        Log.d("asa", "estou profile pic con tocar: $profilePic")
+
+        val array: Array<String> = profilePic.toCharArray().map { it.toString() }.toTypedArray()
+        Log.d("asa", "estou profile pic a array: ${array[0]}${array[1]}${array[2]}${array[3]}")
+
+        var imageParts: IntArray = intArrayOf(0, 0, 0, 0)
+        imageParts[0] = array[0].toIntOrNull()!!
+        imageParts[1] = array[1].toIntOrNull()!!
+        imageParts[2] = array[2].toIntOrNull()!!
+        imageParts[3] = array[3].toIntOrNull()!!
+        Log.d("asa", "estou profile pic a int: ${imageParts[0]}${imageParts[1]}${imageParts[2]}${imageParts[3]}")
+
+        //Set information
+        updateImage(imageParts)
+        binding.playerNameTextviewProfileMenu.text = profileName
+        binding.playerNameEdittextProfileMenu.setText(profileName)
     }
 }
 
