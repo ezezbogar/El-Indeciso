@@ -258,13 +258,13 @@ class ProfileMenuFragment : BaseFragment() {
     }
 
     /*
- * Action when prev button is clicked.
- */
-    private fun updateImage(imageParts: IntArray) {
-        binding.backProfileMenu.setImageResource(BACKGROUNDS[imageParts[0]])
-        binding.headProfileMenu.setImageResource(HEADS[imageParts[1]])
-        binding.faceProfileMenu.setImageResource(FACES[imageParts[2]])
-        binding.outfitProfileMenu.setImageResource(OUTFITS[imageParts[3]])
+     * Action when prev button is clicked.
+     */
+    private fun updateImage(back: Int, head: Int, face: Int, outfit: Int) {
+        binding.backProfileMenu.setImageResource(BACKGROUNDS[back])
+        binding.headProfileMenu.setImageResource(HEADS[head])
+        binding.faceProfileMenu.setImageResource(FACES[face])
+        binding.outfitProfileMenu.setImageResource(OUTFITS[outfit])
     }
 
     /*
@@ -289,15 +289,14 @@ class ProfileMenuFragment : BaseFragment() {
         val array: Array<String> = profilePic.toCharArray().map { it.toString() }.toTypedArray()
         Log.d("asa", "estou profile pic a array: ${array[0]}${array[1]}${array[2]}${array[3]}")
 
-        var imageParts: IntArray = intArrayOf(0, 0, 0, 0)
-        imageParts[0] = array[0].toIntOrNull()!!
-        imageParts[1] = array[1].toIntOrNull()!!
-        imageParts[2] = array[2].toIntOrNull()!!
-        imageParts[3] = array[3].toIntOrNull()!!
-        Log.d("asa", "estou profile pic a int: ${imageParts[0]}${imageParts[1]}${imageParts[2]}${imageParts[3]}")
+        backIndex = array[0].toIntOrNull()!!
+        headIndex = array[1].toIntOrNull()!!
+        faceIndex = array[2].toIntOrNull()!!
+        outfitIndex = array[3].toIntOrNull()!!
+        Log.d("asa", "estou profile pic a int: $backIndex$faceIndex$outfitIndex$headIndex")
 
         //Set information
-        updateImage(imageParts)
+        updateImage(backIndex, headIndex, faceIndex, outfitIndex)
         binding.playerNameTextviewProfileMenu.text = profileName
         binding.playerNameEdittextProfileMenu.setText(profileName)
     }
