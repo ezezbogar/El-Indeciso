@@ -1,5 +1,6 @@
 package com.example.el_indeciso
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,8 @@ class PlayMenuFragment : BaseFragment() {
             goToFragment(MainMenuFragment())
         }
         binding.createButtonPlayMenu.setOnClickListener {
-            goToFragment(CreateGameFragment())
+            val intent = Intent(context, GameView::class.java)
+            context?.startActivity(intent)
         }
         binding.joinButtonPlayMenu.setOnClickListener {
             goToFragment(JoinGameFragment())

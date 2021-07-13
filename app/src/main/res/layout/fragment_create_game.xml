@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateGameFragment">
-    
+
     <ImageButton
         android:id="@+id/prev_page_create_game"
         style="@style/PrevPageButton"
@@ -49,7 +49,7 @@
         android:textColor="@color/principal_background_color" />
 
     <Button
-        android:id="@+id/save_button_profile_menu"
+        android:id="@+id/start_play_button"
         style="@style/BottomButton"
         android:text="@string/start_play_text" />
 
