@@ -21,14 +21,16 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginHorizontal">@dimen/left_margin_textview</item>
+        <item name="android:layout_marginLeft">@dimen/left_margin_textview</item>
+        <item name="android:layout_marginRight">@dimen/left_margin_textview</item>
     </style>
 
     <style name="CustomEditText">
         <item name="android:textColorHint">@color/hint_color</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginHorizontal">@dimen/left_margin_textview</item>
+        <item name="android:layout_marginLeft">@dimen/left_margin_textview</item>
+        <item name="android:layout_marginRight">@dimen/left_margin_textview</item>
         <item name="android:inputType">numberDecimal</item>
         <item name="fontFamily">sans-serif-light</item>
         <item name="android:layout_gravity">top|center</item>

@@ -2,7 +2,6 @@ package com.example.el_indeciso
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
@@ -89,7 +88,7 @@ class ProfileMenuFragment : BaseFragment() {
             editText.setText(profileName)
 
             //Set length limit to profile name
-            editText.filters += InputFilter.LengthFilter(12)
+            editText.filters += InputFilter.LengthFilter(8)
 
             //Focus change to EditText
             editText.setFocus()
@@ -276,7 +275,6 @@ class ProfileMenuFragment : BaseFragment() {
         //If there is information saved, it's loaded
         if (readData.isNotEmpty()) {
             val list = readData.split(delimiter)
-            Log.d("asa", "estou profile pic sin tocar: ${list[0]}")
 
             //Update with the file information
             profileName = list[1]
@@ -284,16 +282,11 @@ class ProfileMenuFragment : BaseFragment() {
         }
 
         //Update profile pic information to int
-        Log.d("asa", "estou profile pic con tocar: $profilePic")
-
         val array: Array<String> = profilePic.toCharArray().map { it.toString() }.toTypedArray()
-        Log.d("asa", "estou profile pic a array: ${array[0]}${array[1]}${array[2]}${array[3]}")
-
         backIndex = array[0].toIntOrNull()!!
         headIndex = array[1].toIntOrNull()!!
         faceIndex = array[2].toIntOrNull()!!
         outfitIndex = array[3].toIntOrNull()!!
-        Log.d("asa", "estou profile pic a int: $backIndex$faceIndex$outfitIndex$headIndex")
 
         //Set information
         updateImage(backIndex, headIndex, faceIndex, outfitIndex)
