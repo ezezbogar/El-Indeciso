@@ -31,10 +31,10 @@ class Game(private var handler: Handler,
     private var playerCards = mutableListOf<Card>()
     private var currentNumber: Int = 0
     private var lives: Int = 3
-    private var maxCardNumber: Int = 0
+    private var maxCardNumber: Int = 100
     private var cardsSequence: Vector<Int> = Vector<Int>()
-    private var roundNumber: Int = 3
-    private val maxRounds: Int = 12
+    private var roundNumber: Int = 1
+    private var maxRounds: Int = 12
     private var gameStarted: AtomicBoolean = AtomicBoolean(false)
 
     private var rnd: Random? = null
@@ -61,6 +61,8 @@ class Game(private var handler: Handler,
         rnd = Random(123) //Leer de Firebase
 
         maxCardNumber = calculateMaxCardNumber(players.size)
+        maxRounds = calculateLevelsAmount(players.size)
+        lives = players.size
 
         // Game Starts
         while (stillPlaying && roundNumber <= maxRounds) {
@@ -155,6 +157,17 @@ class Game(private var handler: Handler,
             9 -> maxNumber = 225
         }
         return maxNumber
+    }
+
+    private fun calculateLevelsAmount(playersAmount: Int): Int {
+        var maxLevel = 0
+        when (playersAmount) {
+            1, 2, 3 -> maxLevel = 12
+            4, 5 -> maxLevel = 10
+            6, 7 -> maxLevel = 8
+            8, 9 -> maxLevel = 6
+        }
+        return maxLevel
     }
 
     private fun processMove(newMove: Move) {
