@@ -2,24 +2,24 @@ package com.example.el_indeciso
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Handler
 import android.util.Log
-
-import java.util.*
-import java.util.concurrent.BlockingQueue
-import java.util.concurrent.LinkedBlockingQueue
-import java.util.concurrent.atomic.AtomicBoolean
-import kotlin.random.Random
-import kotlin.concurrent.*
-
-import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import android.graphics.drawable.ColorDrawable
-import android.graphics.Color
+import android.widget.TextView
+import java.util.*
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.locks.Lock
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.thread
+import kotlin.random.Random
 
 class Game(private var handler: Handler,
            private var gameViews: GameViews,
@@ -41,24 +41,20 @@ class Game(private var handler: Handler,
 
     /* - - - - - - - UI - - - - - - - */
     private val messageQueue: BlockingQueue<String> = LinkedBlockingQueue()
+    private var fireBasePlayers = mutableListOf<MatchPlayer>()
     lateinit var dialogBuilderCommon: AlertDialog.Builder
     lateinit var alertDialogCommon: AlertDialog
 
     lateinit var dialogBuilderWrongMove: AlertDialog.Builder
     lateinit var alertDialogWrongMove: AlertDialog
+    private val mtx = ReentrantLock()
     /* - - - - - - - - - - - - - - - - */
 
     fun run(): Boolean {
 
         thread { messageLoop() }
 
-        /*thread {
-            Thread.sleep(10000)
-            match.ready()
-        }*/
-
-
-        handler.post { showStartPopUp() }
+        handler.post { showStartPopUp(match.key) }
 
         waitTillPlayersReady()
 
@@ -76,12 +72,6 @@ class Game(private var handler: Handler,
 
             createCardsSequence()
             loadPlayersCards()
-
-            for (player in players) {
-                for (card in player.getCards()) {
-                    Log.v("Cartas", card.toString()) // Borrar
-                }
-            }
 
             while (!allCardsPlayed() && stillPlaying) {
                 val newMove = match.getMove()
@@ -253,12 +243,14 @@ class Game(private var handler: Handler,
 
         while (!playersReady) {
 
-            val playersFireBase = match.getPlayers()
-            Log.d("PLAYERS", "${playersFireBase}") // Borrar
-            if (playersReady(playersFireBase) && playersFireBase.size > 0) {
+            mtx.lock()
+            fireBasePlayers = match.getPlayers()
+            mtx.unlock()
+
+            if (playersReady(fireBasePlayers) && fireBasePlayers.size > 0) {
                 playersReady = true
 
-                loadPlayers(playersFireBase)
+                loadPlayers(fireBasePlayers)
 
             } else {
                 Thread.sleep(1000)
@@ -379,13 +371,13 @@ class Game(private var handler: Handler,
 
     // Muestra el PopUp que aparece al inicio de la partida.
     // El jugador toca "COMENZAR" y queda bloqueando hasta que todos hayan hecho lo mismo.
-    private fun showStartPopUp() {
+    private fun showStartPopUp(room_code: String) {
         dialogBuilderCommon = AlertDialog.Builder(context)
-        val popUpLayout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
+        val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
 
-        // Lo mismo con este metodo, los parametros manejalos vos
-        initializeStartButton(popUpLayout.findViewById(R.id.start_button), handler)
-        showPopUp(popUpLayout)
+        setStartPopUpData(pop_up_layout, room_code)
+        initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
+        showPopUp(pop_up_layout)
     }
 
     // Setea la información que muestra el PopUp de ronda completada.
@@ -463,7 +455,7 @@ class Game(private var handler: Handler,
                 val waitConnections: Runnable = object : Runnable {
                     override fun run() {
                         val waiting = gameStarted.get()
-                        if (waiting) {
+                        if (!waiting) {
                             handler.postDelayed(this, 50)
                         } else {
                             alertDialogCommon.dismiss()
@@ -473,5 +465,46 @@ class Game(private var handler: Handler,
                 handler.post(waitConnections)
             }
         })
+    }
+
+    private fun setStartPopUpData(pop_up_layout: View, room_code: String) {
+        val players_state = mutableMapOf<String, Boolean>() // no estoy seguro de que con esto aca funcione, si es un atributo de clase seguro que sí
+        val players_state_view = mutableMapOf<String, TextView>()
+        val players_state_container: LinearLayout = pop_up_layout.findViewById(R.id.players_state)
+
+        val room_text: TextView = pop_up_layout.findViewById(R.id.room_code)
+        room_text.text = context.getString(R.string.room_message, room_code)
+
+        val view_connections: Runnable = object : Runnable {
+            override fun run() {
+
+                mtx.lock()
+                for (player in fireBasePlayers) {
+                    if (!players_state.contains(player.id)) {
+                        val connected_player = LayoutInflater.from(context).inflate(R.layout.players_pop_up_line, players_state_container, false)
+
+                        val player_name: TextView = connected_player.findViewById(R.id.connected_player_name)
+                        val player_state: TextView = connected_player.findViewById(R.id.connected_player_state)
+                        player_name.text = player.nombre
+
+                        players_state_container.addView(connected_player)
+                        players_state.put(player.id, false)
+                        players_state_view.put(player.id, player_state)
+
+                    } else if (players_state[player.id] != player.ready) {
+                        players_state_view[player.id]?.text = context.getString(R.string.ready)
+                        players_state_view[player.id]?.setTextColor((Color.parseColor("#056266")))
+                    }
+                }
+                mtx.unlock()
+
+                val unready = players_state.containsValue(false) || fireBasePlayers.isEmpty()
+                if (unready) {
+                    handler.postDelayed(this, 100)
+                }
+
+            }
+        }
+        handler.post(view_connections)
     }
 }
