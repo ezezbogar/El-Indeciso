@@ -75,6 +75,12 @@ class Game(private var handler: Handler,
             createCardsSequence()
             loadPlayersCards()
 
+            for (player in players) {
+                if (player.playerId != match.whoAmI()) {
+                    handler.post { player.getUI()!!.updateCards(roundNumber) }
+                }
+            }
+
             while (!allCardsPlayed() && stillPlaying) {
                 val newMove = match.getMove()
 
@@ -246,9 +252,9 @@ class Game(private var handler: Handler,
             discardedCards[player.name] = discardedCardsList as List<String>
         }
 
-        handler.post { showWrongDropPopUp(players.find { player -> player.playerId == move.playerId }!!.name,
+        handler.postDelayed( { showWrongDropPopUp(players.find { player -> player.playerId == move.playerId }!!.name,
                         move.card.toString(),
-                        discardedCards) }
+                        discardedCards) }, 250)
     }
 
     private fun waitTillPlayersReady() {
@@ -266,7 +272,7 @@ class Game(private var handler: Handler,
                 loadPlayers(fireBasePlayers)
 
             } else {
-                Thread.sleep(1000)
+                Thread.sleep(500)
             }
         }
         gameStarted.set(true)
@@ -359,6 +365,7 @@ class Game(private var handler: Handler,
        Recibe la cantidad de vidas restantes, la ronda que se acaba de terminar y la cantidad
        de rondas totales. */
     private fun showCompletedRoundPopUp(lives:Int, round:Int, total_rounds: Int) {
+        match.unready()
         dialogBuilderCommon = AlertDialog.Builder(context)
         val popUpLayout: View =  LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
 
@@ -450,7 +457,20 @@ class Game(private var handler: Handler,
     }
 
     private fun initializeCloseButton(button: Button) {
-        button.setOnClickListener { alertDialogCommon.dismiss() }
+        button.setOnClickListener {
+            match.ready()
+
+            val waitForAllReady: Runnable = object : Runnable {
+                override fun run () {
+                    if (playersReady(match.getPlayers())) {
+                        alertDialogCommon.dismiss()
+                    } else {
+                        handler.postDelayed(this, 100)
+                    }
+                }
+            }
+            handler.post(waitForAllReady)
+        }
     }
 
     private fun initializeCloseButtonWrongMove(button: Button) {
