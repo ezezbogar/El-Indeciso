@@ -42,7 +42,7 @@ class GameView : AppCompatActivity() {
 
         var match: Match = if (isHost) {
             matchMaker.newMatch()
-        } else{
+        } else {
             matchMaker.joinMatch(roomCode)
         }
 

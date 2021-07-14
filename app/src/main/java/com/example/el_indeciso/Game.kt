@@ -112,19 +112,25 @@ class Game(private var handler: Handler,
 
     private fun loadPlayersCards() {
         var posCard = 0
+        val handCards = Vector<Int>()
         for (player in players) {
             for (i in 0 until roundNumber) {
                 player.addCard(cardsSequence[posCard])
 
                 if (player.playerId == match.whoAmI()) {
-
-                    /* - - - */
-                    addHandCardUI(cardsSequence[posCard])
-                    /* - - - */
+                    handCards.add(cardsSequence[posCard])
                 }
 
                 posCard++
             }
+            player.getCards().sort()
+        }
+
+        handCards.sort()
+        for(card in handCards) {
+            /* - - - */
+            addHandCardUI(card)
+            /* - - - */
         }
     }
 
