@@ -2,6 +2,7 @@ package com.example.el_indeciso
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -154,5 +155,14 @@ abstract class BaseFragment : Fragment() {
     fun String.getDigit(): String {
         return substring(indexOfFirst { it.isDigit() }, indexOfLast { it.isDigit() } + 1)
             .filter { it.isDigit()}
+    }
+
+    fun startGameIntent(isHost: Boolean, roomCode: String){
+        val intent = Intent(context, GameView::class.java)
+        intent.putExtra("isHost", isHost)
+        if(!isHost){
+            intent.putExtra("roomCode", roomCode)
+        }
+        context?.startActivity(intent)
     }
 }

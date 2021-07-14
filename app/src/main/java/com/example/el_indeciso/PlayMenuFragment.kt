@@ -32,8 +32,7 @@ class PlayMenuFragment : BaseFragment() {
             goToFragment(MainMenuFragment())
         }
         binding.createButtonPlayMenu.setOnClickListener {
-            val intent = Intent(context, GameView::class.java)
-            context?.startActivity(intent)
+            startGameIntent(true, "46AS")
         }
         binding.joinButtonPlayMenu.setOnClickListener {
             goToFragment(JoinGameFragment())

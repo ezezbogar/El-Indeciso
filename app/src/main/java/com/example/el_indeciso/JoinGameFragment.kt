@@ -33,9 +33,14 @@ class JoinGameFragment : BaseFragment() {
         binding.prevPageJoin.setOnClickListener {
             goToFragment(PlayMenuFragment())
         }
-        /*binding.joinButtonJoin.setOnClickListener {
-            goToFragment(fragment())
-        }*/
+        binding.joinButtonJoin.setOnClickListener {
+            if (!validRoomCode()) {
+                //setErrorTextField(true)
+                showMessageToast("Please set the room code")
+            } else { //Room Code is ok
+                startGameIntent(false, binding.edittextJoin.text.toString())
+            }
+        }
         binding.edittextJoin.setOnKeyListener { v, keyCode, event ->
 
             when {
@@ -55,5 +60,15 @@ class JoinGameFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /*
+     * Returns if the room code meets the requirements
+     */
+    private fun validRoomCode(): Boolean {
+        val actualText = binding.edittextJoin.text.toString()
+
+        return (actualText.length == 4
+                && !(actualText.contains(" ")))
     }
 }
