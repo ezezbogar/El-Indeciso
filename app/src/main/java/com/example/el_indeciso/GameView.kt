@@ -1,5 +1,6 @@
 package com.example.el_indeciso
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -20,6 +21,7 @@ class GameView : AppCompatActivity() {
     private val delimiter: String = " - "
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.game_screen)
