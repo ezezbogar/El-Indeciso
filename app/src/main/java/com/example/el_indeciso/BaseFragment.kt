@@ -157,6 +157,9 @@ abstract class BaseFragment : Fragment() {
             .filter { it.isDigit()}
     }
 
+    /*
+     * Set a new Activity of type GameView
+     */
     fun startGameIntent(isHost: Boolean, roomCode: String){
         val intent = Intent(context, GameView::class.java)
         intent.putExtra("isHost", isHost)

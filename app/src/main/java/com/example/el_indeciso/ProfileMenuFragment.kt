@@ -115,30 +115,15 @@ class ProfileMenuFragment : BaseFragment() {
             }
         }
 
-        binding.nextHead.setOnClickListener {
-            headIndex = nextButtonClicked(headIndex, HEADS, head)
-        }
-        binding.prevHead.setOnClickListener {
-            headIndex = prevButtonClicked(headIndex, HEADS, head)
-        }
-        binding.nextFace.setOnClickListener {
-            faceIndex = nextButtonClicked(faceIndex, FACES, face)
-        }
-        binding.prevFace.setOnClickListener {
-            faceIndex = prevButtonClicked(faceIndex, FACES, face)
-        }
-        binding.nextOutfit.setOnClickListener {
-            outfitIndex = nextButtonClicked(outfitIndex, OUTFITS, outfit)
-        }
-        binding.prevOutfit.setOnClickListener {
-            outfitIndex = prevButtonClicked(outfitIndex, OUTFITS, outfit)
-        }
-        binding.nextBack.setOnClickListener {
-            backIndex = nextButtonClicked(backIndex, BACKGROUNDS, back)
-        }
-        binding.prevBack.setOnClickListener {
-            backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
-        }
+        binding.nextHead.setOnClickListener { headIndex = nextButtonClicked(headIndex, HEADS, head) }
+        binding.prevHead.setOnClickListener { headIndex = prevButtonClicked(headIndex, HEADS, head) }
+        binding.nextFace.setOnClickListener { faceIndex = nextButtonClicked(faceIndex, FACES, face) }
+        binding.prevFace.setOnClickListener { faceIndex = prevButtonClicked(faceIndex, FACES, face) }
+        binding.nextOutfit.setOnClickListener { outfitIndex = nextButtonClicked(outfitIndex, OUTFITS, outfit) }
+        binding.prevOutfit.setOnClickListener { outfitIndex = prevButtonClicked(outfitIndex, OUTFITS, outfit) }
+        binding.nextBack.setOnClickListener { backIndex = nextButtonClicked(backIndex, BACKGROUNDS, back) }
+        binding.prevBack.setOnClickListener { backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back) }
+
         binding.saveButtonProfileMenu.setOnClickListener {
             if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
@@ -156,6 +141,7 @@ class ProfileMenuFragment : BaseFragment() {
                 goToFragment(MainMenuFragment())
             }
         }
+
         binding.prevPageProfileMenu.setOnClickListener {
             if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")

@@ -29,13 +29,10 @@ class MainMenuFragment : BaseFragment() {
         mensajero.addMove(Move("Niqui", 1))
         mensajero.addMove(Move("Eze", 2))
 
-        binding.profileButton.setOnClickListener {
-            goToFragment(ProfileMenuFragment())
-        }
-
-        binding.playButton.setOnClickListener {
-            goToFragment(PlayMenuFragment())
-        }
+        binding.profileButton.setOnClickListener { goToFragment(ProfileMenuFragment()) }
+        binding.playButton.setOnClickListener { goToFragment(PlayMenuFragment()) }
+        binding.settingsButton.setOnClickListener { goToFragment(SettingsFragment()) }
+        binding.rulesButton.setOnClickListener { goToFragment(RulesFragment()) }
     }
 
     override fun onDestroyView() {
