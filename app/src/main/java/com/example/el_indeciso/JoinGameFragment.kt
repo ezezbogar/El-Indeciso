@@ -31,17 +31,25 @@ class JoinGameFragment : BaseFragment() {
         binding.edittextJoin.setFocus()
 
         binding.prevPageJoin.setOnClickListener {
-            goToFragment(PlayMenuFragment())
+            goToDirection(
+                JoinGameFragmentDirections.actionJoinGameFragmentToPlayMenuFragment(),
+                view
+            )
         }
         binding.joinButtonJoin.setOnClickListener {
             if (!validRoomCode()) {
                 //setErrorTextField(true)
                 showMessageToast("Please set the room code")
             } else { //Room Code is ok
-                startGameIntent(false, binding.edittextJoin.text.toString())
+                goToDirection(
+                    JoinGameFragmentDirections.actionJoinGameFragmentToGameView(
+                        false,
+                        binding.edittextJoin.text.toString()
+                    ), view
+                )
             }
         }
-        binding.edittextJoin.setOnKeyListener { v, keyCode, event ->
+        binding.edittextJoin.setOnKeyListener { _, keyCode, event ->
 
             when {
                 //Check if it is the Enter-Key,      Check if the Enter Key was pressed down

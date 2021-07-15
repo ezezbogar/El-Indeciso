@@ -1,12 +1,10 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.el_indeciso.databinding.FragmentRulesBinding
-import com.example.el_indeciso.databinding.FragmentSettingsBinding
 
 class RulesFragment : BaseFragment() {
     private var _binding: FragmentRulesBinding? = null
@@ -25,6 +23,8 @@ class RulesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.prevPageRules.setOnClickListener { goToFragment(MainMenuFragment()) }
+        binding.prevPageRules.setOnClickListener {
+            goToDirection(RulesFragmentDirections.actionRulesFragmentToMainMenuFragment(), view)
+        }
     }
 }

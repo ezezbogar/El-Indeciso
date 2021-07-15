@@ -1,11 +1,9 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.el_indeciso.databinding.FragmentPlayMenuBinding
 import com.example.el_indeciso.databinding.FragmentSettingsBinding
 
 class SettingsFragment : BaseFragment() {
@@ -25,6 +23,11 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.prevPageSettings.setOnClickListener { goToFragment(MainMenuFragment()) }
+        binding.prevPageSettings.setOnClickListener {
+            goToDirection(
+                SettingsFragmentDirections.actionSettingsFragmentToMainMenuFragment(),
+                view
+            )
+        }
     }
 }

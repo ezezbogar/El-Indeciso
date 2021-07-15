@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/mainMenuFragment">
+
+    <fragment
+        android:id="@+id/mainMenuFragment"
+        android:name="com.example.el_indeciso.MainMenuFragment"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_playMenuFragment"
+            app:destination="@id/playMenuFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_profileMenuFragment"
+            app:destination="@id/profileMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playMenuFragment"
+        android:name="com.example.el_indeciso.PlayMenuFragment"
+        android:label="fragment_play_menu"
+        tools:layout="@layout/fragment_play_menu" >
+        <action
+            android:id="@+id/action_playMenuFragment_to_joinGameFragment"
+            app:destination="@id/joinGameFragment" />
+        <action
+            android:id="@+id/action_playMenuFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_playMenuFragment_to_gameView"
+            app:destination="@id/gameView" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinGameFragment"
+        android:name="com.example.el_indeciso.JoinGameFragment"
+        android:label="fragment_join_game"
+        tools:layout="@layout/fragment_join_game" >
+        <action
+            android:id="@+id/action_joinGameFragment_to_playMenuFragment"
+            app:destination="@id/playMenuFragment" />
+        <action
+            android:id="@+id/action_joinGameFragment_to_gameView"
+            app:destination="@id/gameView" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileMenuFragment"
+        android:name="com.example.el_indeciso.ProfileMenuFragment"
+        android:label="fragment_profile_menu"
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenuFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.el_indeciso.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" >
+        <action
+            android:id="@+id/action_rulesFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.el_indeciso.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/gameView"
+        android:name="com.example.el_indeciso.GameView"
+        android:label="GameView" >
+        <argument
+            android:name="isHost"
+            app:argType="boolean" />
+        <argument
+            android:name="roomCode"
+            app:argType="string"
+            android:defaultValue='"46AS"' />
+    </activity>
+</navigation>

@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.el_indeciso.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     // Binding object instance with access to the views in the activity_main.xml layout
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -21,21 +21,20 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        goToFragmentFromActivity(MainMenuFragment())
-
-        val lobby = MatchMaker("Eze","dough")
+        val lobby = MatchMaker("Eze", "dough")
         val match = lobby.newMatch()
-        match.addPlayer(MatchPlayer("Niqui","Hola"))
+        match.addPlayer(MatchPlayer("Niqui", "Hola"))
         match.playCard(1)
         match.playCard(3)
         match.playCard(69)
     }
 
-    private fun goToFragmentFromActivity(fragmentToGo: Fragment) {
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragmentToGo).commit()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     /*
@@ -49,11 +48,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
-
-    /*override fun onUserInteraction() {
-        if (currentFocus != null) {
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-        }
-    }*/
 }

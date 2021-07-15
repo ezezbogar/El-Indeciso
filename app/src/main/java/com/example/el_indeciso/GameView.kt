@@ -9,11 +9,16 @@ import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.navArgs
 import kotlin.concurrent.*
 
 class GameView : AppCompatActivity() {
 
     private val drop_handler = Handler()
+
+    private val args: GameViewArgs by navArgs()
+    private var isHost: Boolean = true
+    private lateinit var roomCode: String
 
     private var profileName: String = "player"
     private var profilePic: String = "0000"
@@ -23,11 +28,10 @@ class GameView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
+        isHost = args.isHost
+        roomCode = args.roomCode
 
         setContentView(R.layout.game_screen)
-
-        val isHost = intent?.extras?.getBoolean("isHost")!!
-        val roomCode = intent?.extras?.getString("roomCode").toString()
 
         val lives: TextView = findViewById(R.id.life_value)
         val round: TextView = findViewById(R.id.round_value)
@@ -74,5 +78,4 @@ class GameView : AppCompatActivity() {
         return substring(indexOfFirst { it.isDigit() }, indexOfLast { it.isDigit() } + 1)
             .filter { it.isDigit()}
     }
-
 }

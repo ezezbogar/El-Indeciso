@@ -115,14 +115,30 @@ class ProfileMenuFragment : BaseFragment() {
             }
         }
 
-        binding.nextHead.setOnClickListener { headIndex = nextButtonClicked(headIndex, HEADS, head) }
-        binding.prevHead.setOnClickListener { headIndex = prevButtonClicked(headIndex, HEADS, head) }
-        binding.nextFace.setOnClickListener { faceIndex = nextButtonClicked(faceIndex, FACES, face) }
-        binding.prevFace.setOnClickListener { faceIndex = prevButtonClicked(faceIndex, FACES, face) }
-        binding.nextOutfit.setOnClickListener { outfitIndex = nextButtonClicked(outfitIndex, OUTFITS, outfit) }
-        binding.prevOutfit.setOnClickListener { outfitIndex = prevButtonClicked(outfitIndex, OUTFITS, outfit) }
-        binding.nextBack.setOnClickListener { backIndex = nextButtonClicked(backIndex, BACKGROUNDS, back) }
-        binding.prevBack.setOnClickListener { backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back) }
+        binding.nextHead.setOnClickListener {
+            headIndex = nextButtonClicked(headIndex, HEADS, head)
+        }
+        binding.prevHead.setOnClickListener {
+            headIndex = prevButtonClicked(headIndex, HEADS, head)
+        }
+        binding.nextFace.setOnClickListener {
+            faceIndex = nextButtonClicked(faceIndex, FACES, face)
+        }
+        binding.prevFace.setOnClickListener {
+            faceIndex = prevButtonClicked(faceIndex, FACES, face)
+        }
+        binding.nextOutfit.setOnClickListener {
+            outfitIndex = nextButtonClicked(outfitIndex, OUTFITS, outfit)
+        }
+        binding.prevOutfit.setOnClickListener {
+            outfitIndex = prevButtonClicked(outfitIndex, OUTFITS, outfit)
+        }
+        binding.nextBack.setOnClickListener {
+            backIndex = nextButtonClicked(backIndex, BACKGROUNDS, back)
+        }
+        binding.prevBack.setOnClickListener {
+            backIndex = prevButtonClicked(backIndex, BACKGROUNDS, back)
+        }
 
         binding.saveButtonProfileMenu.setOnClickListener {
             if (editText.visibility == View.VISIBLE) {
@@ -138,7 +154,10 @@ class ProfileMenuFragment : BaseFragment() {
                 //Internal Storage: Write info into profile_info.txt
                 val textToWrite = "$profilePic$delimiter$profileName"
                 writeFile(fileName, textToWrite)
-                goToFragment(MainMenuFragment())
+                goToDirection(
+                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(),
+                    view
+                )
             }
         }
 
@@ -146,11 +165,14 @@ class ProfileMenuFragment : BaseFragment() {
             if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
             } else {
-                goToFragment(MainMenuFragment())
+                goToDirection(
+                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(),
+                    view
+                )
             }
         }
 
-        editText.setOnKeyListener { v, keyCode, event ->
+        editText.setOnKeyListener { _, keyCode, event ->
             when {
                 //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
                 ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {

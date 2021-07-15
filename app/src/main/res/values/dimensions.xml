@@ -35,10 +35,4 @@
     <!-- JOIN -->
     <dimen name="top_margin_textview_join">@dimen/_60sdp</dimen>
     <dimen name="top_margin_edittext_join">@dimen/_10sdp</dimen>
-
-    <!-- CREATE PLAY -->
-    <dimen name="top_margin_room_code_textview_create_game">@dimen/_80sdp</dimen>
-    <dimen name="top_margin_room_code_edittext_create_game">@dimen/_120sdp</dimen>
-    <dimen name="bottom_margin_waiting_players_text_textview_create_game">@dimen/_20sdp</dimen>
-    <dimen name="top_margin_waiting_players_textview_create_game">@dimen/_90sdp</dimen>
 </resources>

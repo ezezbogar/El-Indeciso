@@ -10,7 +10,6 @@ class FileManager(val context: Context) {
      */
     fun writeFile(fileName: String, textToWrite: String) {
         try {
-            val filename = "profile_info.txt"
             val fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)
             fos.write(textToWrite.toByteArray())
             fos.close()
@@ -28,7 +27,7 @@ class FileManager(val context: Context) {
     /*
      * File: Read
      */
-    public fun readFile(fileName: String): String {
+    fun readFile(fileName: String): String {
         var ret = ""
 
         try {

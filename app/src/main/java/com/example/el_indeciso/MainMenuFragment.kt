@@ -25,14 +25,31 @@ class MainMenuFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mensajero = MovesMessenger("DesdeElRepo")
+        val mensajero = MovesMessenger("DesdeElRepo")
         mensajero.addMove(Move("Niqui", 1))
         mensajero.addMove(Move("Eze", 2))
 
-        binding.profileButton.setOnClickListener { goToFragment(ProfileMenuFragment()) }
-        binding.playButton.setOnClickListener { goToFragment(PlayMenuFragment()) }
-        binding.settingsButton.setOnClickListener { goToFragment(SettingsFragment()) }
-        binding.rulesButton.setOnClickListener { goToFragment(RulesFragment()) }
+        binding.profileButton.setOnClickListener {
+            goToDirection(
+                MainMenuFragmentDirections.actionMainMenuFragmentToProfileMenuFragment(),
+                view
+            )
+        }
+        binding.playButton.setOnClickListener {
+            goToDirection(
+                MainMenuFragmentDirections.actionMainMenuFragmentToPlayMenuFragment(),
+                view
+            )
+        }
+        binding.settingsButton.setOnClickListener {
+            goToDirection(
+                MainMenuFragmentDirections.actionMainMenuFragmentToSettingsFragment(),
+                view
+            )
+        }
+        binding.rulesButton.setOnClickListener {
+            goToDirection(MainMenuFragmentDirections.actionMainMenuFragmentToRulesFragment(), view)
+        }
     }
 
     override fun onDestroyView() {
