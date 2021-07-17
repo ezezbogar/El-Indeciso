@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Handler
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -23,6 +24,7 @@ import kotlin.random.Random
 
 class Game(private var handler: Handler,
            private var gameViews: GameViews,
+           private var sfxManager: SFX_Manager,
            private var context: Context,
            private var match: Match) {
 
@@ -355,7 +357,7 @@ class Game(private var handler: Handler,
     }
 
     private fun addHandCardUI(card: Int) {
-        val cardUI = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, match)
+        val cardUI = Card(card.toString(), context, gameViews.player_hand, gameViews.maze_text, sfxManager, match)
         playerCards.add(cardUI)
 
         val handCardAdder = Runnable { gameViews.player_hand.addView(cardUI.view) }
@@ -373,6 +375,7 @@ class Game(private var handler: Handler,
         setCompletedRoundPopUpData(popUpLayout, lives, round, total_rounds)
         initializeCloseButton(popUpLayout.findViewById(R.id.close_button))
         showPopUp(popUpLayout)
+        sfxManager.play(Sound.HAPPY_POP_UP)
     }
 
 
@@ -387,6 +390,7 @@ class Game(private var handler: Handler,
         setWrongDropPopUpData(popUpLayout, drop_responsible, card_dropped, discarded_cards)
         initializeCloseButtonWrongMove(popUpLayout.findViewById(R.id.close_button))
         showPopUpWrongMove(popUpLayout)
+        sfxManager.play(Sound.SAD_POP_UP)
     }
 
 
@@ -399,6 +403,7 @@ class Game(private var handler: Handler,
         setStartPopUpData(pop_up_layout, room_code)
         initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
         showPopUp(pop_up_layout)
+        sfxManager.play(Sound.NORMAL_POP_UP)
     }
 
     // Setea la información que muestra el PopUp de ronda completada.
@@ -470,35 +475,38 @@ class Game(private var handler: Handler,
                     }
                 }
             }
+            sfxManager.play(Sound.BUTTON_CLICK)
             handler.post(waitForAllReady)
         }
     }
 
     private fun initializeCloseButtonWrongMove(button: Button) {
-        button.setOnClickListener { alertDialogWrongMove.dismiss() }
+        button.setOnClickListener {
+            sfxManager.play(Sound.BUTTON_CLICK)
+            alertDialogWrongMove.dismiss()
+        }
     }
 
     private fun initializeStartButton(button: Button, handler: Handler) {
-        button.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                button.isClickable = false
-                button.setBackgroundResource(R.drawable.popup_button_pressed)
-                button.setText(R.string.wait_button)
-                match.ready()
+        button.setOnClickListener {
+            button.isClickable = false
+            sfxManager.play(Sound.BUTTON_CLICK)
+            button.setBackgroundResource(R.drawable.popup_button_pressed)
+            button.setText(R.string.wait_button)
+            match.ready()
 
-                val waitConnections: Runnable = object : Runnable {
-                    override fun run() {
-                        val waiting = gameStarted.get()
-                        if (!waiting) {
-                            handler.postDelayed(this, 50)
-                        } else {
-                            alertDialogCommon.dismiss()
-                        }
+            val waitConnections: Runnable = object : Runnable {
+                override fun run() {
+                    val waiting = gameStarted.get()
+                    if (!waiting) {
+                        handler.postDelayed(this, 50)
+                    } else {
+                        alertDialogCommon.dismiss()
                     }
                 }
-                handler.post(waitConnections)
             }
-        })
+            handler.post(waitConnections)
+        }
     }
 
     private fun setStartPopUpData(pop_up_layout: View, room_code: String) {

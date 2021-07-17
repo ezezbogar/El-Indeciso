@@ -17,6 +17,7 @@ class Card (val value: String,
             context: Context,
             layout: LinearLayout,
             maze_top: TextSwitcher,
+            sfxManager: SFX_Manager,
             match: Match) {
 
     val view = LayoutInflater.from(context).inflate(R.layout.scrollable_card, layout, false)
@@ -35,6 +36,7 @@ class Card (val value: String,
                     val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.drop)
                     view.startAnimation(animation)
                     maze_top.setText(card_text.text)
+                    sfxManager.play(Sound.CARD_DROP)
 
                     handler.postDelayed({
                         val parent: ViewGroup = view.parent as ViewGroup

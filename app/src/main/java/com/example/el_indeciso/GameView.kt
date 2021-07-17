@@ -15,6 +15,7 @@ import kotlin.concurrent.*
 class GameView : AppCompatActivity() {
 
     private val drop_handler = Handler()
+    private lateinit var sfx_manager: SFX_Manager
 
     private val args: GameViewArgs by navArgs()
     private var isHost: Boolean = true
@@ -42,6 +43,7 @@ class GameView : AppCompatActivity() {
         maze_text.setText("0")
 
         val game_views = GameViews(maze_text, drop_message, lives, round, player_hand, players_grid)
+        sfx_manager = SFX_Manager(this)
 
         getInitialData()
         val matchMaker = MatchMaker(profileName, profilePic)
@@ -52,7 +54,7 @@ class GameView : AppCompatActivity() {
             matchMaker.joinMatch(roomCode)
         }
 
-        val game = Game(drop_handler, game_views, this, match)
+        val game = Game(drop_handler, game_views, sfx_manager, this, match)
 
         thread { game.run() }
     }
@@ -77,5 +79,10 @@ class GameView : AppCompatActivity() {
     private fun String.getDigit(): String {
         return substring(indexOfFirst { it.isDigit() }, indexOfLast { it.isDigit() } + 1)
             .filter { it.isDigit()}
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sfx_manager.release()
     }
 }
