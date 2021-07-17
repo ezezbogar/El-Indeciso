@@ -1,10 +1,12 @@
 package com.example.el_indeciso
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.el_indeciso.databinding.FragmentJoinGameBinding
 
 class JoinGameFragment : BaseFragment() {
@@ -29,6 +31,7 @@ class JoinGameFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.edittextJoin.setFocus()
+        binding.edittextJoin.filters += InputFilter.LengthFilter(4)
 
         binding.prevPageJoin.setOnClickListener {
             goToDirection(
@@ -38,8 +41,8 @@ class JoinGameFragment : BaseFragment() {
         }
         binding.joinButtonJoin.setOnClickListener {
             if (!validRoomCode()) {
-                //setErrorTextField(true)
-                showMessageToast("Please set the room code")
+                binding.edittextJoin.setText("")
+                showMessageToast("Please set a valid room code")
             } else { //Room Code is ok
                 goToDirection(
                     JoinGameFragmentDirections.actionJoinGameFragmentToGameView(
@@ -49,11 +52,13 @@ class JoinGameFragment : BaseFragment() {
                 )
             }
         }
+
         binding.edittextJoin.setOnKeyListener { _, keyCode, event ->
 
             when {
                 //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
                 ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
+
                     binding.joinButtonJoin.performClick()
                     binding.edittextJoin.hideKeyboard()
                     binding.edittextJoin.clearFocus()
@@ -77,6 +82,17 @@ class JoinGameFragment : BaseFragment() {
         val actualText = binding.edittextJoin.text.toString()
 
         return (actualText.length == 4
-                && !(actualText.contains(" ")))
+                && !(actualText.contains(" "))
+                && isValidImput(actualText))
+    }
+
+    private fun isValidImput(string: String): Boolean {
+        for (c in string)
+        {
+            if (c !in 'A'..'Z' && c !in 'a'..'z' && c !in '0'..'9') {
+                return false
+            }
+        }
+        return true
     }
 }

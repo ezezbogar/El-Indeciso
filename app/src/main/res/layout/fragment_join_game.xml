@@ -27,7 +27,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/top_margin_edittext_join"
         android:autofillHints="no"
-        android:hint="..."
         android:textColorHint="#BDC6D6"
         android:textSize="@dimen/_60sdp" />
 
