@@ -41,4 +41,15 @@
     <string name="waiting_players_text">JUGADORES \nEN ESPERA</string>
     <string name="start_play_text">COMENZAR</string>
     <string name="text_example_waiting_players_text">gonzalo37 \n_ezequiel98 \nriedel.2 \nanag8 \nferrignoelmejor</string>
+    <string name="music_on_text">ACTIVADA</string>
+    <string name="music_off_text">DESACTIVADA</string>
+    <string name="introduction_body_text">EL INDECISO es un juego cooperativo en el que todos los jugadores forman un equipo. En la primera ronda, cada uno recibe una (1) carta, en la segunda, cada participante recibe dos (2), y así sucesivamente.\n\nEn cada nivel, los miembros del grupo deberán poner, una a una, todas sus cartas en orden ascendente en el pilón de cartas central. Los jugadores no toman turnos en un orden particular. Quien quiera colocar una carta, podrá hacerlo.\n\n¿Dónde está la gracia entonces? No se permite que los jugadores revelen o muestren sus números. Tampoco se permite ningún tipo de acuerdo, consulta ni señales secretas entre los mismos.</string>
+    <string name="introduction_text">INTRODUCCIÓN</string>
+    <string name="cards_format_text">FORMATO DE LAS CARTAS</string>
+    <string name="cards_format_first_body_text">Las cartas se encuentran numeradas del 1 al N, donde N varía según el número de jugadores.</string>
+    <string name="cards_format_second_body_text">• 2-4 jugadores: N=100\n\n• 5 jugadores: N=125\n\n• 6 jugadores: N=150\n\n• 7 jugadores: N=175 \n\n• 8 jugadores: N=200\n\n• 9 jugadores: N=225</string>
+    <string name="lifes_and_levels_text">VIDAS Y NIVELES</string>
+    <string name="lifes_and_levels_body_text">La cantidad de vidas y niveles por partida también dependen de la cantidad de jugadores como se detalla a continuación:\n\n• 2 jugadores: 12 niveles, 2 vidas.\n\n• 3 jugadores: 12 niveles, 3 vidas.\n\n• 4 jugadores: 10 niveles, 4 vidas.\n\n• 5 jugadores: 10 niveles, 5 vidas.\n\n• 6 jugadores: 8 niveles, 6 vidas.\n\n• 7 jugadores: 8 niveles, 7 vidas.\n\n• 8 jugadores: 6 niveles, 8 vidas.\n\n• 9 jugadores: 6 niveles, 9 vidas.</string>
+    <string name="game_development_body_text">Si los jugadores han jugado todas sus cartas en el orden correcto (ascendente), habrán superado el nivel correspondiente.\nAl ocurrir esto, se vuelve a barajar y se reparte la cantidad de cartas correspondiente con el nuevo nivel.\n\nCuando se completa exitosamente un nivel par, el equipo obtiene una nueva vida como bonificación.\n\nEn caso de que uno de los participantes coloca una carta numerada en el orden incorrecto, el juego se interrumpe, se descartan todas aquellas cartas en las manos de los demás jugadores que sean menores a la que se acaba de jugar y el equipo pierde una vida.\n\nEn caso de tener una o más vidas restantes, se continua con el nivel actual.\nCaso contrario, se da por terminada la partida, el equipo ha perdido.\n\nSi los jugadores consiguen superar todos los niveles con al menos una vida, entonces <b>han ganado el juego</b>.</string>
+    <string name="game_development">DESARROLLO DEL JUEGO</string>
 </resources>

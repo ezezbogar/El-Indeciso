@@ -7,7 +7,9 @@
     <dimen name="bottom_margin_menu_button">@dimen/_110sdp</dimen>
     <!--bottom_margin_menu_button_cellphone + margin_between_buttons_menu + menu_button_height -->
     <dimen name="bottom_margin_top_button">@dimen/_240sdp</dimen>
-    <dimen name="text_size_menu_options">@dimen/_15sdp</dimen>
+    <dimen name="text_size_button_menu_options">@dimen/_15sdp</dimen>
+    <dimen name="text_size_menu_options">@dimen/_20sdp</dimen>
+
 
     <!-- PROFILE -->
     <dimen name="top_margin_linear_layout_profile_menu">@dimen/_70sdp</dimen>

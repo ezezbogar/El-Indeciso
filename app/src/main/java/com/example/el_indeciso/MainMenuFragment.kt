@@ -25,10 +25,6 @@ class MainMenuFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mensajero = MovesMessenger("DesdeElRepo")
-        mensajero.addMove(Move("Niqui", 1))
-        mensajero.addMove(Move("Eze", 2))
-
         binding.profileButton.setOnClickListener {
             goToDirection(
                 MainMenuFragmentDirections.actionMainMenuFragmentToProfileMenuFragment(),

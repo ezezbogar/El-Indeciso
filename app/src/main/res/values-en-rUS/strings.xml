@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">El-Indeciso</string>
+    <string name="settings_menu_text">Settings</string>
+    <string name="profile_menu_text">Profile</string>
+    <string name="try_again">Error</string>
+    <string name="rules_menu_text">Rules</string>
+    <string name="play_menu_text">Play</string>
+    <string name="settings_content_description_text">Settings content description</string>
+    <string name="drop_message">%1$s tiró el %2$d</string>
+    <string name="drop_spacing"></string>
+    <string name="next">&gt;</string>
+    <string name="previous">&lt;</string>
+    <string name="face">FACE</string>
+    <string name="back">BACK</string>
+    <string name="head">HEAD</string>
+    <string name="outfit">OUTFIT</string>
+    <string name="save_profile">SAVE</string>
+    <string name="life">LIFES</string>
+    <string name="round">ROUND</string>
+    <string name="round_counter">%1$d/%2$d</string>
+    <string name="wrong_drop_title">Stop There</string>
+    <string name="round_completed_title">Round %1$s completed</string>
+    <string name="start_title">Welcome</string>
+    <string name="drop_responsible">%1$s cometió un error y lanzó el %2$s\nHan perdido una vida.</string>
+    <string name="discard_message">%1$s tuvo que descartar el %2$s</string>
+    <string name="round_completed_text">Recompensa: %1$s\nVidas restantes: %2$s\nRondas para ganar: %3$s</string>
+    <string name="room_message">Room: %1$s</string>
+    <string name="players_connected">Jugadores conectados:</string>
+    <string name="not_ready">Not ready</string>
+    <string name="ready">Ready</string>
+    <string name="start_message">Cuando esté listo para comenzar, pulse el botón</string>
+    <string name="continue_button">Continuar</string>
+    <string name="start_button">Start</string>
+    <string name="wait_button">Wait...</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_text">Create</string>
+    <string name="join_text">Join</string>
+    <string name="room_code_text">ROOM CODE</string>
+    <string name="room_text">ROOM</string>
+    <string name="room_code_hint_text">553286</string>
+    <string name="waiting_players_text">JUGADORES \nEN ESPERA</string>
+    <string name="start_play_text">START</string>
+</resources>

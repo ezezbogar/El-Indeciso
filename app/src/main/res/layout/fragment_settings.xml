@@ -5,9 +5,90 @@
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
 
+    <ImageView
+        android:id="@+id/background_imageview_profile_menu"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/text_imageview_play_menu"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/settings_text" />
+
+    <ImageView
+        android:id="@+id/background_imageview_play_menu"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background_play" />
+
     <ImageButton
         android:id="@+id/prev_page_settings"
         style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/top_margin_create_button_play_menu">
+
+        <!--<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="IDIOMA"
+                android:textColor="@drawable/text_color_button_play_menu"
+                android:textSize="@dimen/text_size_menu_options" />
+
+            <Button
+                android:id="@+id/language_button_settings"
+                style="@style/PlayMenuButton"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_popup_button"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/language_text" />
+        </LinearLayout>
+        -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_29sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="MUSICA"
+                android:textColor="@drawable/text_color_button_play_menu"
+                android:textSize="@dimen/text_size_menu_options" />
+
+            <Button
+                android:id="@+id/music_button_settings"
+                style="@style/PlayMenuButton"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/custom_popup_button"
+                android:text="ACTIVADA" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/contact_us_button"
+        style="@style/BottomButton"
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:text="Contactanos!" />
 
 </FrameLayout>

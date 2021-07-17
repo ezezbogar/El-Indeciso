@@ -4,10 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RulesFragment">
-
+    <ImageView
+        android:id="@+id/background_imageview_profile_menu"
+        style="@style/BackgroundImageView"
+        android:importantForAccessibility="no"
+        android:src="@drawable/background" />
     <ImageButton
         android:id="@+id/prev_page_rules"
         style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_90sdp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+
+            <TextView
+                style= "@style/TitleRules"
+                android:text="@string/introduction_text" />
+
+            <TextView
+                style="@style/BodyTextRules"
+                android:text="@string/introduction_body_text" />
+
+            <TextView
+                style= "@style/TitleRules"
+                android:text="@string/cards_format_text" />
+            <TextView
+                style="@style/BodyTextRules"
+                android:text="@string/cards_format_first_body_text"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/BodyTextRules"
+                    android:text= "@string/cards_format_second_body_text"/>
+
+                <ImageView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/card"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:importantForAccessibility="no" />
+            </LinearLayout>
+            <TextView
+                style= "@style/TitleRules"
+                android:text="@string/lifes_and_levels_text" />
+            <TextView
+                style="@style/BodyTextRules"
+                android:text="@string/lifes_and_levels_body_text"/>
+
+            <TextView
+                style= "@style/TitleRules"
+                android:text="@string/game_development" />
+            <TextView
+                style="@style/BodyTextRules"
+                android:text="@string/game_development_body_text"/>
+        </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>
