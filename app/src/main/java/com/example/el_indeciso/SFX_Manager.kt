@@ -5,9 +5,8 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Build
-import android.util.Log
 
-class SFX_Manager (val context: Context) {
+class SFX_Manager (val context: Context, var soundOn: Boolean = true) {
 
     private var soundPool: SoundPool
     private val sounds = mutableMapOf<Sound, Int>()
@@ -29,7 +28,7 @@ class SFX_Manager (val context: Context) {
                     }
 
         soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
-            soundPool.play(sampleId, 1F, 1F, 0, 0, 1F)
+            soundPool.play(sampleId, 0F, 0F, 0, 0, 1F)
         }
 
         sounds.put(Sound.CARD_DROP, soundPool.load(context, R.raw.card_drop, 1))
@@ -40,8 +39,9 @@ class SFX_Manager (val context: Context) {
     }
 
     fun play(sound: Sound) {
-        val cosito = soundPool.play(sounds[sound]!!, 1F, 1F, 0 , 0 , 1F)
-        Log.d("sonidito", "$cosito")
+        if (soundOn) {
+            soundPool.play(sounds[sound]!!, 1F, 1F, 0 , 0 , 1F)
+        }
     }
 
     fun release() {
