@@ -1,18 +1,9 @@
 package com.example.el_indeciso
 
-import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Handler
 
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
 
 import java.util.*
 import java.util.concurrent.BlockingQueue
@@ -44,19 +35,19 @@ class Game(private var handler: Handler,
     /* - - - - - - - UI - - - - - - - */
     private val messageQueue: BlockingQueue<String> = LinkedBlockingQueue()
     private var fireBasePlayers = mutableListOf<MatchPlayer>()
-    lateinit var dialogBuilderCommon: AlertDialog.Builder
-    lateinit var alertDialogCommon: AlertDialog
-
-    lateinit var dialogBuilderWrongMove: AlertDialog.Builder
-    lateinit var alertDialogWrongMove: AlertDialog
+    private var popUpOnDisplay: AtomicBoolean = AtomicBoolean(false)
     private val mtx = ReentrantLock()
+
+    private val startPopUp = StartPopUp(handler, mtx, sfxManager, context)
+    private val completedRoundPopUp = CompletedRoundPopUp(popUpOnDisplay, handler, sfxManager, context)
+    private val wrongDropPopUp = WrongDropPopUp(popUpOnDisplay, sfxManager, context)
     /* - - - - - - - - - - - - - - - - */
 
     fun run(): Boolean {
 
         thread { messageLoop() }
 
-        handler.post { showStartPopUp(match.key) }
+        handler.post { startPopUp.launch(match.key, gameStarted, match) }
 
         waitTillPlayersReady()
 
@@ -103,7 +94,7 @@ class Game(private var handler: Handler,
 
             val roundNumberCopy = roundNumber
             val livesCopy = lives
-            handler.post { showCompletedRoundPopUp(livesCopy, roundNumberCopy, maxRounds) }
+            handler.postDelayed({ completedRoundPopUp.launch(livesCopy, roundNumberCopy, maxRounds, match, this::playersReady ) }, 50)
 
             currentNumber = 0
             roundNumber++
@@ -255,9 +246,9 @@ class Game(private var handler: Handler,
             discardedCards[player.name] = discardedCardsList as List<String>
         }
 
-        handler.postDelayed( { showWrongDropPopUp(players.find { player -> player.playerId == move.playerId }!!.name,
-                        move.card.toString(),
-                        discardedCards) }, 250)
+        handler.postDelayed( { wrongDropPopUp.launch(players.find { player -> player.playerId == move.playerId }!!.name,
+                                move.card.toString(),
+                                discardedCards) }, 250)
     }
 
     private fun waitTillPlayersReady() {
@@ -300,7 +291,7 @@ class Game(private var handler: Handler,
         }
     }
 
-    private fun playersReady(playersFireBase: MutableList<MatchPlayer>): Boolean {
+    fun playersReady(playersFireBase: MutableList<MatchPlayer>): Boolean {
         var allReady = true
         for (player in playersFireBase) {
             if (!player.ready) {
@@ -362,191 +353,5 @@ class Game(private var handler: Handler,
 
         val handCardAdder = Runnable { gameViews.player_hand.addView(cardUI.view) }
         handler.post(handCardAdder)
-    }
-
-    /* Muestra el PopUp que indica que la ronda fue completada.
-       Recibe la cantidad de vidas restantes, la ronda que se acaba de terminar y la cantidad
-       de rondas totales. */
-    private fun showCompletedRoundPopUp(lives:Int, round:Int, total_rounds: Int) {
-        match.unready()
-        dialogBuilderCommon = AlertDialog.Builder(context)
-        val popUpLayout: View =  LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
-
-        setCompletedRoundPopUpData(popUpLayout, lives, round, total_rounds)
-        initializeCloseButton(popUpLayout.findViewById(R.id.close_button))
-        showPopUp(popUpLayout)
-        sfxManager.play(Sound.HAPPY_POP_UP)
-    }
-
-
-    // Muestra el PopUp que indica que un jugador tiró mal una carta
-    // Recibe el nombre del jugador que tiró dicha carta, la carta que tiró y un map de las cartas
-    // que descartó cada jugador.
-    // El map es de la forma ("gonza" to ["1","2","5"], "eze" to ["69", "420"], "chuchu" to [])
-    private fun showWrongDropPopUp(drop_responsible: String, card_dropped: String, discarded_cards: Map<String, List<String>>) {
-        dialogBuilderWrongMove = AlertDialog.Builder(context)
-        val popUpLayout: View = LayoutInflater.from(context).inflate(R.layout.drop_pop_up, null)
-
-        setWrongDropPopUpData(popUpLayout, drop_responsible, card_dropped, discarded_cards)
-        initializeCloseButtonWrongMove(popUpLayout.findViewById(R.id.close_button))
-        showPopUpWrongMove(popUpLayout)
-        sfxManager.play(Sound.SAD_POP_UP)
-    }
-
-
-    // Muestra el PopUp que aparece al inicio de la partida.
-    // El jugador toca "COMENZAR" y queda bloqueando hasta que todos hayan hecho lo mismo.
-    private fun showStartPopUp(room_code: String) {
-        dialogBuilderCommon = AlertDialog.Builder(context)
-        val pop_up_layout: View = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
-
-        setStartPopUpData(pop_up_layout, room_code)
-        initializeStartButton(pop_up_layout.findViewById(R.id.start_button), handler)
-        showPopUp(pop_up_layout)
-        sfxManager.play(Sound.NORMAL_POP_UP)
-    }
-
-    // Setea la información que muestra el PopUp de ronda completada.
-    private fun setCompletedRoundPopUpData(pop_up_layout: View, lives:Int, round:Int, total_rounds: Int) {
-        val reward = if (round % 2 == 0) "1 vida" else "-"
-        val title: TextView = pop_up_layout.findViewById(R.id.completed_round_title)
-        val content: TextView = pop_up_layout.findViewById(R.id.completed_round_content)
-
-        title.text = context.getString(R.string.round_completed_title, round.toString())
-        content.text = context.getString(R.string.round_completed_text, reward,
-            lives.toString(), (total_rounds-round).toString())
-    }
-
-    // Setea la información que muestra el PopUp de cuando alguien tira el numero equivocado.
-    // El subtitulo dice quién pifió, qué carta tiró y que perdieron una vida.
-    // Después muestra una lista scrolleable con las cartas de cada jugador que fueron descartadas.
-    private fun setWrongDropPopUpData(pop_up_layout: View,
-                                      drop_responsible: String,
-                                      card_dropped: String,
-                                      discarded_cards: Map<String, List<String>>) {
-
-        val discardedCardsMessages: LinearLayout = pop_up_layout.findViewById(R.id.discarded_cards_messages)
-
-        val subtitle: TextView = pop_up_layout.findViewById(R.id.drop_responsible)
-        subtitle.text = context.getString(R.string.drop_responsible, drop_responsible, card_dropped)
-
-        for (player: Map.Entry<String, List<String>> in discarded_cards) {
-            for (card: String in player.value) {
-                val discardedMessageLayout =  LayoutInflater.from(context).inflate(R.layout.drop_pop_up_line, discardedCardsMessages, false)
-
-                val discardedMessage: TextView = discardedMessageLayout.findViewById(R.id.discarded_message)
-                discardedMessage.text = context.getString(R.string.discard_message, player.key, card)
-
-                discardedCardsMessages.addView(discardedMessageLayout)
-            }
-        }
-    }
-
-    private fun showPopUp(pop_up_layout: View) {
-        // Magia de inicializacion
-        dialogBuilderCommon.setView(pop_up_layout);
-        alertDialogCommon = dialogBuilderCommon.create()
-        alertDialogCommon.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        alertDialogCommon.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialogCommon.setCanceledOnTouchOutside(false)
-        alertDialogCommon.show()
-    }
-
-    private fun showPopUpWrongMove(pop_up_layout: View) {
-        // Magia de inicializacion
-        dialogBuilderWrongMove.setView(pop_up_layout);
-        alertDialogWrongMove = dialogBuilderWrongMove.create()
-        alertDialogWrongMove.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        alertDialogWrongMove.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialogWrongMove.setCanceledOnTouchOutside(false)
-        alertDialogWrongMove.show()
-    }
-
-    private fun initializeCloseButton(button: Button) {
-        button.setOnClickListener {
-            match.ready()
-
-            val waitForAllReady: Runnable = object : Runnable {
-                override fun run () {
-                    if (playersReady(match.getPlayers())) {
-                        alertDialogCommon.dismiss()
-                    } else {
-                        handler.postDelayed(this, 100)
-                    }
-                }
-            }
-            sfxManager.play(Sound.BUTTON_CLICK)
-            handler.post(waitForAllReady)
-        }
-    }
-
-    private fun initializeCloseButtonWrongMove(button: Button) {
-        button.setOnClickListener {
-            sfxManager.play(Sound.BUTTON_CLICK)
-            alertDialogWrongMove.dismiss()
-        }
-    }
-
-    private fun initializeStartButton(button: Button, handler: Handler) {
-        button.setOnClickListener {
-            button.isClickable = false
-            sfxManager.play(Sound.BUTTON_CLICK)
-            button.setBackgroundResource(R.drawable.popup_button_pressed)
-            button.setText(R.string.wait_button)
-            match.ready()
-
-            val waitConnections: Runnable = object : Runnable {
-                override fun run() {
-                    val waiting = gameStarted.get()
-                    if (!waiting) {
-                        handler.postDelayed(this, 50)
-                    } else {
-                        alertDialogCommon.dismiss()
-                    }
-                }
-            }
-            handler.post(waitConnections)
-        }
-    }
-
-    private fun setStartPopUpData(pop_up_layout: View, room_code: String) {
-        val players_state = mutableMapOf<String, Boolean>() // no estoy seguro de que con esto aca funcione, si es un atributo de clase seguro que sí
-        val players_state_view = mutableMapOf<String, TextView>()
-        val players_state_container: LinearLayout = pop_up_layout.findViewById(R.id.players_state)
-
-        val room_text: TextView = pop_up_layout.findViewById(R.id.room_code)
-        room_text.text = context.getString(R.string.room_message, room_code)
-
-        val view_connections: Runnable = object : Runnable {
-            override fun run() {
-
-                mtx.lock()
-                for (player in fireBasePlayers) {
-                    if (!players_state.contains(player.id)) {
-                        val connected_player = LayoutInflater.from(context).inflate(R.layout.players_pop_up_line, players_state_container, false)
-
-                        val player_name: TextView = connected_player.findViewById(R.id.connected_player_name)
-                        val player_state: TextView = connected_player.findViewById(R.id.connected_player_state)
-                        player_name.text = player.nombre
-
-                        players_state_container.addView(connected_player)
-                        players_state.put(player.id, false)
-                        players_state_view.put(player.id, player_state)
-
-                    } else if (players_state[player.id] != player.ready) {
-                        players_state_view[player.id]?.text = context.getString(R.string.ready)
-                        players_state_view[player.id]?.setTextColor((Color.parseColor("#056266")))
-                    }
-                }
-                mtx.unlock()
-
-                val unready = players_state.containsValue(false) || fireBasePlayers.isEmpty()
-                if (unready) {
-                    handler.postDelayed(this, 100)
-                }
-
-            }
-        }
-        handler.post(view_connections)
     }
 }
