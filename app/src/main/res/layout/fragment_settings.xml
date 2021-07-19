@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="MUSICA"
+                android:text="@string/music_text"
                 android:textColor="@drawable/text_color_button_play_menu"
                 android:textSize="@dimen/text_size_menu_options" />
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/custom_popup_button"
-                android:text="ACTIVADA" />
+                android:text="@string/music_on_text" />
         </LinearLayout>
 
     </LinearLayout>
@@ -89,6 +89,6 @@
         style="@style/BottomButton"
         android:layout_marginBottom="@dimen/_70sdp"
         android:layout_height="@dimen/_40sdp"
-        android:text="Contactanos!" />
+        android:text="@string/contact_us_text" />
 
 </FrameLayout>

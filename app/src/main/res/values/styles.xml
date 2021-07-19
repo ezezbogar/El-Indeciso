@@ -64,16 +64,6 @@
         <item name="android:src">@drawable/logo</item>
     </style>
 
-    <style name="SettingsImageButton">
-        <item name="android:layout_width">@dimen/_40sdp</item>
-        <item name="android:layout_height">@dimen/_40sdp</item>
-        <item name="srcCompat">@drawable/ic_settings</item>
-        <item name="android:layout_gravity">top|end</item>
-        <item name="android:background">@color/principal_background_color</item>
-        <item name="android:layout_marginTop">@dimen/_108sdp</item>
-        <item name="android:layout_marginRight">@dimen/_20sdp</item>
-    </style>
-
     <style name="OptionMenuButton">
         <item name="android:layout_width">@dimen/menu_button_width</item>
         <item name="android:layout_height">@dimen/menu_button_height</item>

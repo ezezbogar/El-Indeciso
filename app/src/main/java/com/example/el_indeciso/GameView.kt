@@ -3,7 +3,6 @@ package com.example.el_indeciso
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
@@ -20,6 +19,7 @@ class GameView : AppCompatActivity() {
     private val args: GameViewArgs by navArgs()
     private var isHost: Boolean = true
     private lateinit var roomCode: String
+    private var soundOn = true
 
     private var profileName: String = "player"
     private var profilePic: String = "0000"
@@ -29,10 +29,14 @@ class GameView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.game_screen)
+
+        sfx_manager = SFX_Manager(this)
+
         isHost = args.isHost
         roomCode = args.roomCode
-
-        setContentView(R.layout.game_screen)
+        soundOn = args.soundOn
+        sfx_manager.changeSoundStatus(soundOn)
 
         val lives: TextView = findViewById(R.id.life_value)
         val round: TextView = findViewById(R.id.round_value)
@@ -43,7 +47,6 @@ class GameView : AppCompatActivity() {
         maze_text.setText("0")
 
         val game_views = GameViews(maze_text, drop_message, lives, round, player_hand, players_grid)
-        sfx_manager = SFX_Manager(this)
 
         getInitialData()
         val matchMaker = MatchMaker(profileName, profilePic)
@@ -60,7 +63,7 @@ class GameView : AppCompatActivity() {
     }
 
     private fun getInitialData() {
-        val fileManager: FileManager = FileManager(this)
+        val fileManager = FileManager(this)
         val readData = fileManager.readFile(fileName) as CharSequence
 
         //If there is information saved, it's loaded

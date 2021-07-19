@@ -6,13 +6,15 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 import com.example.el_indeciso.databinding.FragmentJoinGameBinding
 
 class JoinGameFragment : BaseFragment() {
     private var _binding: FragmentJoinGameBinding? = null
     private val binding get() = _binding!!
     override fun layoutId() = R.layout.fragment_join_game
+
+    private val args: JoinGameFragmentArgs by navArgs()
 
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +32,22 @@ class JoinGameFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sfxManager = SFX_Manager(requireActivity().applicationContext)
+        val soundOn = args.soundOn
+        sfxManager.changeSoundStatus(soundOn)
+
         binding.edittextJoin.setFocus()
         binding.edittextJoin.filters += InputFilter.LengthFilter(4)
 
         binding.prevPageJoin.setOnClickListener {
+            sfxManager.play(Sound.BUTTON_CLICK)
             goToDirection(
-                JoinGameFragmentDirections.actionJoinGameFragmentToPlayMenuFragment(),
+                JoinGameFragmentDirections.actionJoinGameFragmentToPlayMenuFragment(soundOn),
                 view
             )
         }
         binding.joinButtonJoin.setOnClickListener {
+            sfxManager.play(Sound.BUTTON_CLICK)
             if (!validRoomCode()) {
                 binding.edittextJoin.setText("")
                 showMessageToast("Please set a valid room code")
@@ -47,7 +55,7 @@ class JoinGameFragment : BaseFragment() {
                 goToDirection(
                     JoinGameFragmentDirections.actionJoinGameFragmentToGameView(
                         false,
-                        binding.edittextJoin.text.toString()
+                        binding.edittextJoin.text.toString(), soundOn
                     ), view
                 )
             }
@@ -83,10 +91,10 @@ class JoinGameFragment : BaseFragment() {
 
         return (actualText.length == 4
                 && !(actualText.contains(" "))
-                && isValidImput(actualText))
+                && isValidInput(actualText))
     }
 
-    private fun isValidImput(string: String): Boolean {
+    private fun isValidInput(string: String): Boolean {
         for (c in string)
         {
             if (c !in 'A'..'Z' && c !in 'a'..'z' && c !in '0'..'9') {

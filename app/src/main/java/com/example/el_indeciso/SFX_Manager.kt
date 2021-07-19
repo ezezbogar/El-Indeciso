@@ -47,4 +47,8 @@ class SFX_Manager (val context: Context, var soundOn: Boolean = true) {
     fun release() {
         soundPool.release()
     }
+
+    fun changeSoundStatus(status: Boolean){
+        soundOn = status
+    }
 }

@@ -22,6 +22,10 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_profileMenuFragment"
             app:destination="@id/profileMenuFragment" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
     <fragment
         android:id="@+id/playMenuFragment"
@@ -37,6 +41,9 @@
         <action
             android:id="@+id/action_playMenuFragment_to_gameView"
             app:destination="@id/gameView" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/joinGameFragment"
@@ -49,6 +56,9 @@
         <action
             android:id="@+id/action_joinGameFragment_to_gameView"
             app:destination="@id/gameView" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/profileMenuFragment"
@@ -58,6 +68,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/rulesFragment"
@@ -67,6 +80,9 @@
         <action
             android:id="@+id/action_rulesFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -76,6 +92,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </fragment>
     <activity
         android:id="@+id/gameView"
@@ -88,5 +107,8 @@
             android:name="roomCode"
             app:argType="string"
             android:defaultValue='"46AS"' />
+        <argument
+            android:name="soundOn"
+            app:argType="boolean" />
     </activity>
 </navigation>

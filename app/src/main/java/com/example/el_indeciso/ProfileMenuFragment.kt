@@ -6,12 +6,17 @@ import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.navArgs
 import com.example.el_indeciso.databinding.FragmentProfileMenuBinding
 
 class ProfileMenuFragment : BaseFragment() {
     private var _binding: FragmentProfileMenuBinding? = null
     private val binding get() = _binding!!
     override fun layoutId() = R.layout.fragment_join_game
+
+    private lateinit var sfxManager: SFX_Manager
+    private val args: ProfileMenuFragmentArgs by navArgs()
+    private var soundOn = true
 
     private var backIndex = 0
     private var faceIndex = 0
@@ -62,6 +67,10 @@ class ProfileMenuFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sfxManager = SFX_Manager(requireActivity().applicationContext)
+        soundOn = args.soundOn
+        sfxManager.changeSoundStatus(soundOn)
+
         val head: ImageView = binding.headProfileMenu
         val face: ImageView = binding.faceProfileMenu
         val outfit: ImageView = binding.outfitProfileMenu
@@ -80,6 +89,8 @@ class ProfileMenuFragment : BaseFragment() {
         //Action when wanting to change profile name
         binding.changeNameButtonProfileMenu.setOnClickListener {
 
+            sfxManager.play(Sound.BUTTON_CLICK)
+
             //Edittext and Save Button Visibility is set as visible
             //Textview and Change Button Visibility is set as invisible
             changeVisibilityOfButtons()
@@ -95,6 +106,8 @@ class ProfileMenuFragment : BaseFragment() {
         }
 
         binding.saveNameButtonProfileMenu.setOnClickListener {
+
+            sfxManager.play(Sound.BUTTON_CLICK)
 
             if (!validProfileName()) {
                 setErrorTextField(true)
@@ -141,6 +154,7 @@ class ProfileMenuFragment : BaseFragment() {
         }
 
         binding.saveButtonProfileMenu.setOnClickListener {
+            sfxManager.play(Sound.BUTTON_CLICK)
             if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
             } else {
@@ -155,18 +169,19 @@ class ProfileMenuFragment : BaseFragment() {
                 val textToWrite = "$profilePic$delimiter$profileName"
                 writeFile(fileName, textToWrite)
                 goToDirection(
-                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(),
+                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(soundOn),
                     view
                 )
             }
         }
 
         binding.prevPageProfileMenu.setOnClickListener {
+            sfxManager.play(Sound.BUTTON_CLICK)
             if (editText.visibility == View.VISIBLE) {
                 showMessageToast("Please set a profile name")
             } else {
                 goToDirection(
-                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(),
+                    ProfileMenuFragmentDirections.actionProfileMenuFragmentToMainMenuFragment(soundOn),
                     view
                 )
             }
@@ -199,6 +214,7 @@ class ProfileMenuFragment : BaseFragment() {
         imageView: ImageView
     )
             : Int {
+        sfxManager.play(Sound.BUTTON_CLICK)
         var avatarPartIndex = _avatarPartIndex
         avatarPartIndex++
         if (avatarPartIndex >= listOfAvatarPart.size) avatarPartIndex = 0
@@ -216,6 +232,7 @@ class ProfileMenuFragment : BaseFragment() {
         imageView: ImageView
     )
             : Int {
+        sfxManager.play(Sound.BUTTON_CLICK)
         var avatarPartIndex = _avatarPartIndex
         avatarPartIndex--
         if (avatarPartIndex < 0) avatarPartIndex = listOfAvatarPart.size - 1

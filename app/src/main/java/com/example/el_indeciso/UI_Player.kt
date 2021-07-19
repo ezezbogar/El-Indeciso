@@ -2,14 +2,12 @@ package com.example.el_indeciso
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextSwitcher
 import android.widget.TextView
-import com.example.el_indeciso.DoubleClickListener
 import java.lang.Long.parseLong
 import java.util.concurrent.BlockingQueue
 

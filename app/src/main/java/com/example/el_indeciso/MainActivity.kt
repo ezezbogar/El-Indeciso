@@ -24,13 +24,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
-        val lobby = MatchMaker("Eze", "dough")
-        val match = lobby.newMatch()
-        match.addPlayer(MatchPlayer("Niqui", "Hola"))
-        match.playCard(1)
-        match.playCard(3)
-        match.playCard(69)
     }
 
     override fun onSupportNavigateUp(): Boolean {

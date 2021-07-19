@@ -64,10 +64,10 @@
             </LinearLayout>
             <TextView
                 style= "@style/TitleRules"
-                android:text="@string/lifes_and_levels_text" />
+                android:text="@string/lives_and_levels_text" />
             <TextView
                 style="@style/BodyTextRules"
-                android:text="@string/lifes_and_levels_body_text"/>
+                android:text="@string/lives_and_levels_body_text"/>
 
             <TextView
                 style= "@style/TitleRules"

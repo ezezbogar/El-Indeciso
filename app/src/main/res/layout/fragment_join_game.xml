@@ -10,7 +10,6 @@
         style="@style/PrevPageButton"
         android:contentDescription="@string/settings_content_description_text" />
 
-    <!--CAMBIAR-->
     <TextView
         android:id="@+id/textview_join"
         style="@style/CustomTextView"
@@ -18,8 +17,6 @@
         android:layout_marginBottom="@dimen/top_margin_textview_join"
         android:fontFamily="sans-serif"
         android:text="@string/room_code_text" />
-
-    <!--CAMBIAR-->
 
     <EditText
         android:id="@+id/edittext_join"
