@@ -1,20 +1,22 @@
 package com.example.el_indeciso
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
-import android.widget.GridLayout
-import android.widget.LinearLayout
-import android.widget.TextSwitcher
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
+import java.io.FileNotFoundException
+import java.io.IOException
 import kotlin.concurrent.*
 
 class GameView : AppCompatActivity() {
 
     private val drop_handler = Handler()
     private lateinit var sfx_manager: SFX_Manager
+    val fileManager = FileManager(this)
 
     private val args: GameViewArgs by navArgs()
     private var isHost: Boolean = true
@@ -59,11 +61,26 @@ class GameView : AppCompatActivity() {
 
         val game = Game(drop_handler, game_views, sfx_manager, this, match)
 
-        thread { game.run() }
+        thread {
+            var gano : Boolean = game.run()
+            Thread.sleep(3000)
+            val showResult = Runnable {
+
+                /* Acá poné el pop up
+                    var toast = Toast.makeText(this, "GANASTE", Toast.LENGTH_SHORT)
+                    if(!gano){
+                        toast = Toast.makeText(this, "PERDISTE", Toast.LENGTH_SHORT)
+                    }
+                    toast.show()
+                */
+                val intent = Intent(this, MainActivity::class.java)
+                this.startActivity(intent)
+            }
+            drop_handler.post(showResult)
+        }
     }
 
     private fun getInitialData() {
-        val fileManager = FileManager(this)
         val readData = fileManager.readFile(fileName) as CharSequence
 
         //If there is information saved, it's loaded
