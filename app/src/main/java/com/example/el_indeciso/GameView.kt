@@ -60,24 +60,7 @@ class GameView : AppCompatActivity() {
         }
 
         val game = Game(drop_handler, game_views, sfx_manager, this, match)
-
-        thread {
-            var gano : Boolean = game.run()
-            Thread.sleep(3000)
-            val showResult = Runnable {
-
-                /* Acá poné el pop up
-                    var toast = Toast.makeText(this, "GANASTE", Toast.LENGTH_SHORT)
-                    if(!gano){
-                        toast = Toast.makeText(this, "PERDISTE", Toast.LENGTH_SHORT)
-                    }
-                    toast.show()
-                */
-                val intent = Intent(this, MainActivity::class.java)
-                this.startActivity(intent)
-            }
-            drop_handler.post(showResult)
-        }
+        thread { game.run() }
     }
 
     private fun getInitialData() {

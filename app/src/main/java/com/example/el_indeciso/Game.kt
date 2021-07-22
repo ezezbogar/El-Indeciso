@@ -41,6 +41,7 @@ class Game(private var handler: Handler,
     private val startPopUp = StartPopUp(handler, mtx, sfxManager, context)
     private val completedRoundPopUp = CompletedRoundPopUp(popUpOnDisplay, handler, sfxManager, context)
     private val wrongDropPopUp = WrongDropPopUp(popUpOnDisplay, sfxManager, context)
+    private val gameEndedPopUp = GameEndedPopUp(popUpOnDisplay, handler, sfxManager, context)
     /* - - - - - - - - - - - - - - - - */
 
     fun run(): Boolean {
@@ -54,8 +55,10 @@ class Game(private var handler: Handler,
         rnd = Random(123) //Leer de Firebase
 
         maxCardNumber = calculateMaxCardNumber(players.size)
-        maxRounds = calculateLevelsAmount(players.size)
-        lives = players.size
+//        maxRounds = calculateLevelsAmount(players.size)
+//        lives = players.size
+        maxRounds = 2
+        lives = 2
 
         // Game Starts
         while (stillPlaying && roundNumber <= maxRounds) {
@@ -83,7 +86,7 @@ class Game(private var handler: Handler,
                     processMove(newMove)
                 }
 
-                if (lives < 0) {
+                if (lives <= 0) {
                     stillPlaying = false
                 }
             }
@@ -94,7 +97,14 @@ class Game(private var handler: Handler,
 
             val roundNumberCopy = roundNumber
             val livesCopy = lives
-            handler.postDelayed({ completedRoundPopUp.launch(livesCopy, roundNumberCopy, maxRounds, match, this::playersReady ) }, 50)
+
+            if (roundNumber == maxRounds && stillPlaying) {
+                gameEndedPopUp.launch(stillPlaying)
+            } else if (!stillPlaying) {
+                gameEndedPopUp.launch(stillPlaying)
+            } else {
+                handler.postDelayed({ completedRoundPopUp.launch(livesCopy, roundNumberCopy, maxRounds, match, this::playersReady ) }, 50)
+            }
 
             currentNumber = 0
             roundNumber++
@@ -246,9 +256,9 @@ class Game(private var handler: Handler,
             discardedCards[player.name] = discardedCardsList as List<String>
         }
 
-        handler.postDelayed( { wrongDropPopUp.launch(players.find { player -> player.playerId == move.playerId }!!.name,
+        handler.post { wrongDropPopUp.launch(players.find { player -> player.playerId == move.playerId }!!.name,
                                 move.card.toString(),
-                                discardedCards) }, 250)
+                                discardedCards) }
     }
 
     private fun waitTillPlayersReady() {

@@ -2,9 +2,11 @@ package com.example.el_indeciso
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -139,7 +141,7 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
                 }
             }
             sfx_manager.play(Sound.BUTTON_CLICK)
-            handler.post(waitForAllReady)
+            handler.postDelayed(waitForAllReady, 250)
         }
     }
 }
@@ -156,13 +158,13 @@ class StartPopUp (val handler: Handler,
     fun launch (room_code: String,
                 gameStarted: AtomicBoolean,
                 match: Match) {
-        setData(room_code, match.getPlayers())
+        setData(room_code, match)
         initializeButton(popUpLayout.findViewById(R.id.start_button), gameStarted, match)
         sfx_manager.play(Sound.NORMAL_POP_UP)
         show()
     }
 
-    private fun setData (room_code: String, firebase_players:List<MatchPlayer>) {
+    private fun setData (room_code: String, match: Match) {
         val players_state = mutableMapOf<String, Boolean>()
         val players_state_view = mutableMapOf<String, TextView>()
         val players_state_container: LinearLayout = popUpLayout.findViewById(R.id.players_state)
@@ -174,7 +176,7 @@ class StartPopUp (val handler: Handler,
             override fun run() {
 
                 mutex.lock()
-                for (player in firebase_players) {
+                for (player in match.getPlayers()) {
                     if (!players_state.contains(player.id)) {
                         val connected_player = LayoutInflater.from(context).inflate(R.layout.players_pop_up_line, players_state_container, false)
 
@@ -193,7 +195,7 @@ class StartPopUp (val handler: Handler,
                 }
                 mutex.unlock()
 
-                val unready = players_state.containsValue(false) || firebase_players.isEmpty()
+                val unready = players_state.containsValue(false) || match.getPlayers().isEmpty()
                 if (unready) {
                     handler.postDelayed(this, 100)
                 }
@@ -222,6 +224,46 @@ class StartPopUp (val handler: Handler,
                 }
             }
             handler.post(waitConnections)
+        }
+    }
+}
+
+class GameEndedPopUp (val onDisplay: AtomicBoolean,
+                           val handler: Handler,
+                           sfx_manager: SFX_Manager,
+                           context: Context): PopUp (context, sfx_manager) {
+    init {
+        popUpLayout = LayoutInflater.from(context).inflate(R.layout.game_ended_pop_up, null)
+    }
+
+    fun launch (playersWon: Boolean) {
+
+        val launchPopUp: Runnable = object : Runnable {
+            override fun run() {
+                if (!onDisplay.get()) {
+                    setData(playersWon)
+                    initializeButton(popUpLayout.findViewById(R.id.main_menu_button))
+                    if (playersWon) sfx_manager.play(Sound.GAME_WON_POP_UP) else sfx_manager.play(Sound.GAME_LOST_POP_UP)
+                    show()
+                } else {
+                    handler.postDelayed(this, 50)
+                }
+            }
+        }
+        handler.postDelayed(launchPopUp, 250)
+    }
+
+    private fun setData(playersWon: Boolean) {
+        val title: TextView = popUpLayout.findViewById(R.id.game_ended_title)
+
+        title.text = if (playersWon) context.getString(R.string.game_won_title)
+                     else context.getString(R.string.game_lost_title)
+    }
+
+    private fun initializeButton(button: Button) {
+        button.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
     }
 }
