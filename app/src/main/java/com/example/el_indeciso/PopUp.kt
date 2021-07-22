@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -41,8 +40,13 @@ class WrongDropPopUp (var onDisplay: AtomicBoolean,
                       sfx_manager: SFX_Manager, 
                       context: Context): PopUp (context, sfx_manager) {
 
+    var discardedCardsMessages: LinearLayout
+    var subtitle: TextView
+
     init {
         popUpLayout = LayoutInflater.from(context).inflate(R.layout.drop_pop_up, null)
+        discardedCardsMessages = popUpLayout.findViewById(R.id.discarded_cards_messages)
+        subtitle = popUpLayout.findViewById(R.id.drop_responsible)
     }
 
     // Muestra el PopUp que indica que un jugador tiró mal una carta
@@ -59,13 +63,11 @@ class WrongDropPopUp (var onDisplay: AtomicBoolean,
     }
 
     private fun setData(drop_responsible: String, card_dropped: String, discarded_cards: Map<String, List<String>>) {
-        val discardedCardsMessages: LinearLayout = popUpLayout.findViewById(R.id.discarded_cards_messages)
-
-        val subtitle: TextView = popUpLayout.findViewById(R.id.drop_responsible)
+        discardedCardsMessages.removeAllViews()
         subtitle.text = context.getString(R.string.drop_responsible, drop_responsible, card_dropped)
 
-        for (player: Map.Entry<String, List<String>> in discarded_cards) {
-            for (card: String in player.value) {
+        for (player in discarded_cards) {
+            for (card in player.value) {
                 val discardedMessageLayout =  LayoutInflater.from(context).inflate(R.layout.drop_pop_up_line,
                     discardedCardsMessages, false)
 
@@ -91,8 +93,14 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
                            val handler: Handler,
                            sfx_manager: SFX_Manager,
                            context: Context): PopUp (context, sfx_manager) {
+
+    var title: TextView
+    var content: TextView
+
     init {
         popUpLayout= LayoutInflater.from(context).inflate(R.layout.completed_round_pop_up, null)
+        title = popUpLayout.findViewById(R.id.completed_round_title)
+        content = popUpLayout.findViewById(R.id.completed_round_content)
     }
 
     // Muestra el PopUp que indica que la ronda fue completada.
@@ -119,8 +127,6 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
 
     private fun setData(lives:Int, round:Int, total_rounds: Int) {
         val reward = if (round % 2 == 0) "1 vida" else "-"
-        val title: TextView = popUpLayout.findViewById(R.id.completed_round_title)
-        val content: TextView = popUpLayout.findViewById(R.id.completed_round_content)
 
         title.text = context.getString(R.string.round_completed_title, round.toString())
         content.text = context.getString(R.string.round_completed_text, reward,
@@ -131,6 +137,11 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
         button.setOnClickListener {
             match.ready()
 
+            button.isClickable = false
+            sfx_manager.play(Sound.BUTTON_CLICK)
+            button.setBackgroundResource(R.drawable.popup_button_pressed)
+            button.setText(R.string.wait_button)
+
             val waitForAllReady: Runnable = object : Runnable {
                 override fun run () {
                     if (playersReady(match.getPlayers())) {
@@ -140,7 +151,6 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
                     }
                 }
             }
-            sfx_manager.play(Sound.BUTTON_CLICK)
             handler.postDelayed(waitForAllReady, 250)
         }
     }
@@ -151,8 +161,13 @@ class StartPopUp (val handler: Handler,
                   sfx_manager: SFX_Manager,
                   context: Context): PopUp (context, sfx_manager) {
 
+    var players_state_container: LinearLayout
+    var room_text: TextView
+
     init {
         popUpLayout = LayoutInflater.from(context).inflate(R.layout.start_pop_up, null)
+        players_state_container = popUpLayout.findViewById(R.id.players_state)
+        room_text = popUpLayout.findViewById(R.id.room_code)
     }
 
     fun launch (room_code: String,
@@ -165,11 +180,10 @@ class StartPopUp (val handler: Handler,
     }
 
     private fun setData (room_code: String, match: Match) {
+        players_state_container.removeAllViews()
         val players_state = mutableMapOf<String, Boolean>()
         val players_state_view = mutableMapOf<String, TextView>()
-        val players_state_container: LinearLayout = popUpLayout.findViewById(R.id.players_state)
 
-        val room_text: TextView = popUpLayout.findViewById(R.id.room_code)
         room_text.text = context.getString(R.string.room_message, room_code)
 
         val view_connections: Runnable = object : Runnable {
