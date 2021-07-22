@@ -134,6 +134,9 @@ class CompletedRoundPopUp (val onDisplay: AtomicBoolean,
     }
 
     private fun initializeButton(button: Button, match: Match, playersReady: (MutableList<MatchPlayer>) -> Boolean) {
+        button.setBackgroundResource(R.drawable.custom_popup_button)
+        button.setText(R.string.continue_button)
+
         button.setOnClickListener {
             match.ready()
 
