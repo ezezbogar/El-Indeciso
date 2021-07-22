@@ -52,13 +52,11 @@ class Game(private var handler: Handler,
 
         waitTillPlayersReady()
 
-        rnd = Random(123) //Leer de Firebase
+        rnd = Random(match.key.hashCode())
 
         maxCardNumber = calculateMaxCardNumber(players.size)
-//        maxRounds = calculateLevelsAmount(players.size)
-//        lives = players.size
-        maxRounds = 2
-        lives = 2
+        maxRounds = calculateLevelsAmount(players.size)
+        lives = players.size
 
         // Game Starts
         while (stillPlaying && roundNumber <= maxRounds) {
